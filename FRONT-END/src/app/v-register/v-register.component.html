@@ -1,0 +1,193 @@
+<header class="d-none d-md-block">
+    <div class="row header_navbar">
+        <div class="col-5">
+
+        </div>
+        <div class="col-2">
+            <div class="header_title">
+                <div class="row">
+                    <div class="col-12">
+                        <h4 class="titleText">Weekly Menu <i class="fas fa-seedling"></i></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-5">
+            <div class="row text-center">
+                <div class="col-4">
+                </div>
+                <div class="col-3">
+                    <h6 routerLink="/about" class="text-center navText mt-3">ABOUT US</h6>
+                </div>
+                <div class="col-5">
+                    <h6 routerLink="/home" class="float-left navText mt-3">HOME</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<header class="d-block d-md-none">
+    <div class="dropdown header__menu">
+        <button class="btn dropdown-toggle menu__button" type="button" id="dropdownMenu2" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-ellipsis-h button__icon"></i>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <button routerLink="/about" class="dropdown-item navText" type="button">ABOUT US</button>
+            <button routerLink="/home" class="dropdown-item navText" type="button">HOME</button>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="banner main__background">
+        <div class="row w-100">
+            <div class="col-1 col-md-3">
+            </div>
+            <div class="col-10 col-md-6 formContainer">
+                <div class="mobile__display d-block d-md-none">
+
+                </div>
+                <div class="from__background">
+                    <form #formContainer="ngForm" (ngSubmit)="getData(formContainer)" class="registerForm">
+
+                        <!--Nom-->
+
+                        <div class="form-group form__group">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="smlltext float-right" for="name">Name</label>
+                                </div>
+                                <div class="col-8">
+                                    <input id="name" type="text" #inputName="ngModel" [(ngModel)]="name"
+                                        name="inputName" class="form-control main__input smlltext" required
+                                        pattern="[A-zÀ-ú]*" placeholder="Nombre">
+
+                                    <p class="error" *ngIf="inputName.invalid && inputName.touched && inputName.dirty">
+                                        Invalid format*</p>
+                                    <p class="error" *ngIf="inputName.touched && inputName.pristine">Name is mandatory*
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Cognom-->
+                        <div class="form-group form__group">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="smlltext float-right" for="name">Last Name</label>
+                                </div>
+                                <div class="col-8">
+                                    <input id="lastName" type="text" #inputLastName="ngModel" [(ngModel)]="lastName"
+                                        name="inputLastName" class="form-control main__input smlltext" required
+                                        pattern="[A-zÀ-ú]*" placeholder="Last Name">
+
+                                    <p class="error"
+                                        *ngIf="inputLastName.invalid && inputLastName.touched && inputLastName.dirty">
+                                        Invalid format*</p>
+                                    <p class="error" *ngIf="inputLastName.touched && inputLastName.pristine">Last name
+                                        is mandatory*</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Username-->
+                        <div class="form-group form__group">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="smlltext float-right" for="username">Username</label>
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" #inputUsername="ngModel" [(ngModel)]="username"
+                                        name="inputUsername" class="form-control main__input smlltext" required
+                                        pattern="^[a-zA-Z0-9]([._](?![._])|[a-zA-Z0-9]){6,18}[a-zA-Z0-9]$" placeholder="Username">
+                                    <p class="error"
+                                        *ngIf="inputUsername.invalid && inputUsername.touched && inputUsername.dirty">
+                                        Invalid format. Username should have at least 6 characters (1 of them should be a number)*</p>
+                                    <p class="error" *ngIf="inputUsername.touched && inputUsername.pristine">Username is
+                                        mandatory*</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Email-->
+                        <div class="form-group form__group">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="smlltext float-right" for="email">Email</label>
+                                </div>
+                                <div class="col-8">
+                                    <input type="email" #inputEmail="ngModel" [(ngModel)]="email" name="inputEmail"
+                                        class="form-control main__input smlltext" required pattern="\S+@\S+\.\S+"
+                                        placeholder="Email">
+                                    <div class="error"
+                                        *ngIf="inputEmail.invalid && inputEmail.touched && inputEmail.dirty">
+                                        Invalid format*
+                                    </div>
+                                    <div class="error" *ngIf="inputEmail.touched && inputEmail.pristine">
+                                        Email is mandatory*
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Password-->
+                        <div class="form-group form__group">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="smlltext float-right" for="name">Password</label>
+                                </div>
+                                <div class="col-8">
+                                    <input type="password" #inputPassword="ngModel" [(ngModel)]="password"
+                                        name="inputPassword" class="form-control main__input smlltext" required
+                                        pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}"
+                                        placeholder="Password">
+                                    <p class="error"
+                                        *ngIf="inputPassword.invalid && inputPassword.touched && inputPassword.dirty">
+                                        Invalid format. Password should have at least 8 characters (1 lowcase, 1
+                                        uppercase, 1 number and 1 special character)*
+                                    </p>
+                                    <p class="error" *ngIf="inputPassword.touched && inputPassword.pristine">Password is
+                                        mandatory*</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Dietist-->
+                        <div class="form-group form__group">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="smlltext float-right" for="name">Are you a dietist?</label>
+                                </div>
+                                <div class="col-8">
+                                    <div class="form-check" id="checks">
+                                        <input [(ngModel)]="dietistTrue" name="dietist"
+                                            class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                        <label class="form-check-label" for="defaultCheck1">
+                                            Yes
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button [disabled]="formContainer.invalid" type="reset"
+                                class="btn btn-success m-2 main__buton">Enviar</button>
+                        </div>
+
+                        <!-- <div *ngIf="formContainer.invalid && formContainer.touched" class="alert alert-danger mt-5"
+                        role="alert">
+                        Formulario no válido! Revisa tus datos!
+                    </div> -->
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-1 col-md-3">
+        </div>
+    </div>
+</main>
+
+<footer>
+
+</footer>

@@ -1,0 +1,136 @@
+.navText{
+    font-family: 'Hind', sans-serif;
+    font-size: 1.0rem;
+    transition: .5;
+}
+.monText{
+    font-family: 'Montserrat', sans-serif;
+}
+.titleText{
+    font-size: 1.3rem;
+    transition: .2s;
+    font-family: 'Montserrat', sans-serif;
+}
+.leafText{
+    font-size: 0.2rem;
+    transition: .2s;
+    color: white;
+}
+.navText, .titleText{
+    cursor: pointer;
+}
+.header_navbar{
+    width: 100%;
+    margin: 0 0;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    position: fixed;
+    top: 0;
+    background-color: white;
+    /* -webkit-box-shadow: 1px 20px 20px -8px rgba(0,0,0,0.5);
+    -moz-box-shadow: 1px 20px 20px -8px rgba(0,0,0,0.5);
+    box-shadow: 1px 20px 20px -8px rgba(0,0,0,0.5); */
+    z-index: 1;
+}
+.header_title{
+    border-bottom: 1px solid rgb(18, 135, 53);
+    border-top: 1px solid rgb(18, 135, 53);
+    text-align: center;
+    padding-top: 6%;
+    cursor: pointer;
+    transition: .1s;
+}
+.navText:hover{
+    color: rgb(18, 135, 53);
+    font-size: 1.2rem;
+    background-color: white !important;
+    outline: none;
+    border: none;    
+}
+.navText:focus{
+    outline: 0;
+}
+.titleText:hover{
+    color: rgb(18, 135, 53);
+    font-size: 1.5rem;
+}
+
+.header_title:hover{
+    border-bottom: none;
+    border-top: none;
+}
+.nanText{
+    font-family: 'Nanum Gothic', sans-serif;
+}
+.effectText{
+    font-weight: 900;
+    color: black;
+    transition: .2s;
+}
+.effectText:hover{
+    color: #444;
+}
+.header__menu{
+    position: absolute;
+    left: 12vw;
+    top: 5vh;
+}
+.button__icon{
+    font-size: 3rem;
+}
+.menu__button:focus{
+    outline: none;
+    box-shadow: none !important;
+}
+.dropdown-toggle::after {
+    display: none !important;
+}
+.main__background{
+    background-image: url('../../assets/log-res-background.jpg');
+    background-size: cover;
+    height: 100%;
+}
+.formContainer{
+    margin-top: 17%;
+    font-family: 'Montserrat', sans-serif;
+    padding-bottom: 5%;
+}
+.main__input{
+    width: 125%;
+    opacity: .9;
+}
+.error{
+    margin-top: 3%;
+    font-size: small;
+    color: #dc3545;
+}
+input.ng-invalid.ng-dirty.ng-touched{
+    border-left: 5px solid #dc3545;
+}
+input.ng-touched.ng-pristine{
+    border-left: 5px solid #dc3545;
+}
+.mobile__display{
+    height: 20vh;
+}
+.from__background{
+    width: 100%;
+    padding: 5%;
+    background-color: white;
+    border-radius: .25rem;
+    opacity: .8;
+    position: relative;
+    z-index: 0;
+}
+.registerForm{
+    width: 75%;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+.smlltext{
+    font-size: small;
+}
+.main__buton{
+    border-radius: 0px !important;
+}
