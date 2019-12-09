@@ -10,11 +10,9 @@ const userSchema = new mongoose.Schema({
     },
     name: {
         type: types.String,
-        require: true
     },
     lastName: {
         type: types.String,
-        require: true
     },
     username: {
         type: types.String,
@@ -22,7 +20,13 @@ const userSchema = new mongoose.Schema({
     },
     email: {
         type: types.String,
-        require: true
+        require: ()=>{
+            if(this.username === undefined){
+                return true
+            }else{
+                return false
+            }
+        }
     },
     password: {
         type: types.String,
@@ -37,6 +41,11 @@ const userSchema = new mongoose.Schema({
         type: types.Date,
         require: true,
         default: new Date()
+    },
+    dietist: {
+        type: types.Boolean,
+        require: true,
+        default: false
     }
 })
 

@@ -135,7 +135,7 @@ mongoose.connect(`mongodb://localhost/WeeklyMenu`, { useNewUrlParser: true, useU
                     })
             })
 
-            //////////////// - SIGN IN - /////////////////
+            //////////////// - LOG IN - /////////////////
 
             server.post("/login", [
                 check('name').not().isEmpty().trim().escape(),
@@ -147,7 +147,9 @@ mongoose.connect(`mongodb://localhost/WeeklyMenu`, { useNewUrlParser: true, useU
                 if (body.name !== undefined && body.lastName !== undefined && body.username !== undefined && body.email !== undefined && body.password !== undefined) {
                     User.findOne({ "username": body.username }, (error, data) => {
                         let userFound = data
-                        if (userFound !== null) {
+                        if(error){
+                            res.send(error)
+                        }else if (userFound !== null) {
                             console.log(userFound)
                             bcrypt.compare(body.password, userFound.password, (error, same) => {
                                 if (error) {
