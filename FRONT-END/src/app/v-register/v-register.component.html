@@ -27,7 +27,7 @@
     </div>
 </header>
 <header class="d-block d-md-none">
-    <div class="dropdown header__menu">
+    <!-- <div class="dropdown header__menu">
         <button class="btn dropdown-toggle menu__button" type="button" id="dropdownMenu2" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-ellipsis-h button__icon"></i>
@@ -36,20 +36,38 @@
             <button routerLink="/about" class="dropdown-item navText" type="button">ABOUT US</button>
             <button routerLink="/home" class="dropdown-item navText" type="button">HOME</button>
         </div>
+    </div> -->
+
+
+    <div class="pos-f-t d-block d-md-none">
+        <div class="collapse" id="navbarToggleExternalContent">
+            <div class="bg-light p-4">
+                <h5 routerLink="/about" class="navText">ABOUT US</h5>
+                <h5 routerLink="/home" class="navText">HOME</h5>
+            </div>
+        </div>
+        <nav class="navbar navbar-light bg-light">
+            <button class="navbar-toggler menu__button" type="button" data-toggle="collapse"
+                data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </nav>
     </div>
+
 </header>
 
 <main>
     <div class="banner main__background">
-        <div class="row w-100">
+        <div class="row w-100" style="margin: 0 auto;">
             <div class="col-1 col-md-3">
             </div>
-            <div class="col-10 col-md-6 formContainer">
-                <div class="mobile__display d-block d-md-none">
+            <div class="col-10 col-md-6 form__container">
+                <div class="pc__display d-none d-md-block">
 
                 </div>
-                <div class="from__background">
-                    <form #formContainer="ngForm" (ngSubmit)="getData(formContainer)" class="registerForm">
+                <div class="form__background">
+                    <form #registerForm="ngForm" (ngSubmit)="sendData(registerForm)" class="registerForm">
 
                         <!--Nom-->
 
@@ -61,7 +79,7 @@
                                 <div class="col-8">
                                     <input id="name" type="text" #inputName="ngModel" [(ngModel)]="name"
                                         name="inputName" class="form-control main__input smlltext" required
-                                        pattern="[A-zÀ-ú]*" placeholder="Nombre">
+                                        pattern="[A-zÀ-ú]*" placeholder="Name">
 
                                     <p class="error" *ngIf="inputName.invalid && inputName.touched && inputName.dirty">
                                         Invalid format*</p>
@@ -100,10 +118,12 @@
                                 <div class="col-8">
                                     <input type="text" #inputUsername="ngModel" [(ngModel)]="username"
                                         name="inputUsername" class="form-control main__input smlltext" required
-                                        pattern="^[a-zA-Z0-9]([._](?![._])|[a-zA-Z0-9]){6,18}[a-zA-Z0-9]$" placeholder="Username">
+                                        pattern="^[a-zA-Z0-9]([._](?![._])|[a-zA-Z0-9]){6,18}[a-zA-Z0-9]$"
+                                        placeholder="Username">
                                     <p class="error"
                                         *ngIf="inputUsername.invalid && inputUsername.touched && inputUsername.dirty">
-                                        Invalid format. Username should have at least 6 characters (1 of them should be a number)*</p>
+                                        Invalid format. Username should have at least 6 characters (1 of them should be
+                                        a number)*</p>
                                     <p class="error" *ngIf="inputUsername.touched && inputUsername.pristine">Username is
                                         mandatory*</p>
                                 </div>
@@ -117,7 +137,7 @@
                                     <label class="smlltext float-right" for="email">Email</label>
                                 </div>
                                 <div class="col-8">
-                                    <input type="email" #inputEmail="ngModel" [(ngModel)]="email" name="inputEmail"
+                                    <input type="text" #inputEmail="ngModel" [(ngModel)]="email" name="inputEmail"
                                         class="form-control main__input smlltext" required pattern="\S+@\S+\.\S+"
                                         placeholder="Email">
                                     <div class="error"
@@ -140,7 +160,7 @@
                                 <div class="col-8">
                                     <input type="password" #inputPassword="ngModel" [(ngModel)]="password"
                                         name="inputPassword" class="form-control main__input smlltext" required
-                                        pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}"
+                                        pattern="(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-_]).{8,}"
                                         placeholder="Password">
                                     <p class="error"
                                         *ngIf="inputPassword.invalid && inputPassword.touched && inputPassword.dirty">
@@ -161,9 +181,9 @@
                                 </div>
                                 <div class="col-8">
                                     <div class="form-check" id="checks">
-                                        <input [(ngModel)]="dietistTrue" name="dietist"
-                                            class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                        <label class="form-check-label" for="defaultCheck1">
+                                        <input [(ngModel)]="dietistTrue" name="dietistTrue" class="form-check-input"
+                                            type="checkbox" value="" id="defaultCheck1">
+                                        <label class="form-check-label smlltext" for="defaultCheck1">
                                             Yes
                                         </label>
                                     </div>
@@ -171,14 +191,35 @@
                             </div>
                         </div>
                         <div class="text-center">
-                            <button [disabled]="formContainer.invalid" type="reset"
-                                class="btn btn-success m-2 main__buton">Enviar</button>
+                            <button [disabled]="registerForm.invalid" type="submit"
+                                class="btn btn-success m-2 main__buton">Sign In</button>
                         </div>
 
-                        <!-- <div *ngIf="formContainer.invalid && formContainer.touched" class="alert alert-danger mt-5"
-                        role="alert">
-                        Formulario no válido! Revisa tus datos!
-                    </div> -->
+                        <div *ngIf="registerForm.invalid && registerForm.touched"
+                            class="alert alert-danger mt-5 monText smlltext" role="alert">
+                            Invalid from! Please, check your credentials.
+                        </div>
+
+                        <div class="text-center mt-2">
+                            <small class="monText">Are you registered already?</small>
+                            <button routerLink="/login" class="btn btn-link login__button">Log In</button>
+                        </div>
+
+                        <div *ngIf="status" class="alert alert-warning mt-5 monText smlltext" role="alert">
+                            {{status}}
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 form__registerLoad">
+                                <div class="lds-ring" *ngIf="registerLoad === true">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+
                     </form>
                 </div>
             </div>
@@ -189,5 +230,7 @@
 </main>
 
 <footer>
+    <div class="row footer__navbar d-none d-md-block">
 
+    </div>
 </footer>

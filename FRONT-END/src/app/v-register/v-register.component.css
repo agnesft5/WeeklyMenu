@@ -1,5 +1,5 @@
 .navText{
-    font-family: 'Hind', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 1.0rem;
     transition: .5;
 }
@@ -73,7 +73,7 @@
 .header__menu{
     position: absolute;
     left: 12vw;
-    top: 5vh;
+    top: 0vh;
 }
 .button__icon{
     font-size: 3rem;
@@ -88,10 +88,10 @@
 .main__background{
     background-image: url('../../assets/log-res-background.jpg');
     background-size: cover;
-    height: 100%;
+    height: 150vh;
 }
-.formContainer{
-    margin-top: 17%;
+.form__container{
+    margin-top: 5%;
     font-family: 'Montserrat', sans-serif;
     padding-bottom: 5%;
 }
@@ -110,10 +110,10 @@ input.ng-invalid.ng-dirty.ng-touched{
 input.ng-touched.ng-pristine{
     border-left: 5px solid #dc3545;
 }
-.mobile__display{
-    height: 20vh;
+.pc__display{
+    height: 10vh;
 }
-.from__background{
+.form__background{
     width: 100%;
     padding: 5%;
     background-color: white;
@@ -133,4 +133,62 @@ input.ng-touched.ng-pristine{
 }
 .main__buton{
     border-radius: 0px !important;
+}
+.footer__navbar{
+    width: 100%;
+    margin: 0 0;
+    height: 7vh;
+    position: fixed;
+    bottom: 0;
+    background-color: white;
+    z-index: 1;
+}
+.lds-ring {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+  }
+  .lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    margin: 8px;
+    border: 8px solid #444;
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #444 transparent transparent transparent;
+  }
+  .lds-ring div:nth-child(1) {
+    animation-delay: -0.45s;
+  }
+  .lds-ring div:nth-child(2) {
+    animation-delay: -0.3s;
+  }
+  .lds-ring div:nth-child(3) {
+    animation-delay: -0.15s;
+  }
+  @keyframes lds-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+.form__registerLoad{
+    margin: 0 auto;
+    width: 50%;
+    text-align: center;
+}
+.login__button{
+    color: green;
+    font-size: small;
+}
+.menu__button:focus{
+    outline: none;
+    border: none;
+    box-shadow: none !important;
 }

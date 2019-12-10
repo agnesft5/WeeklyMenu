@@ -1,5 +1,5 @@
 .navText{
-    font-family: 'Hind', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 1.0rem;
     transition: .5;
 }
@@ -54,7 +54,6 @@
     color: rgb(18, 135, 53);
     font-size: 1.5rem;
 }
-
 .header_title:hover{
     border-bottom: none;
     border-top: none;
@@ -62,16 +61,21 @@
 .main__wrapper{
     background-image: url("../../assets/home-background.jpg");
     background-size: cover !important;
-    height: 140vh;
+    height: 150vh;
 }
 .main__container{
     position: absolute;
-    top: 30vh;
+    top: 5vh;
     cursor: pointer;
     padding: 5%;
     /* background-color: #ffffff;
     border-radius: .75rem;
     opacity: .5; */
+}
+@media only screen and (min-width: 691px) {
+    .main__container {
+      top: 30vh;
+    }
 }
 .nanText{
     font-family: 'Nanum Gothic', sans-serif;
@@ -97,10 +101,11 @@
 .header__menu{
     position: absolute;
     left: 9vw;
-    top: 5vh;
+    top: 0vh;
 }
 .button__icon{
     font-size: 3rem;
+    color: #fffc
 }
 .menu__button:focus{
     outline: none;
@@ -108,4 +113,18 @@
 }
 .dropdown-toggle::after {
     display: none !important;
+}
+@media only screen and (max-width: 320px) {
+    .main__button {
+      margin-top:2% !important;
+    }
+    .main__container {
+        top: 0vh;
+        padding-top:2%;
+      }
+}
+.menu__button:focus{
+    outline: none;
+    border: none;
+    box-shadow: none !important;
 }

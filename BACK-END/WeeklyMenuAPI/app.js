@@ -41,7 +41,7 @@ server.use(jwtChecker({
         //retorna un array de cookies
         return req.cookies['jwt'];
     }
-}).unless({ path: ["/login", "register"] })
+}).unless({ path: ["/login", "/register", "/home"] })
 )
 
 
@@ -63,9 +63,11 @@ mongoose.connect(`mongodb://localhost/WeeklyMenu`, { useNewUrlParser: true, useU
                 check('name').not().isEmpty().trim().escape(),
                 check('lastName').not().isEmpty().trim().escape(),
                 check('username').not().isEmpty().trim().escape(),
+                check('email').not().isEmpty().trim().escape(),
                 check('password').not().isEmpty().trim().escape()
             ], (req, res) => {
                 let body = req.body
+                console.log(body)
                 if (body.name !== undefined && body.lastName !== undefined && body.username !== undefined && body.email !== undefined && body.password !== undefined) {
                     User.findOne({ "username": body.username }, (error, data) => {
                         if (error) {
@@ -86,6 +88,7 @@ mongoose.connect(`mongodb://localhost/WeeklyMenu`, { useNewUrlParser: true, useU
                                             username: body.username,
                                             email: body.email,
                                             password: hash,
+                                            dietist: body.dietist
                                         })
 
                                         newUser.save((error) => {
@@ -109,7 +112,8 @@ mongoose.connect(`mongodb://localhost/WeeklyMenu`, { useNewUrlParser: true, useU
                 }
             })
 
-            //Comprovació users
+            //////////////// - GET USERS ADMIN - /////////////////
+
             server.get('/users', (req, res) => {
                 let token = req.cookies["jwt"]
                 jwt.verify(token, secrets["jwt_key"],
@@ -119,7 +123,7 @@ mongoose.connect(`mongodb://localhost/WeeklyMenu`, { useNewUrlParser: true, useU
                                 "status": "Authentication failed.",
                                 "error": error
                             })
-                        } else if (decoded['id'] == "5de93602d563c96abc61d737") {
+                        } else if (decoded['id'] == "5def8d7095df1d66b8fdea11") {
                             console.log(decoded)
                             User.find((error, data) => {
                                 if (error) {
@@ -141,16 +145,17 @@ mongoose.connect(`mongodb://localhost/WeeklyMenu`, { useNewUrlParser: true, useU
                 check('name').not().isEmpty().trim().escape(),
                 check('lastName').not().isEmpty().trim().escape(),
                 check('username').not().isEmpty().trim().escape(),
+                check('email').not().isEmpty().trim().escape(),
                 check('password').not().isEmpty().trim().escape()
             ], (req, res) => {
                 let body = req.body;
                 if (body.name !== undefined && body.lastName !== undefined && body.username !== undefined && body.email !== undefined && body.password !== undefined) {
                     User.findOne({ "username": body.username }, (error, data) => {
+
                         let userFound = data
-                        if(error){
+                        if (error) {
                             res.send(error)
-                        }else if (userFound !== null) {
-                            console.log(userFound)
+                        } else if (userFound !== null) {
                             bcrypt.compare(body.password, userFound.password, (error, same) => {
                                 if (error) {
                                     res.send({
@@ -172,6 +177,90 @@ mongoose.connect(`mongodb://localhost/WeeklyMenu`, { useNewUrlParser: true, useU
                 } else {
                     res.send({ "status": "Something went wrong. Check your credentials." })
                 }
+            })
+
+
+            //////////////// - UPDATE DETAILS- /////////////////
+
+            server.put('/update-details', [
+                check('weight').trim().escape().not().isEmpty(),
+                check('height').trim().escape().not().isEmpty(),
+                check('age').trim().escape().not().isEmpty(),
+                check('gender').trim().escape().not().isEmpty(),
+            ], (req, res) => {
+                let body = req.body;
+                console.log(body)
+                if (body.weight !== undefined && body.height !== undefined && body.age !== undefined && body.gender) {
+                    let token = req.cookies["jwt"]
+                    jwt.verify(token, secrets["jwt_key"],
+                        (error, decoded) => {
+                            if (error) {
+                                res.send({
+                                    "status": "Authentication failed.",
+                                    "error": error
+                                })
+                            } else if (decoded['id'] !== undefined) {
+                                User.findByIdAndUpdate(decoded['id'],
+                                    {
+                                        $set: {
+                                            "weight": body.weight,
+                                            "height": body.height,
+                                            "age": body.age,
+                                            "gender": body.gender,
+                                            "updateDate": new Date()
+                                        }
+                                    }
+                                    ,
+                                    (error) => {
+                                        if (error) {
+                                            res.send({
+                                                "status": "Couldn't update this user.",
+                                                "error": error
+                                            })
+                                        } else {
+                                            res.send({
+                                                "status": "Details updated!"
+                                            })
+                                        }
+                                    })
+                            } else {
+                                res.send({ "status": "Wrong credentials. Not allowed. Plz be agnesft5" })
+                            }
+                        })
+                }
+            })
+
+            //////////////// - GET USER DETAILS- /////////////////
+            
+            server.get('/user-details', (req, res) => {
+                let token = req.cookies["jwt"]
+                jwt.verify(token, secrets["jwt_key"],
+                    (error, decoded) => {
+                        if (error) {
+                            res.send({
+                                "status": "Authentication failed.",
+                                "error": error
+                            })
+                        } else if (decoded) {
+                            User.findById(decoded['id'],
+                                (error, data) => {
+                                    if (error) {
+                                        res.send({
+                                            "status": "Something went wrong. Try again.",
+                                            "error": error
+                                        })
+                                    } else {
+                                        console.log(data)
+                                        res.send({
+                                            "status": "User found.",
+                                            "data": data
+                                        })
+                                    }
+                                })
+                        } else {
+                            res.send({ "status": "Wrong credentials. Not allowed." })
+                        }
+                    })
             })
 
 

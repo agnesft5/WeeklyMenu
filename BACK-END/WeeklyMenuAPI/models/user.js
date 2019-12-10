@@ -20,10 +20,10 @@ const userSchema = new mongoose.Schema({
     },
     email: {
         type: types.String,
-        require: ()=>{
-            if(this.username === undefined){
+        require: () => {
+            if (this.username === undefined) {
                 return true
-            }else{
+            } else {
                 return false
             }
         }
@@ -44,12 +44,23 @@ const userSchema = new mongoose.Schema({
     },
     dietist: {
         type: types.Boolean,
-        require: true,
         default: false
+    },
+    weight: {
+        type: types.Number
+    },
+    height: {
+        type: types.Number
+    },
+    age: {
+        type: types.Number
+    },
+    gender: {
+        type: types.String
     }
 })
 
-module.exports = mongoose.model('User',userSchema);
+module.exports = mongoose.model('User', userSchema);
 
 
 // {

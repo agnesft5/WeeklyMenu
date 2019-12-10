@@ -1,1 +1,184 @@
-<p>v-login works!</p>
+<header class="d-none d-md-block">
+    <div class="row header_navbar">
+        <div class="col-5">
+
+        </div>
+        <div class="col-2">
+            <div class="header_title">
+                <div class="row">
+                    <div class="col-12">
+                        <h4 class="titleText">Weekly Menu <i class="fas fa-seedling"></i></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-5">
+            <div class="row text-center">
+                <div class="col-4">
+                </div>
+                <div class="col-3">
+                    <h6 routerLink="/about" class="text-center navText mt-3">ABOUT US</h6>
+                </div>
+                <div class="col-5">
+                    <h6 routerLink="/home" class="float-left navText mt-3">HOME</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<header class="d-block d-md-none">
+
+
+    <!-- <div class="dropdown header__menu">
+        <button class="btn dropdown-toggle menu__button" type="button" id="dropdownMenu2" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <i class="fas fa-ellipsis-h button__icon"></i>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <button routerLink="/about" class="dropdown-item navText" type="button">ABOUT US</button>
+            <button routerLink="/home" class="dropdown-item navText" type="button">HOME</button>
+        </div>
+    </div> -->
+
+    <div class="pos-f-t d-block d-md-none">
+        <div class="collapse" id="navbarToggleExternalContent">
+            <div class="bg-light p-4">
+                <h5 routerLink="/about" class="navText">ABOUT US</h5>
+                <h5 routerLink="/home" class="navText">HOME</h5>
+            </div>
+        </div>
+        <nav class="navbar navbar-light bg-light">
+            <button class="navbar-toggler menu__button" type="button" data-toggle="collapse"
+                data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <div class="banner main__background">
+        <div class="row w-100" style="margin: 0 auto;">
+            <div class="col-1 col-md-3">
+            </div>
+            <div class="col-10 col-md-6 form__container">
+                <div class="pc__display d-none d-md-block">
+
+                </div>
+                <div class="form__background">
+                    <form #loginForm="ngForm" (ngSubmit)="sendData(loginForm); loginForm.reset()" class="loginForm">
+
+                        <!--Username-->
+                        <div class="form-group form__group">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="smlltext float-right" for="username">Username</label>
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" #inputUsername="ngModel" [(ngModel)]="username"
+                                        name="inputUsername" class="form-control main__input smlltext" required
+                                        pattern="^[a-zA-Z0-9]([._](?![._])|[a-zA-Z0-9]){6,18}[a-zA-Z0-9]$"
+                                        placeholder="Username">
+                                    <!-- <p class="error"
+                                        *ngIf="inputUsername.invalid && inputUsername.touched && inputUsername.dirty">
+                                        Invalid format. Username should have at least 6 characters (1 of them should be
+                                        a number)*</p> -->
+                                    <p class="error" *ngIf="inputUsername.touched && inputUsername.pristine">Username is
+                                        mandatory*</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="row">
+                            <div class="col-12 text-center mb-2 main__separator">
+                                <small class="monText"> or </small>
+                            </div>
+                        </div>
+
+                        <--!Email--
+                        <div class="form-group form__group">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="smlltext float-right" for="email">Email</label>
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" #inputEmail="ngModel" [(ngModel)]="email" name="inputEmail"
+                                        class="form-control main__input smlltext" required pattern="\S+@\S+\.\S+"
+                                        placeholder="Email">
+                                    <div class="error"
+                                        *ngIf="inputEmail.invalid && inputEmail.touched && inputEmail.dirty">
+                                        Invalid format*
+                                    </div>
+                                    <div class="error" *ngIf="inputEmail.touched && inputEmail.pristine">
+                                        Email is mandatory*
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+
+                        <!--Password-->
+                        <div class="form-group form__group">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="smlltext float-right" for="name">Password</label>
+                                </div>
+                                <div class="col-8">
+                                    <input type="password" #inputPassword="ngModel" [(ngModel)]="password"
+                                        name="inputPassword" class="form-control main__input smlltext" required
+                                        placeholder="Password">
+                                    <!-- <p class="error"
+                                        *ngIf="inputPassword.invalid && inputPassword.touched && inputPassword.dirty">
+                                        Invalid format. Password should have at least 8 characters (1 lowcase, 1
+                                        uppercase, 1 number and 1 special character)*
+                                    </p> -->
+                                    <p class="error" *ngIf="inputPassword.touched && inputPassword.pristine">Password is
+                                        mandatory*</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <button [disabled]="loginForm.invalid" type="submit"
+                                class="btn btn-success m-2 main__buton">Log In</button>
+                        </div>
+
+                        <div class="text-center mt-5">
+                            <small class="monText">Aren't you registered yet?</small>
+                            <button routerLink="/register" class="btn btn-link register__button">Sign In</button>
+                        </div>
+
+                        <div *ngIf="loginForm.touched && loginForm.pristine"
+                            class="alert alert-danger mt-5 monText smlltext" role="alert">
+                            Invalid from! Please, check your credentials.
+                        </div>
+
+
+                        <div *ngIf="status" class="alert alert-warning mt-5 monText smlltext" role="alert">
+                            {{status}}
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 form__loginLoad">
+                                <div class="lds-ring" *ngIf="loginLoad === true">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-1 col-md-3">
+        </div>
+    </div>
+</main>
+
+<footer>
+    <div class="row footer__navbar d-none d-md-block">
+
+    </div>
+</footer>

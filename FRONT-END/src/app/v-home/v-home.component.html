@@ -27,7 +27,7 @@
         </div>
     </div>
 </header>
-<header class="d-block d-md-none">
+<!-- <header class="d-block d-md-none">
     <div class="dropdown header__menu">
         <button class="btn dropdown-toggle menu__button" type="button" id="dropdownMenu2" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
@@ -39,18 +39,37 @@
             <button routerLink="/login" class="dropdown-item navText" type="button">LOGIN</button>
         </div>
     </div>
+</header> -->
+
+<header class="d-block d-md-none">
+    <div class="pos-f-t d-block d-md-none">
+        <div class="collapse" id="navbarToggleExternalContent">
+            <div class="bg-light p-4">
+                <h5 routerLink="/home" class="navText">HOME</h5>
+                <h5 routerLink="/about" class="navText">ABOUT US</h5>
+                <h5 routerLink="/login" class="navText">LOGIN</h5>
+            </div>
+        </div>
+        <nav class="navbar navbar-light bg-light">
+            <button class="navbar-toggler menu__button" type="button" data-toggle="collapse"
+                data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </nav>
+    </div>
 </header>
 
 <main>
     <div class="banner main__wrapper">
         <div class="container">
             <div class="row">
-                <div class="col-8">
+                <div class="col-12 col-md-8">
                     <div class="main__container">
                         <div class="main__text">
                             <h2 style="font-weight: 100; font-size: 2.5rem;">Feel better with our guided meal plan.</h2>
                             <h2 class="mt-2" style="font-weight: 100; font-size: 3rem;"><span class="effectText">WEEKLY
-                                    MENUS</span> BASED IN YOUR PROFILE</h2>
+                                    MENUS</span> BASED ON YOUR PROFILE</h2>
                             <button routerLink="/register" type="button"
                                 class="btn btn-success main__button mt-5 monText">Sign In <span
                                     class="nanText">>></span></button>
