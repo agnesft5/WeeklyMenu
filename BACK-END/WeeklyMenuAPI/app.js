@@ -16,6 +16,9 @@ const helmet = require('helmet');
 ////////////////////// MODEL IMPORTS //////////////////////
 
 const User = require('./models/user');
+const Dish = require ('./models/dish');
+const Menu = require ('./models/menu');
+const Diet = require ('./models/diet');
 
 
 //////////////////////// SERVIDOR ////////////////////////
@@ -55,7 +58,7 @@ mongoose.connect(`mongodb://localhost/WeeklyMenu`, { useNewUrlParser: true, useU
 
             console.log("Connection with MongoDB created".green)
 
-            //////////////////// USER /////////////////////
+            /////////////////////////////////// USER /////////////////////////////////
 
             //////////////// - SIGN IN - /////////////////
 
@@ -112,7 +115,7 @@ mongoose.connect(`mongodb://localhost/WeeklyMenu`, { useNewUrlParser: true, useU
                 }
             })
 
-            //////////////// - GET USERS ADMIN - /////////////////
+            //////////////// - GET USERS ADMIN - /////////
 
             server.get('/users', (req, res) => {
                 let token = req.cookies["jwt"]
@@ -180,17 +183,19 @@ mongoose.connect(`mongodb://localhost/WeeklyMenu`, { useNewUrlParser: true, useU
             })
 
 
-            //////////////// - UPDATE DETAILS- /////////////////
+            //////////////// - UPDATE DETAILS- //////////
 
             server.put('/update-details', [
                 check('weight').trim().escape().not().isEmpty(),
                 check('height').trim().escape().not().isEmpty(),
                 check('age').trim().escape().not().isEmpty(),
                 check('gender').trim().escape().not().isEmpty(),
+                check('IMC').trim().escape().not().isEmpty(),
+                check('basal').trim().escape().not().isEmpty()
             ], (req, res) => {
                 let body = req.body;
                 console.log(body)
-                if (body.weight !== undefined && body.height !== undefined && body.age !== undefined && body.gender) {
+                if (body.weight !== undefined && body.height !== undefined && body.age !== undefined && body.gender && body.IMC !== undefined && body.basal !== undefined) {
                     let token = req.cookies["jwt"]
                     jwt.verify(token, secrets["jwt_key"],
                         (error, decoded) => {
@@ -207,6 +212,8 @@ mongoose.connect(`mongodb://localhost/WeeklyMenu`, { useNewUrlParser: true, useU
                                             "height": body.height,
                                             "age": body.age,
                                             "gender": body.gender,
+                                            "IMC": body.IMC,
+                                            "basal": body.basal,
                                             "updateDate": new Date()
                                         }
                                     }
@@ -224,14 +231,14 @@ mongoose.connect(`mongodb://localhost/WeeklyMenu`, { useNewUrlParser: true, useU
                                         }
                                     })
                             } else {
-                                res.send({ "status": "Wrong credentials. Not allowed. Plz be agnesft5" })
+                                res.send({ "status": "Wrong credentials. Not allowed." })
                             }
                         })
                 }
             })
 
             //////////////// - GET USER DETAILS- /////////////////
-            
+
             server.get('/user-details', (req, res) => {
                 let token = req.cookies["jwt"]
                 jwt.verify(token, secrets["jwt_key"],
@@ -269,3 +276,8 @@ mongoose.connect(`mongodb://localhost/WeeklyMenu`, { useNewUrlParser: true, useU
             })
         }
     })
+
+
+
+
+    ///////// & 'C:\Program Files (x86)\Google\Chrome\Application\chrome.exe' --disable-web-security --disable-gpu --user-data-dir=~/chromeTemp

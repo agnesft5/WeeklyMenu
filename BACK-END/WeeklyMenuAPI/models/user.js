@@ -57,6 +57,15 @@ const userSchema = new mongoose.Schema({
     },
     gender: {
         type: types.String
+    },
+    IMC:{
+        type: types.Number
+    },
+    basal:{
+        type: types.Number
+    },
+    userProfile:{
+        type:types.String
     }
 })
 

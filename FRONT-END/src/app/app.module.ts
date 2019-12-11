@@ -11,12 +11,15 @@ import { UserService } from './services/user.service';
 import { RouterModule, Routes, Router } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { VDetailsComponent } from './v-details/v-details.component';
+import { AuthGuard } from './servieces/auth.guard';
 
 const config: Routes = [
   { "path": "", "component": VHomeComponent },
   { "path": "home", "component": VHomeComponent },
   { "path": "login", "component": VLoginComponent },
   { "path": "register", "component": VRegisterComponent },
+  { "path": "details", "component": VDetailsComponent, "canActivate": [AuthGuard] },
   { "path": "**", "component": VHomeComponent }
 ]
 
@@ -25,7 +28,8 @@ const config: Routes = [
     AppComponent,
     VHomeComponent,
     VLoginComponent,
-    VRegisterComponent
+    VRegisterComponent,
+    VDetailsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,329 @@
+<header class="d-none d-md-block">
+    <div class="row header_navbar">
+        <div class="col-5">
+
+        </div>
+        <div class="col-2">
+            <div class="header_title">
+                <div class="row">
+                    <div class="col-12">
+                        <h4 class="titleText">Weekly Menu <i class="fas fa-seedling"></i></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-5">
+            <div class="row text-center">
+                <div class="col-4">
+                    <h6 routerLink="/home" class="float-right navText mt-3">HOME</h6>
+
+                </div>
+                <div class="col-3">
+                    <h6 routerLink="/about" class="text-center navText mt-3">ABOUT US</h6>
+                </div>
+                <div class="col-5">
+                    <h6 (click)="logout()" class="float-left navText mt-3">LOG OUT</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<header class="d-block d-md-none">
+
+
+    <!-- <div class="dropdown header__menu">
+            <button class="btn dropdown-toggle menu__button" type="button" id="dropdownMenu2" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-ellipsis-h button__icon"></i>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <button routerLink="/about" class="dropdown-item navText" type="button">ABOUT US</button>
+                <button routerLink="/home" class="dropdown-item navText" type="button">HOME</button>
+            </div>
+        </div> -->
+
+    <div class="pos-f-t d-block d-md-none">
+        <div class="collapse" id="navbarToggleExternalContent">
+            <div class="bg-light p-4">
+                <h5 routerLink="/about" class="navText">ABOUT US</h5>
+                <h5 routerLink="/home" class="navText">HOME</h5>
+                <h5 (click)="logout()" class="navText">LOG OUT</h5>
+            </div>
+        </div>
+        <nav class="navbar navbar-light bg-light">
+            <button class="navbar-toggler menu__button" type="button" data-toggle="collapse"
+                data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <div class="banner main__background">
+        <div class="row w-100" style="margin: 0 auto;">
+            <div class="col-1 col-md-3">
+            </div>
+            <div class="col-10 col-md-6 form__container">
+                <div *ngIf="vista == 'loggedOut'"
+                    class="p-3 alert alert-success mt-5 monText text-center smlltext loggedOut" role="alert">
+                    <p class="monText text-success mb-0">You are not logged anymore.</p>
+                    <p class="monText text-success mb-0">See you soon!</p>
+                </div>
+                <div class="pc__display d-none d-md-block">
+
+                </div>
+                <div *ngIf="vista == 'loggedIn'" class="form__background">
+
+                    <!-- Afegir funció per canviar de vista i fer la get -->
+                    <form #detailsForm="ngForm" (ngSubmit)="sendData(detailsForm); getDetails()" class="detailsForm">
+
+                        <!--Weight-->
+                        <div class="form-group form__group">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="smlltext float-right" for="weight">Weight</label>
+                                </div>
+                                <div class="col-8">
+                                    <input type="number" #inputWeight="ngModel" [(ngModel)]="weight" name="inputWeight"
+                                        class="form-control main__input smlltext" required
+                                        pattern="[0-9]+(\.[0-9][0-9]?)?" placeholder="70 kg">
+                                    <p class="error"
+                                        *ngIf="inputWeight.invalid && inputWeight.touched && inputWeight.dirty">
+                                        Invalid format. Weight should be a number*</p>
+                                    <p class="error" *ngIf="inputWeight.touched && inputWeight.pristine">Weight is
+                                        mandatory*</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Height-->
+                        <div class="form-group form__group">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="smlltext float-right" for="height">Height</label>
+                                </div>
+                                <div class="col-8">
+                                    <input type="number" #inputHeight="ngModel" [(ngModel)]="height" name="inputHeight"
+                                        class="form-control main__input smlltext" required
+                                        pattern="[0-9]+(\.[0-9][0-9]?)?" placeholder="1.70 m">
+                                    <p class="error"
+                                        *ngIf="inputHeight.invalid && inputHeight.touched && inputHeight.dirty">
+                                        Invalid format. Height should be a number*</p>
+                                    <p class="error" *ngIf="inputHeight.touched && inputHeight.pristine">Height is
+                                        mandatory*</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Age-->
+                        <div class="form-group form__group">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="smlltext float-right" for="age">Age</label>
+                                </div>
+                                <div class="col-8">
+                                    <input type="number" #inputAge="ngModel" [(ngModel)]="age" name="inputAge"
+                                        class="form-control main__input smlltext" required pattern="^[0-9]*"
+                                        placeholder="Age">
+                                    <p class="error" *ngIf="inputAge.invalid && inputAge.touched && inputAge.dirty">
+                                        Invalid format. Age should be a number*</p>
+                                    <p class="error" *ngIf="inputAge.touched && inputAge.pristine">Age is
+                                        mandatory*</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Gender -->
+                        <div class="form-group form__group">
+                            <div class="row">
+                                <div class="col-4 text-center ">
+                                    <!-- Etiqueta -->
+                                    <label class="form-check-label smlltext float-right" for="gender">Gender</label>
+                                </div>
+                            </div>
+
+                            <!-- Femení -->
+                            <div class="row">
+                                <div class="col-4"></div>
+                                <div class="col-8">
+
+                                    <div class="form-check mt-2" id="gender">
+                                        <input [(ngModel)]="gender" class="form-check-input" type="radio"
+                                            name="femGender" id="femGender" value="F" required>
+                                        <label class="form-check-label smlltext" for="femGender">
+                                            Female
+                                        </label>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- Masculí -->
+                            <div class="row">
+                                <div class="col-4">
+
+                                </div>
+                                <div class="col-8">
+                                    <div class="form-check" id="gender">
+                                        <input [(ngModel)]="gender" class="form-check-input" type="radio"
+                                            name="masGender" id="masGender" value="M">
+                                        <label class="form-check-label smlltext" for="masGender">
+                                            Male
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="text-center">
+                            <button [disabled]="detailsForm.invalid" type="submit"
+                                class="btn btn-success m-2 main__buton">Send</button>
+                        </div>
+
+                        <div *ngIf="detailsForm.touched && detailsForm.pristine"
+                            class="alert alert-danger mt-5 monText smlltext" role="alert">
+                            Invalid from! Please, check your credentials.
+                        </div>
+
+
+                        <div *ngIf="status" class="alert alert-warning mt-5 monText smlltext" role="alert">
+                            {{status}}
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 form__detailsLoad">
+                                <div class="lds-ring" *ngIf="detailsLoading === true">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+                <div *ngIf="vista == 'showDetails'" class="form__background">
+                    <form #detailsForm="ngForm" (ngSubmit)="sendData(detailsForm); detailsForm.reset()"
+                        class="detailsForm">
+
+                        <div class="details__welcome">
+                            <p class="smlltext monText">Hi <span class="welcome__name">{{userName}}</span>!</p>
+                            <p class="smlltext monText mt-2 mb-4">These are your profile details:</p>
+                        </div>
+                        <!--Weight-->
+                        <div class="detail__group">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="smlltext float-right" for="weight">Weight</label>
+                                </div>
+                                <div class="col-8">
+                                    <p name="weight" class="smlltext monText">{{userWeight}} kg</p>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Height-->
+                        <div class="detail__group">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="smlltext float-right" for="height">Height</label>
+                                </div>
+                                <div class="col-8">
+                                    <p name="height" class="smlltext monText">{{userHeight}} m</p>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Age-->
+                        <div class="detail__group">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="smlltext float-right" for="age">Age</label>
+                                </div>
+                                <div class="col-8">
+                                    <p name="age" class="smlltext monText">{{userAge}} years old</p>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--BMI-->
+                        <div class="detail__group">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="smlltext float-right" for="IMC">BMI</label>
+                                </div>
+                                <div class="col-8">
+                                    <p name="IMC" class="smlltext monText">{{userIMC}}</p>
+                                    <p name="IMC" class="smlltext monText">{{imcCorres}}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--BMI-->
+                        <div class="detail__group">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="smlltext float-right" for="IMC">BM</label>
+                                </div>
+                                <div class="col-8">
+                                    <p name="IMC" class="smlltext monText">{{userMB}} kcal</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr>
+                        <!-- Canviar marge des botons -->
+                        <div class="text-center mt-2">
+                            <p class="smlltext monText">Would you like to change your details?</p>
+                            <button (click)="changeView()" type="submit"
+                                class="btn btn-link m-2 text-success smlltext monText">Update
+                                details</button>
+                        </div>
+
+                        <div class="text-center mt-2">
+                            <button type="submit" class="btn btn-success m-2 main__buton">Generate diet</button>
+                        </div>
+
+                        <div *ngIf="detailsForm.touched && detailsForm.pristine"
+                            class="alert alert-danger mt-5 monText smlltext" role="alert">
+                            Invalid from! Please, check your credentials.
+                        </div>
+
+                        <div *ngIf="detailsNotFound" class="alert alert-warning mt-5 monText smlltext" role="alert">
+                            {{detailsNotFound}}
+                        </div>
+
+                        <!-- <div class="row">
+                            <div class="col-12 form__detailsLoad">
+                                <div class="lds-ring" *ngIf="detailsLoading === true">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div> -->
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-1 col-md-3">
+        </div>
+    </div>
+</main>
+
+<footer>
+    <div class="row footer__navbar d-none d-md-block">
+
+    </div>
+</footer>
