@@ -86,9 +86,9 @@ export class UserService {
 
   /////////////// POST USERDETAILS ///////////////
 
-  putData(weight: number, height: number, age: number, gender: string, IMC: number, reqBasal: number): any {
+  putData(weight: number, height: number, age: number, gender: string, IMC: number, reqBasal: number, profile: string): any {
     this._http.put("http://localhost:3000/update-details",
-      { "weight": weight, "height": height, "age": age, "gender": gender, "IMC": IMC, "basal": reqBasal },
+      { "weight": weight, "height": height, "age": age, "gender": gender, "IMC": IMC, "basal": reqBasal, "userProfile": profile },
       { headers: new HttpHeaders({ "x-requested-witdh": "XMLHResponse" }) })
       .subscribe(
         (result) => {
@@ -101,16 +101,37 @@ export class UserService {
   //////////// CALCULATE USER DETAILS ////////////
 
   calculate(weight: number, height: number, age: number, gender: string): any {
-    let IMC: number = Math.round(weight / (height * height));
-    let reqBasal: number;
-    if (gender == "F") {
-      reqBasal = (10 * weight) + (6.25 * height * 100) - (5 * age) - 161
-    } else {
-      reqBasal = (10 * weight) + (6.25 * height * 100) - (5 * age) + 5
-    }
-    console.log({ "IMC": IMC, "Basal": reqBasal, "Gender": gender })
 
-    this.putData(weight, height, age, gender, IMC, reqBasal)
+    let IMC: number = Math.round(weight / (height * height));
+
+    let reqBasal: number;
+
+    if (gender == "F") {
+      reqBasal = Math.round((10 * weight) + (6.25 * height * 100) - (5 * age) - 161)
+    } else {
+      reqBasal = Math.round((10 * weight) + (6.25 * height * 100) - (5 * age) + 5)
+    }
+
+    //PROFILE
+    let userProfile: string;
+
+    if (reqBasal <= 1300) {
+      userProfile = "WL"
+    } else if (reqBasal >= 1301 && reqBasal <= 1500) {
+      userProfile = "WM"
+    } else if (reqBasal >= 1501 && reqBasal <= 1700) {
+      userProfile = "WG"
+    } else if (reqBasal >= 1701 && reqBasal <= 1900) {
+      userProfile = "ML"
+    } else if (reqBasal >= 1901 && reqBasal <= 2100) {
+      userProfile = "MM"
+    } else if (reqBasal >= 2101) {
+      userProfile = "MG"
+    } else {
+      userProfile = "Undefined profile"
+    }
+
+    this.putData(weight, height, age, gender, IMC, reqBasal, userProfile)
 
   }
 

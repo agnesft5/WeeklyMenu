@@ -34,6 +34,7 @@ export class VDetailsComponent {
   userMB: number;
   userName: string;
   imcCorres: string;
+  userProfile: string;
 
   detailsNotFound: string;
 
@@ -77,7 +78,6 @@ export class VDetailsComponent {
     this.userDetailsSubscription = this._user.userDetails.subscribe(
       (newValue) => {
         this.userDetails = newValue
-        console.log(this.userDetails)
         if (this.userDetails !== undefined) {
           this.userWeight = this.userDetails["data"]["weight"];
           this.userHeight = this.userDetails["data"]["height"];
@@ -85,6 +85,8 @@ export class VDetailsComponent {
           this.userIMC = this.userDetails["data"]["IMC"];
           this.userMB = this.userDetails["data"]["basal"];
           this.userName = this.userDetails["data"]["name"];
+
+          //IMC
           if (this.userIMC <= 18.5) {
             this.imcCorres = "Underweight - You should gain weight"
           } else if (this.userIMC >= 18.4 && this.userIMC <= 24.9) {
@@ -96,10 +98,13 @@ export class VDetailsComponent {
           } else {
             this.imcCorres = "Undefined correspondence"
           }
+          
         } else {
           this.detailsNotFound = "Something went wrong. Please try again."
           this.vista = "loggedIn";
         }
+
+
       }
     )
 

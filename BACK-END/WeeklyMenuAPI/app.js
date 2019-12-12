@@ -191,11 +191,12 @@ mongoose.connect(`mongodb://localhost/WeeklyMenu`, { useNewUrlParser: true, useU
                 check('age').trim().escape().not().isEmpty(),
                 check('gender').trim().escape().not().isEmpty(),
                 check('IMC').trim().escape().not().isEmpty(),
-                check('basal').trim().escape().not().isEmpty()
+                check('basal').trim().escape().not().isEmpty(),
+                check('userProfile').trim().escape().not().isEmpty()
             ], (req, res) => {
                 let body = req.body;
                 console.log(body)
-                if (body.weight !== undefined && body.height !== undefined && body.age !== undefined && body.gender && body.IMC !== undefined && body.basal !== undefined) {
+                if (body.weight !== undefined && body.height !== undefined && body.age !== undefined && body.gender && body.IMC !== undefined && body.basal !== undefined && body.userProfile !== undefined) {
                     let token = req.cookies["jwt"]
                     jwt.verify(token, secrets["jwt_key"],
                         (error, decoded) => {
@@ -214,7 +215,8 @@ mongoose.connect(`mongodb://localhost/WeeklyMenu`, { useNewUrlParser: true, useU
                                             "gender": body.gender,
                                             "IMC": body.IMC,
                                             "basal": body.basal,
-                                            "updateDate": new Date()
+                                            "updateDate": new Date(),
+                                            "userProfile": body.userProfile
                                         }
                                     }
                                     ,
