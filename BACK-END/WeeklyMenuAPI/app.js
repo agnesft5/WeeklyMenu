@@ -16,9 +16,9 @@ const helmet = require('helmet');
 ////////////////////// MODEL IMPORTS //////////////////////
 
 const User = require('./models/user');
-const Dish = require ('./models/dish');
-const Menu = require ('./models/menu');
-const Diet = require ('./models/diet');
+const Dish = require('./models/dish');
+const Menu = require('./models/menu');
+const Diet = require('./models/diet');
 
 
 //////////////////////// SERVIDOR ////////////////////////
@@ -58,6 +58,10 @@ mongoose.connect(`mongodb://localhost/WeeklyMenu`, { useNewUrlParser: true, useU
 
             console.log("Connection with MongoDB created".green)
 
+            User.find({},
+                (error, data) => {
+                    console.log("Buscando a nemo")
+                })
             /////////////////////////////////// USER /////////////////////////////////
 
             //////////////// - SIGN IN - /////////////////
@@ -255,11 +259,10 @@ mongoose.connect(`mongodb://localhost/WeeklyMenu`, { useNewUrlParser: true, useU
                                 (error, data) => {
                                     if (error) {
                                         res.send({
-                                            "status": "Something went wrong. Try again.",
+                                            "status": "Couldn't find this user.",
                                             "error": error
                                         })
                                     } else {
-                                        console.log(data)
                                         res.send({
                                             "status": "User found.",
                                             "data": data
@@ -272,6 +275,88 @@ mongoose.connect(`mongodb://localhost/WeeklyMenu`, { useNewUrlParser: true, useU
                     })
             })
 
+
+            /////////////////////////////////// DISH /////////////////////////////////
+
+            server.post('/add-dish', [
+                check('name').trim().escape().not().isEmpty(),
+                check('ingredients.*').trim().escape().not().isEmpty(),
+                check('quantity.*').trim().escape().not().isEmpty(),
+                check('kcal').trim().escape().not().isEmpty(),
+                check('dish').trim().escape().not().isEmpty(),
+                check('meal').trim().escape().not().isEmpty(),
+                check('profile').trim().escape().not().isEmpty()
+            ],
+                (req, res) => {
+                    let body = req.body
+                    let token = req.cookies["jwt"]
+                    jwt.verify(token, secrets["jwt_key"],
+                        (error, decoded) => {
+                            if (error) {
+                                res.send({
+                                    "status": "Authentication failed.",
+                                    "error": error
+                                })
+                            } else if (decoded) {
+                                User.findById(decoded['id'], (error, data) => {
+                                    if (error) {
+                                        res.send({ "status": "Couldn't find this user." })
+                                    } else {
+                                        console.log({ "status": "User found." })
+                                        console.log(data)
+                                        if (data['dietist'] == true) {
+                                            if (body.name !== undefined && body.ingredients !== undefined && body.quantity !== undefined && body.kcal !== undefined && body.type !== undefined && body.profile !== undefined) {
+
+                                                const newDish = new Dish({
+                                                    _id: mongoose.Types.ObjectId(),
+                                                    name: body.name,
+                                                    ingredients: body.ingredients,
+                                                    quantity: body.quantity,
+                                                    kcal: body.kcal,
+                                                    type: body.type,
+                                                    profile: body.profile
+
+                                                })
+
+                                                newDish.save(
+                                                    (error) => {
+                                                        if (error) {
+                                                            res.send({
+                                                                "status": "Couln't save your dish.",
+                                                                "error": error
+                                                            })
+                                                        } else {
+                                                            res.send({ "status": "Dish saved!" })
+                                                        }
+                                                    })
+                                            }
+                                        } else {
+                                            res.send({ "status": "You should be a dietist to get here." })
+                                        }
+                                    }
+                                })
+                            } else {
+                                res.send({ "status": "Wrong credentials. Not allowed." })
+                            }
+
+                        })
+                })
+
+
+                server.get('/dishes', (req, res)=>{
+                    Dish.find(
+                        (error, data) => {
+                            console.log("Buscando a nemo")
+                            if (error) {
+                                res.send("Couln't find this model.")
+                            } else {
+                                res.send(data)
+                                // for (let i = 0; i < data.length; i++) {
+                                //     console.log(data[i]._id)
+                                // }
+                            }
+                        })
+                })
 
             server.listen(3000, () => {
                 console.log("Weekly Menu API Server listening on port 3000".green)

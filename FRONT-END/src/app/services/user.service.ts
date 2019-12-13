@@ -116,17 +116,17 @@ export class UserService {
     let userProfile: string;
 
     if (reqBasal <= 1300) {
-      userProfile = "WL"
+      userProfile = "profile-1200"
     } else if (reqBasal >= 1301 && reqBasal <= 1500) {
-      userProfile = "WM"
+      userProfile = "profile-1400"
     } else if (reqBasal >= 1501 && reqBasal <= 1700) {
-      userProfile = "WG"
+      userProfile = "profile-1600"
     } else if (reqBasal >= 1701 && reqBasal <= 1900) {
-      userProfile = "ML"
+      userProfile = "profile-1800"
     } else if (reqBasal >= 1901 && reqBasal <= 2100) {
-      userProfile = "MM"
+      userProfile = "profile-2000"
     } else if (reqBasal >= 2101) {
-      userProfile = "MG"
+      userProfile = "profile-2200"
     } else {
       userProfile = "Undefined profile"
     }

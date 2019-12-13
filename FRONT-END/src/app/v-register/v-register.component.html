@@ -118,11 +118,11 @@
                                 <div class="col-8">
                                     <input type="text" #inputUsername="ngModel" [(ngModel)]="username"
                                         name="inputUsername" class="form-control main__input smlltext" required
-                                        pattern="^[a-zA-Z0-9]([._](?![._])|[a-zA-Z0-9]){6,18}[a-zA-Z0-9]$"
+                                        pattern="^[a-z0-9]([._](?![._])|[a-z0-9]){6,18}[a-z0-9]$"
                                         placeholder="Username">
                                     <p class="error"
                                         *ngIf="inputUsername.invalid && inputUsername.touched && inputUsername.dirty">
-                                        Invalid format. Username should have at least 6 characters (1 of them should be
+                                        Invalid format. Username should have at least 6 characters lowercase (1 of them should be
                                         a number)*</p>
                                     <p class="error" *ngIf="inputUsername.touched && inputUsername.pristine">Username is
                                         mandatory*</p>
@@ -164,7 +164,7 @@
                                         placeholder="Password">
                                     <p class="error"
                                         *ngIf="inputPassword.invalid && inputPassword.touched && inputPassword.dirty">
-                                        Invalid format. Password should have at least 8 characters (1 lowcase, 1
+                                        Invalid format. Password should have at least 8 characters (1 lowercase, 1
                                         uppercase, 1 number and 1 special character)*
                                     </p>
                                     <p class="error" *ngIf="inputPassword.touched && inputPassword.pristine">Password is

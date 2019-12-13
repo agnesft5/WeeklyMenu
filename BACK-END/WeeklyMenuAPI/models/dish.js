@@ -15,27 +15,33 @@ const dishSchema = new mongoose.Schema({
         type: [types.String],
         require: true
     },
+    quantity: {
+        type: [types.Number],
+        require: true
+    },
     kcal: {
         type: types.Number,
         require: true
     },
-    dish: {
+    type: {
         type: types.String,
-        enum: ["starter", "main", "dessert"],
+        enum: ["starter_lunch", "main_lunch", "dessert_lunch", "starter_dinner", "main_dinner", "dessert_dinner"],
         default: "starter"
-    },
-    meal: {
-        type: types.String,
-        enum: ["lunch", "dinner"],
-        default: "lunch"
     },
     profile: {
         type: types.String,
-        enum: ["WL", "WM", "WG", "ML", "MM", "MG"],
-        default: "WM"
+        enum: ["profile_1200", "profile_1400", "profile_1600", "profile_1800", "profile_2000", "profile_2200"],
+        default: "profile_1400"
     }
 })
 
 module.exports = mongoose.model('Dish', dishSchema);
 
-// { "WL": WomanLose, "WM": WomanMantain, "WG": WomanGain, "ML": ManLose, "MM": ManMantain, "MG": ManGain }
+
+// {
+//     "name":"omelette",
+//     "ingredients":["egg", "oil"],
+//     "quantity":[120, 10],
+//     "type":"starter_lunch",
+//     "profile":"profile-1200"
+//     }
