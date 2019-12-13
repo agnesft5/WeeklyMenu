@@ -81,22 +81,22 @@ mongoose.connect(`mongodb://localhost/WeeklyMenu`, { useNewUrlParser: true, useU
                     if (error) {
                         console.log("Couln't find this model.")
                     } else {
-                        console.log(data)
-                        for (let i = 0; i < data.length; i++) {
-                            console.log(data[i]._id)
-                            Dish.findByIdAndDelete(data[i], (error) => {
-                                if (error) {
-                                    console.log("Couln't delete your dish")
-                                } else if (data.length > 0) {
-                                    console.log(`Dish ${i} deleted`)
-                                    deleted = true
-                                } else {
-                                    console.log(`Data is empty`)
-                                    deleted = true
-                                }
-                            })
+                        if (data.length === 0) {
+                            console.log(`Data is empty`)
+                            deleted = true
+                        } else {
+                            for (let i = 0; i < data.length; i++) {
+                                console.log(data[i]._id)
+                                Dish.findByIdAndDelete(data[i], (error) => {
+                                    if (error) {
+                                        console.log("Couln't delete your dish")
+                                    } else {
+                                        console.log(`Dish ${i} deleted`)
+                                        deleted = true
+                                    }
+                                })
+                            }
                         }
-
 
                         if (deleted === true) {
                             csv({

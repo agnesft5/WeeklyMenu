@@ -58,10 +58,6 @@ mongoose.connect(`mongodb://localhost/WeeklyMenu`, { useNewUrlParser: true, useU
 
             console.log("Connection with MongoDB created".green)
 
-            User.find({},
-                (error, data) => {
-                    console.log("Buscando a nemo")
-                })
             /////////////////////////////////// USER /////////////////////////////////
 
             //////////////// - SIGN IN - /////////////////
@@ -278,6 +274,8 @@ mongoose.connect(`mongodb://localhost/WeeklyMenu`, { useNewUrlParser: true, useU
 
             /////////////////////////////////// DISH /////////////////////////////////
 
+            //////////////// - ADD DISH - /////////////////
+
             server.post('/add-dish', [
                 check('name').trim().escape().not().isEmpty(),
                 check('ingredients.*').trim().escape().not().isEmpty(),
@@ -342,18 +340,20 @@ mongoose.connect(`mongodb://localhost/WeeklyMenu`, { useNewUrlParser: true, useU
                         })
                 })
 
+                /////////////////////////////////// DISH /////////////////////////////////
+
+                //////////////// - GET DISHES - /////////////////
 
                 server.get('/dishes', (req, res)=>{
                     Dish.find(
                         (error, data) => {
-                            console.log("Buscando a nemo")
                             if (error) {
                                 res.send("Couln't find this model.")
                             } else {
                                 res.send(data)
-                                // for (let i = 0; i < data.length; i++) {
-                                //     console.log(data[i]._id)
-                                // }
+                                for (let i = 0; i < data.length; i++) {
+                                    console.log(i, data[i])
+                                }
                             }
                         })
                 })
