@@ -91,7 +91,6 @@
     height: 150vh;
 }
 .form__container{
-    margin-top: 5%;
     font-family: 'Montserrat', sans-serif;
     padding: 0;
 }
@@ -111,16 +110,17 @@ input.ng-touched.ng-pristine{
     border-left: 5px solid #dc3545;
 }
 .pc__display{
-    height: 10vh;
+    height: 5vh;
 }
 .form__background{
-    width: 100%;
+    width: 70%;
     padding: 5%;
     background-color: white;
     border-radius: .25rem;
     opacity: .8;
     position: relative;
     z-index: 0;
+    margin: 0 auto;
 }
 .registerForm{
     width: 75%;
@@ -194,4 +194,32 @@ input.ng-touched.ng-pristine{
     outline: none;
     border: none;
     box-shadow: none !important;
+}
+@media only screen and (min-width: 315px) and (max-width: 415px){
+    .form__background{
+        margin-top: 10%;
+        width: 100%;
+    }
+    
+}
+@media only screen and (min-width: 416px) and (max-width: 767px){
+    .form__background{
+        margin-top: 10%;
+        width: 100%;
+    }
+    
+}
+@media only screen and (min-width: 768px) and (max-width: 1208px){
+    .form__background{
+        margin-top: 20%;
+        width: 100%;
+    }
+    
+}
+@media only screen and (min-width: 1209px){
+    .form__background{
+        margin-top: 10%;
+        width: 85%;
+    }
+    
 }
