@@ -60,3 +60,13 @@ const menuSchema = new mongoose.Schema({
 
 menuSchema.plugin(mautopopulate);
 module.exports = mongoose.model('Menu', menuSchema);
+
+
+// _id:,
+// date:
+//starterLunch:
+// mainLunch:
+// dessertLunch:
+// starterDinner:
+// mainDinner:
+// dessertDinner:

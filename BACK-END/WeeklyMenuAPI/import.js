@@ -86,7 +86,8 @@ mongoose.connect(`mongodb://localhost/WeeklyMenu`, { useNewUrlParser: true, useU
                             deleted = true
                         } else {
                             for (let i = 0; i < data.length; i++) {
-                                console.log(data[i]._id)
+                                console.log("data[i] ->", data[i])
+                                console.log("data[i].-id ->",data[i]._id)
                                 Dish.findByIdAndDelete(data[i], (error) => {
                                     if (error) {
                                         console.log("Couln't delete your dish")
@@ -104,7 +105,7 @@ mongoose.connect(`mongodb://localhost/WeeklyMenu`, { useNewUrlParser: true, useU
                                 headers: ['name', 'ingredients', 'quantity', 'kcal'],
                                 delimiter: ';'
                             })
-                                .fromFile('C:\\Users\\agnes\\Desktop\\platos1.csv')
+                                .fromFile('C:\\Users\\agnes\\Desktop\\platos2.csv')
                                 .then((jsonObj) => {
                                     for (const [index, receta] of jsonObj.entries()) {
                                         //Creo cada plat a partir del csv
@@ -181,7 +182,7 @@ mongoose.connect(`mongodb://localhost/WeeklyMenu`, { useNewUrlParser: true, useU
                                         })
                                     }
 
-                                    // mongoose.disconnect()
+                                    //mongoose.disconnect()
                                 })
 
                         } else {
@@ -197,6 +198,7 @@ mongoose.connect(`mongodb://localhost/WeeklyMenu`, { useNewUrlParser: true, useU
         }
 
     })
+
 
 
 

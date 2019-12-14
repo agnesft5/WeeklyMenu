@@ -8,19 +8,24 @@ import { Subject } from 'rxjs';
 })
 export class UserService {
 
-  ///// REGISTER /////
+  //////////////// REGISTER /////////////
   registerData: Subject<object> = new Subject<object>();
 
-  ///// LOGIN /////
+  //////////////// LOGIN /////////////
   loginData: Subject<object> = new Subject<object>();
   logged: string;
 
-  //// DETAILS ////
+  //////////// DETAILS /////////////
   //// POST ////
   detailsData: Subject<object> = new Subject<object>();
   //// GET ////
   userDetails: Subject<object> = new Subject<object>();
   details: object;
+
+  //////////// MENU /////////////
+  //// POST ////
+  postMenuData: Subject<object> = new Subject<object>();
+
 
   constructor(
     public _http: HttpClient,
@@ -116,23 +121,34 @@ export class UserService {
     let userProfile: string;
 
     if (reqBasal <= 1300) {
-      userProfile = "profile-1200"
+      userProfile = "profile_1200"
     } else if (reqBasal >= 1301 && reqBasal <= 1500) {
-      userProfile = "profile-1400"
+      userProfile = "profile_1400"
     } else if (reqBasal >= 1501 && reqBasal <= 1700) {
-      userProfile = "profile-1600"
+      userProfile = "profile_1600"
     } else if (reqBasal >= 1701 && reqBasal <= 1900) {
-      userProfile = "profile-1800"
+      userProfile = "profile_1800"
     } else if (reqBasal >= 1901 && reqBasal <= 2100) {
-      userProfile = "profile-2000"
+      userProfile = "profile_2000"
     } else if (reqBasal >= 2101) {
-      userProfile = "profile-2200"
+      userProfile = "profile_2200"
     } else {
       userProfile = "Undefined profile"
     }
 
     this.putData(weight, height, age, gender, IMC, reqBasal, userProfile)
 
+  }
+
+  /////////////// GENERATE MENU ///////////////
+
+  createMenu(): any {
+    this._http.post("http://localhost:3000/generate-menu",
+      { headers: new HttpHeaders({ "x-requested-witdh": "XMLHResponse" }) })
+      .subscribe(
+        (result) => {
+          this.postMenuData.next(result);
+        })
   }
 
   logout() {

@@ -288,9 +288,19 @@
                                 details</button>
                         </div>
 
-                        <div class="text-center mt-2">
-                            <button type="submit" class="btn btn-success m-2 main__buton">Generate diet</button>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="text-center mt-2">
+                                    <button routerLink="/single-menu" type="submit" class="btn btn-outline-success m-2 main__buton">Generate menu</button>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="text-center mt-2">
+                                    <button type="submit" class="btn btn-outline-success m-2 main__buton">Generate diet</button>
+                                </div>
+                            </div>
                         </div>
+
 
                         <div *ngIf="detailsForm.touched && detailsForm.pristine"
                             class="alert alert-danger mt-5 monText smlltext" role="alert">
