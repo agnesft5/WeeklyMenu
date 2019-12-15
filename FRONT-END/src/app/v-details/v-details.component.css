@@ -182,6 +182,7 @@ input.ng-touched.ng-pristine{
       transform: rotate(360deg);
     }
   }
+
 .form__detailsLoad{
     margin: 0 auto;
     width: 50%;

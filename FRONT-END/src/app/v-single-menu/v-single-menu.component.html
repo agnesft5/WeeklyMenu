@@ -15,8 +15,12 @@
         <div class="col-5">
             <div class="row text-center">
                 <div class="col-4">
-                    <h6 routerLink="/home" class="float-right navText mt-3">HOME</h6>
-
+                    <div *ngIf="dietist === false">
+                        <h6 routerLink="/home" class="float-right navText mt-3">HOME</h6>
+                    </div>
+                    <div *ngIf="dietist === true">
+                        <h6 routerLink="/add-dish" class="float-right navText mt-3">ADD DISH</h6>
+                    </div>
                 </div>
                 <div class="col-3">
                     <h6 routerLink="/details" class="text-center navText mt-3">PROFILE</h6>
@@ -31,8 +35,13 @@
 <header class="d-block d-md-none">
     <div class="pos-f-t d-block d-md-none">
         <div class="collapse" id="navbarToggleExternalContent">
-            <div class="bg-light p-4">
-                <h5 routerLink="/home" class="navText">HOME</h5>
+            <div class="bg-light pt-3 pb-1 px-4">
+                <div *ngIf="dietist === false">
+                    <h5 routerLink="/home" class="navText">HOME</h5>
+                </div>
+                <div *ngIf="dietist === true">
+                    <h5 routerLink="/add-dish" class="navText">ADD DISH</h5>
+                </div>
                 <h5 routerLink="/details" class="navText">PROFILE</h5>
                 <h5 (click)="logout()" class="navText">LOG OUT</h5>
             </div>
@@ -205,9 +214,13 @@
                             </div>
                         </div>
                     </div>
-                    <p class="mt-2 mb-2 smlltext monText text-success float-right text-center">Click your dish to see the details
+                    <p class="mb-2 smlltext monText text-light float-right text-center"
+                        style="font-weight: 700; text-shadow: 1px 1px black; margin-top: 9% !important;">Click your dish to see
+                        the
+                        details
                         & double click to hide them*</p>
                 </div>
+
 
                 <div *ngIf="vista == 'loading'" class="loading__container">
                     <div class="details__welcome">

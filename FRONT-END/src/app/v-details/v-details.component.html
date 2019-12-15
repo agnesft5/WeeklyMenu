@@ -15,11 +15,15 @@
         <div class="col-5">
             <div class="row text-center">
                 <div class="col-4">
-                    <h6 routerLink="/home" class="float-right navText mt-3">HOME</h6>
-
+                    <h6 routerLink="/about" class="float-right navText mt-3">ABOUT US</h6>
                 </div>
                 <div class="col-3">
-                    <h6 routerLink="/about" class="text-center navText mt-3">ABOUT US</h6>
+                    <div *ngIf="dietist === false">
+                        <h6 routerLink="/home" class="text-center navText mt-3">HOME</h6>
+                    </div>
+                    <div *ngIf="dietist === true">
+                        <h6 routerLink="/add-dish" class="text-center navText mt-3">ADD DISH</h6>
+                    </div>
                 </div>
                 <div class="col-5">
                     <h6 (click)="logout()" class="float-left navText mt-3">LOG OUT</h6>
@@ -44,9 +48,14 @@
 
     <div class="pos-f-t d-block d-md-none">
         <div class="collapse" id="navbarToggleExternalContent">
-            <div class="bg-light p-4">
+            <div class="bg-light pt-3 pb-1 px-4">
                 <h5 routerLink="/about" class="navText">ABOUT US</h5>
-                <h5 routerLink="/home" class="navText">HOME</h5>
+                <div *ngIf="dietist === false">
+                    <h5 routerLink="/home" class="navText">HOME</h5>
+                </div>
+                <div *ngIf="dietist === true">
+                    <h5 routerLink="/add-dish" class="navText">ADD DISH</h5>
+                </div>
                 <h5 (click)="logout()" class="navText">LOG OUT</h5>
             </div>
         </div>
@@ -76,7 +85,7 @@
                 </div>
                 <div *ngIf="vista == 'loggedIn'" class="form__background">
 
-                    <!-- Afegir funció per canviar de vista i fer la get -->
+                    <!-- Inici formulari -->
                     <form #detailsForm="ngForm" (ngSubmit)="sendData(detailsForm); getDetails()" class="detailsForm">
 
                         <!--Weight-->
@@ -291,12 +300,14 @@
                         <div class="row">
                             <div class="col-6">
                                 <div class="text-center mt-2">
-                                    <button routerLink="/single-menu" type="submit" class="btn btn-outline-success m-2 main__buton">Generate menu</button>
+                                    <button routerLink="/single-menu" type="submit"
+                                        class="btn btn-outline-success m-2 main__buton">Generate menu</button>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="text-center mt-2">
-                                    <button type="submit" class="btn btn-outline-success m-2 main__buton">Generate diet</button>
+                                    <button type="submit" class="btn btn-outline-success m-2 main__buton">Generate
+                                        diet</button>
                                 </div>
                             </div>
                         </div>

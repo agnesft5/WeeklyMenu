@@ -35,6 +35,9 @@ export class VSingleMenuComponent implements OnInit {
 
   userName: string;
 
+  //////////// DIETIST ///////////////
+  dietist:boolean = false;
+
 
 
   constructor(
@@ -68,7 +71,7 @@ export class VSingleMenuComponent implements OnInit {
   changeView(){
     setTimeout(() => {
       this.vista = "loggedIn"
-    }, 3000);
+    }, 5000);
   }
 
   showDetails(view, event){
@@ -76,9 +79,6 @@ export class VSingleMenuComponent implements OnInit {
     if(event.detail == 2){
       this.details = "none"
     }
-    // setTimeout(() => {
-    //   this.details = 'none'
-    // }, 3000);
   }
 
 
@@ -93,6 +93,11 @@ export class VSingleMenuComponent implements OnInit {
     this._user.createMenu();
     this._user.getDetails();
     this.changeView();
+    if (localStorage.getItem("dietist") == "true"){
+      this.dietist = true;
+    }else{
+      this.dietist = false;
+    }
   }
 
 }

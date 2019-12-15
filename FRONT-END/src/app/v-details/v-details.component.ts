@@ -44,6 +44,9 @@ export class VDetailsComponent {
   //DEFAULT: loggedIn
   vista: string = "loggedIn";
 
+  //// DIETIST ////
+  dietist:boolean = false;
+
   constructor(
     public _user: UserService,
     public _router: Router
@@ -158,6 +161,11 @@ export class VDetailsComponent {
       this.getDetails();
     } else {
       this.vista = "loggedIn"
+    }
+    if (localStorage.getItem("dietist") == "true"){
+      this.dietist = true;
+    }else{
+      this.dietist = false;
     }
   }
 

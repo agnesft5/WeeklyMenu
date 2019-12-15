@@ -93,7 +93,6 @@ export class VRegisterComponent {
     //Si la form és vàlida envio les dades
     if (form.valid) {
       this._user.register(this.name, this.lastName, this.username, this.email, this.password, this.dietistTrue)
-
       //Mostro el loading
       this.registerLoad = true;
 

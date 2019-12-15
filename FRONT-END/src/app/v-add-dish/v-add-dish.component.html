@@ -1,0 +1,271 @@
+<header class="d-none d-md-block">
+    <div class="row header_navbar">
+        <div class="col-5">
+
+        </div>
+        <div class="col-2">
+            <div class="header_title">
+                <div class="row">
+                    <div class="col-12">
+                        <h4 class="titleText">Weekly Menu <i class="fas fa-seedling"></i></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-5">
+            <div class="row text-center">
+                <div class="col-4">
+                    <div *ngIf="dietist === false">
+                        <h6 routerLink="/home" class="float-right navText mt-3">HOME</h6>
+                    </div>
+                    <div *ngIf="dietist === true">
+                        <h6 routerLink="/add-dish" class="float-right navText mt-3">ADD DISH</h6>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <h6 routerLink="/details" class="text-center navText mt-3">PROFILE</h6>
+                </div>
+                <div class="col-5">
+                    <h6 (click)="logout()" class="float-left navText mt-3">LOG OUT</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<header class="d-block d-md-none">
+    <div class="pos-f-t d-block d-md-none">
+        <div class="collapse" id="navbarToggleExternalContent">
+            <div class="bg-light pt-3 pb-1 px-4">
+                <div *ngIf="dietist === false">
+                    <h5 routerLink="/home" class="navText">HOME</h5>
+                </div>
+                <div *ngIf="dietist === true">
+                    <h5 routerLink="/add-dish" class="navText">ADD DISH</h5>
+                </div>
+                <h5 routerLink="/details" class="navText">PROFILE</h5>
+                <h5 (click)="logout()" class="navText">LOG OUT</h5>
+            </div>
+        </div>
+        <nav class="navbar navbar-light bg-light">
+            <button class="navbar-toggler menu__button" type="button" data-toggle="collapse"
+                data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <div class="banner main__background">
+        <div class="row w-100" style="margin: 0 auto;">
+            <div class="col-1 col-md-3">
+            </div>
+            <div class="col-10 col-md-6">
+                <div class="pc__display d-none d-md-block">
+
+                </div>
+                <div *ngIf="vista == 'loggedIn'" class="form__container">
+                    <form #dishForm="ngForm" (ngSubmit)="sendData(dishForm); dishForm.reset()" class="dishForm">
+
+                        <!--Name-->
+                        <div class="form-group form__group">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="smlltext float-right monText" for="name">Name</label>
+                                </div>
+                                <div class="col-8">
+                                    <input type="text" #inputName="ngModel" [(ngModel)]="name" name="inputName"
+                                        class="form-control main__input monText smlltext" required
+                                        pattern="^\w+( +\w+)*$" placeholder="goat cheese salad">
+                                    <p class="error" *ngIf="inputName.invalid && inputName.touched && inputName.dirty">
+                                        Invalid format*</p>
+                                    <p class="error" *ngIf="inputName.touched && inputName.pristine">Name is
+                                        mandatory*</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Ingredients & quantity-->
+                        <div class="form-group form__group">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="monText smlltext float-right" for="ingredient">Ingredient</label>
+                                </div>
+                                <div class="col-4 mb-2">
+                                    <input type="text" #inputIngredient="ngModel" [(ngModel)]="ingredient"
+                                        name="inputIngredient" class="form-control add__input monText smlltext" required
+                                        pattern="^\w+( +\w+)*$" placeholder="goat cheese">
+                                    <!-- <p class="error"
+                                        *ngIf="inputIngredient.invalid && inputIngredient.touched && inputIngredient.dirty">
+                                        Invalid format*</p> -->
+                                    <!-- <p class="error" *ngIf="inputIngredient.touched && inputIngredient.pristine">Ingredient is
+                                        mandatory*</p> -->
+                                </div>
+                                <div class="col-4 text-center">
+                                    <span style="color: sandybrown;" class="smlltext monText mt-2 mb-4">Add!</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="monText smlltext float-right" for="quantity">Quantity</label>
+                                </div>
+                                <div class="col-4 mt-2">
+                                    <input type="number" #inputQuantity="ngModel" [(ngModel)]="quantity"
+                                        name="inputQuantity" class="form-control add__input monText smlltext" required
+                                        pattern="[0-9]+(\.[0-9][0-9]?)?" placeholder="30 g">
+                                    <!-- <p class="error"
+                                        *ngIf="inputQuantity.invalid && inputQuantity.touched && inputQuantity.dirty">
+                                        Invalid format. Quantity should be a number*</p> -->
+                                </div>
+
+                                <!-- ADD BUTTON -->
+                                <div class="col-4 mt-1 text-center">
+                                    <button (click)="addData(ingredient, quantity)" type="button"
+                                        class="btn btn add__button"><span class="plus__button">+</span></button>
+                                </div>
+                            </div>
+
+                            <div *ngIf="inputError === true" class="w-75" style="margin:0 auto;">
+                                <p class="error">Both fields (ingredient & quantity) should be filled to save the
+                                    ingredient*</p>
+                            </div>
+
+                            <!-- Show arrays -->
+                            <div class="row" *ngIf="showArrays == 'show'">
+                                <div class="col-6 text-right">
+                                    <div class="row my-3">
+                                        <div *ngFor="let quantity of quantities" class="col-12">
+                                            <small class="monText mt-1 mb-1">{{quantity}} g</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6 text-left">
+                                    <div class="row my-3">
+                                        <div *ngFor="let ingredient of ingredientes" class="col-12">
+                                            <small class="monText mt-1 mb-1">{{ingredient}}</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- kcal -->
+                        <div class="form-group form__group">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="smlltext float-right monText" for="kcal">Calories</label>
+                                </div>
+                                <div class="col-4">
+                                    <input type="number" #inputCalories="ngModel" [(ngModel)]="kcal"
+                                        name="inputCalories" class="form-control add__input monText smlltext" required
+                                        pattern="[0-9]+(\.[0-9][0-9]?)?" placeholder="320 kcal">
+                                    <p class="error"
+                                        *ngIf="inputCalories.invalid && inputCalories.touched && inputCalories.dirty">
+                                        Invalid format*</p>
+                                    <p class="error" *ngIf="inputCalories.touched && inputCalories.pristine">Kcal is
+                                        mandatory*</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Dessert-->
+                        <div class="form-group form__group">
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="smlltext float-right" for="dessert">Is your dish a dessert?</label>
+                                </div>
+                                <div class="col-8">
+                                    <div class="form-check" id="checks">
+                                        <input [(ngModel)]="dessertTrue" name="dessertTrue" class="form-check-input"
+                                            type="checkbox" value="" id="defaultCheck1">
+                                        <label class="form-check-label smlltext" for="defaultCheck1">
+                                            Yes
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Botons -->
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="text-center mt-2">
+                                    <button [disabled]="detailsForm.invalid" type="submit"
+                                        class="btn btn-warning m-2 monText main__buton">Send</button>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="text-center mt-2">
+                                    <button (click)="eraseContent()" type="reset"
+                                        class="btn btn-warning m-2 monText main__buton">Reset</button>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div *ngIf="detailsForm.touched && detailsForm.pristine"
+                            class="alert alert-danger mt-5 monText smlltext" role="alert">
+                            Invalid from! Please, check your credentials.
+                        </div>
+
+                        <!-- status -->
+                        <div *ngIf="status" class="alert alert-warning mt-5 monText smlltext" role="alert">
+                            {{status}}
+                        </div>
+
+                        <!-- loading -->
+                        <div class="row" *ngIf="postLoading === true">
+                            <div class="col-12 text-center mt-5 form__detailsLoad" >
+                                <div class="lds-ring">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
+
+                <div *ngIf="vista == 'loading'" class="loading__container">
+                    <div class="details__welcome">
+                        <p class="smlltext monText">Hi <span class="welcome__name">{{userName}}</span>!</p>
+                        <p class="smlltext monText mt-2 mb-4">We are generating your menu!</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 img__container">
+                            <img class="menu__img" src="../../assets/menu-loading.png" alt="Fork img">
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 menu__loading">
+                            <div class="lds-ring">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngIf="vista == 'loggedOut'"
+                    class="p-3 alert alert-success mt-5 monText text-center smlltext loggedOut" role="alert">
+                    <p class="monText text-success mb-0">You are not logged anymore.</p>
+                    <p class="monText text-success mb-0">See you soon!</p>
+                </div>
+            </div>
+            <div class="col-1 col-md-3">
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <div class="row footer__navbar d-none d-md-block">
+
+    </div>
+</footer>

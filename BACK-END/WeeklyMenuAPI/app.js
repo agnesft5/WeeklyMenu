@@ -281,8 +281,7 @@ mongoose.connect(`mongodb://localhost/WeeklyMenu`, { useNewUrlParser: true, useU
                 check('ingredients.*').trim().escape().not().isEmpty(),
                 check('quantity.*').trim().escape().not().isEmpty(),
                 check('kcal').trim().escape().not().isEmpty(),
-                check('dish').trim().escape().not().isEmpty(),
-                check('meal').trim().escape().not().isEmpty(),
+                check('type').trim().escape().not().isEmpty(),
                 check('profile').trim().escape().not().isEmpty()
             ],
                 (req, res) => {
@@ -324,7 +323,14 @@ mongoose.connect(`mongodb://localhost/WeeklyMenu`, { useNewUrlParser: true, useU
                                                                 "error": error
                                                             })
                                                         } else {
-                                                            res.send({ "status": "Dish saved!" })
+                                                            res.send({
+                                                                "status": "Dish saved!",
+                                                                "data": newDish
+                                                            })
+                                                            console.log({
+                                                                "status": "Dish saved!",
+                                                                "data": newDish
+                                                            })
                                                         }
                                                     })
                                             }
@@ -744,7 +750,7 @@ mongoose.connect(`mongodb://localhost/WeeklyMenu`, { useNewUrlParser: true, useU
                                                     console.log(`////////////////${menuDiet.starterDinner._id}/////////////////`.green)
                                                     console.log("___________________________________________".red)
 
-                                                    
+
 
                                                     // menuDiet.save((error) => {
                                                     //     if (error) {
