@@ -16,6 +16,7 @@ import { AuthGuard } from './servieces/auth.guard';
 import { VSingleMenuComponent } from './v-single-menu/v-single-menu.component';
 import { VAddDishComponent } from './v-add-dish/v-add-dish.component';
 import { DietistGuard } from './services/dietist.guard';
+import { VDietComponent } from './v-diet/v-diet.component';
 
 const config: Routes = [
   { "path": "", "component": VHomeComponent },
@@ -25,6 +26,7 @@ const config: Routes = [
   { "path": "details", "component": VDetailsComponent, "canActivate": [AuthGuard] },
   { "path": "single-menu", "component": VSingleMenuComponent, "canActivate": [AuthGuard] },
   { "path": "add-dish", "component": VAddDishComponent ,"canActivate":[AuthGuard, DietistGuard]},
+  { "path": "diet", "component": VDietComponent, "canActivate": [AuthGuard] },
   { "path": "**", "component": VHomeComponent }
 ]
 
@@ -36,7 +38,8 @@ const config: Routes = [
     VRegisterComponent,
     VDetailsComponent,
     VSingleMenuComponent,
-    VAddDishComponent
+    VAddDishComponent,
+    VDietComponent
   ],
   imports: [
     BrowserModule,

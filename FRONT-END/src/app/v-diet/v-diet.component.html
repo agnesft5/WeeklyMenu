@@ -1,0 +1,268 @@
+<header class="d-none d-md-block">
+    <div class="row header_navbar">
+        <div class="col-5">
+
+        </div>
+        <div class="col-2">
+            <div class="header_title">
+                <div class="row">
+                    <div class="col-12">
+                        <h4 class="titleText">Weekly Menu <i class="fas fa-seedling"></i></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-5">
+            <div class="row text-center">
+                <div class="col-4">
+                    <div *ngIf="dietist === false">
+                        <h6 routerLink="/home" class="float-right navText mt-3">HOME</h6>
+                    </div>
+                    <div *ngIf="dietist === true">
+                        <h6 routerLink="/add-dish" class="float-right navText mt-3">ADD DISH</h6>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <h6 routerLink="/details" class="text-center navText mt-3">PROFILE</h6>
+                </div>
+                <div class="col-5">
+                    <h6 (click)="logout()" class="float-left navText mt-3">LOG OUT</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<header class="d-block d-md-none">
+    <div class="pos-f-t d-block d-md-none">
+        <div class="collapse" id="navbarToggleExternalContent">
+            <div class="bg-light pt-3 pb-1 px-4">
+                <div *ngIf="dietist === false">
+                    <h5 routerLink="/home" class="navText">HOME</h5>
+                </div>
+                <div *ngIf="dietist === true">
+                    <h5 routerLink="/add-dish" class="navText">ADD DISH</h5>
+                </div>
+                <h5 routerLink="/details" class="navText">PROFILE</h5>
+                <h5 (click)="logout()" class="navText">LOG OUT</h5>
+            </div>
+        </div>
+        <nav class="navbar navbar-light bg-light">
+            <button class="navbar-toggler menu__button" type="button" data-toggle="collapse"
+                data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <div class="banner main__background">
+        <div class="row w-100" style="margin: 0 auto;">
+            <div class="col-1">
+            </div>
+            <div class="col-10" style="margin: 0 auto;">
+                <div class="pc__display d-none d-md-block">
+
+                </div>
+                <div *ngIf="vista == 'loggedIn'">
+                    <div class="d-none d-md-block table__container">
+                        <div class="details__welcome">
+                            <p class="smlltext monText">Hi <span class="welcome__name">{{userName}}</span>!</p>
+                            <p class="smlltext monText mt-2 mb-4">Here's the menu we've generated:</p>
+                        </div>
+                        <table class="table table-borderless">
+                            <thead>
+                                <tr>
+                                    <th class="monText text-center" scope="col">MONDAY</th>
+                                    <th class="monText text-center" scope="col">TUESDAY</th>
+                                    <th class="monText text-center" scope="col">WEDNESDAY</th>
+                                    <th class="monText text-center" scope="col">THURSDAY</th>
+                                    <th class="monText text-center" scope="col">FRIDAY</th>
+                                    <th class="monText text-center" scope="col">SATURDAY</th>
+                                    <th class="monText text-center" scope="col">SUNDAY</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="monText text-center welcome__name">LUNCH</td>
+                                    <td class="monText text-center welcome__name">LUNCH</td>
+                                    <td class="monText text-center welcome__name">LUNCH</td>
+                                    <td class="monText text-center welcome__name">LUNCH</td>
+                                    <td class="monText text-center welcome__name">LUNCH</td>
+                                    <td class="monText text-center welcome__name">LUNCH</td>
+                                    <td class="monText text-center welcome__name">LUNCH</td>
+                                </tr>
+                                <tr>
+                                    <td class="monText text-center smlltext dishes_text">{{menu1.starterLunch.name}}
+                                    </td>
+                                    <td class="monText text-center smlltext dishes_text">{{menu2.starterLunch.name}}
+                                    </td>
+                                    <td class="monText text-center smlltext dishes_text">{{menu3.starterLunch.name}}
+                                    </td>
+                                    <td class="monText text-center smlltext dishes_text">{{menu4.starterLunch.name}}
+                                    </td>
+                                    <td class="monText text-center smlltext dishes_text">{{menu5.starterLunch.name}}
+                                    </td>
+                                    <td class="monText text-center smlltext dishes_text">{{menu6.starterLunch.name}}
+                                    </td>
+                                    <td class="monText text-center smlltext dishes_text">{{menu7.starterLunch.name}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="monText text-center smlltext dishes_text">{{menu1.mainLunch.name}}</td>
+                                    <td class="monText text-center smlltext dishes_text">{{menu2.mainLunch.name}}</td>
+                                    <td class="monText text-center smlltext dishes_text">{{menu3.mainLunch.name}}</td>
+                                    <td class="monText text-center smlltext dishes_text">{{menu4.mainLunch.name}}</td>
+                                    <td class="monText text-center smlltext dishes_text">{{menu5.mainLunch.name}}</td>
+                                    <td class="monText text-center smlltext dishes_text">{{menu6.mainLunch.name}}</td>
+                                    <td class="monText text-center smlltext dishes_text">{{menu7.mainLunch.name}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="monText text-center smlltext dishes_text">{{menu1.dessertLunch.name}}
+                                    </td>
+                                    <td class="monText text-center smlltext dishes_text">{{menu2.dessertLunch.name}}
+                                    </td>
+                                    <td class="monText text-center smlltext dishes_text">{{menu3.dessertLunch.name}}
+                                    </td>
+                                    <td class="monText text-center smlltext dishes_text">{{menu4.dessertLunch.name}}
+                                    </td>
+                                    <td class="monText text-center smlltext dishes_text">{{menu5.dessertLunch.name}}
+                                    </td>
+                                    <td class="monText text-center smlltext dishes_text">{{menu6.dessertLunch.name}}
+                                    </td>
+                                    <td class="monText text-center smlltext dishes_text">{{menu7.dessertLunch.name}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="monText text-center smlltext welcome__name">DINNER</td>
+                                    <td class="monText text-center smlltext welcome__name">DINNER</td>
+                                    <td class="monText text-center smlltext welcome__name">DINNER</td>
+                                    <td class="monText text-center smlltext welcome__name">DINNER</td>
+                                    <td class="monText text-center smlltext welcome__name">DINNER</td>
+                                    <td class="monText text-center smlltext welcome__name">DINNER</td>
+                                    <td class="monText text-center smlltext welcome__name">DINNER</td>
+                                </tr>
+                                <tr>
+                                    <td class="monText text-center smlltext dishes_text">{{menu1.starterDinner.name}}
+                                    </td>
+                                    <td class="monText text-center smlltext dishes_text">{{menu2.starterDinner.name}}
+                                    </td>
+                                    <td class="monText text-center smlltext dishes_text">{{menu3.starterDinner.name}}
+                                    </td>
+                                    <td class="monText text-center smlltext dishes_text">{{menu4.starterDinner.name}}
+                                    </td>
+                                    <td class="monText text-center smlltext dishes_text">{{menu5.starterDinner.name}}
+                                    </td>
+                                    <td class="monText text-center smlltext dishes_text">{{menu6.starterDinner.name}}
+                                    </td>
+                                    <td class="monText text-center smlltext dishes_text">{{menu7.starterDinner.name}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="monText text-center smlltext dishes_text">{{menu1.mainDinner.name}}</td>
+                                    <td class="monText text-center smlltext dishes_text">{{menu2.mainDinner.name}}</td>
+                                    <td class="monText text-center smlltext dishes_text">{{menu3.mainDinner.name}}</td>
+                                    <td class="monText text-center smlltext dishes_text">{{menu4.mainDinner.name}}</td>
+                                    <td class="monText text-center smlltext dishes_text">{{menu5.mainDinner.name}}</td>
+                                    <td class="monText text-center smlltext dishes_text">{{menu6.mainDinner.name}}</td>
+                                    <td class="monText text-center smlltext dishes_text">{{menu7.mainDinner.name}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="monText text-center smlltext dishes_text">{{menu1.dessertDinner.name}}
+                                    </td>
+                                    <td class="monText text-center smlltext dishes_text">{{menu2.dessertDinner.name}}
+                                    </td>
+                                    <td class="monText text-center smlltext dishes_text">{{menu3.dessertDinner.name}}
+                                    </td>
+                                    <td class="monText text-center smlltext dishes_text">{{menu4.dessertDinner.name}}
+                                    </td>
+                                    <td class="monText text-center smlltext dishes_text">{{menu5.dessertDinner.name}}
+                                    </td>
+                                    <td class="monText text-center smlltext dishes_text">{{menu6.dessertDinner.name}}
+                                    </td>
+                                    <td class="monText text-center smlltext dishes_text">{{menu7.dessertDinner.name}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="data__container d-block d-md-none">
+                        <div class="details__welcome">
+                            <p class="smlltext monText">Hi <span class="welcome__name">{{userName}}</span>!
+                            </p>
+                            <p class="smlltext monText">Here's the diet we generated for this week:</p>
+                        </div>
+                        <div *ngFor="let menu of dietMenus, let i = index" class="menu__container">
+                            <div class="menu__details">
+                                <p class="monText text-center">{{days[i]}}</p>
+                                <p class="smlltext monText text-center welcome__name">LUNCH</p>
+                                <p (click)="showDetails('starterLunch',$event)"
+                                    class="smlltext monText mt-2 mb-4 text-center dishes_text">
+                                    {{menu.starterLunch.name}}</p>
+                                <p (click)="showDetails('mainLunch',$event)"
+                                    class="smlltext monText mt-2 mb-4 text-center dishes_text">{{menu.mainLunch.name}}
+                                </p>
+                                <p (click)="showDetails('dessertLunch',$event)"
+                                    class="smlltext monText mt-2 mb-4 text-center dishes_text">
+                                    {{menu.dessertLunch.name}}</p>
+                            </div>
+                            <hr style="width: 50%; margin: 3 auto; margin-bottom: 0;">
+                            <div class="menu__details mt-4">
+                                <p class="smlltext monText text-center welcome__name">DINNER</p>
+                                <p (click)="showDetails('starterDinner',$event)"
+                                    class="smlltext monText mt-2 mb-4 text-center dishes_text">
+                                    {{menu.starterDinner.name}}</p>
+                                <p (click)="showDetails('mainDinner',$event)"
+                                    class="smlltext monText mt-2 mb-4 text-center dishes_text">{{menu.mainDinner.name}}
+                                </p>
+                                <p (click)="showDetails('dessertDinner',$event)"
+                                    class="smlltext monText mt-2 mb-4 text-center dishes_text">
+                                    {{menu.dessertDinner.name}}</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div *ngIf="vista == 'loading'" class="loading__container">
+                    <div class="details__welcome">
+                        <p class="smlltext monText">Hi <span class="welcome__name">{{userName}}</span>!</p>
+                        <p class="smlltext monText mt-2 mb-4">We are generating your diet!</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 img__container">
+                            <img class="menu__img" src="../../assets/menu-loading.png" alt="Fork img">
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 menu__loading">
+                            <div class="lds-ring">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngIf="vista == 'loggedOut'"
+                    class="p-3 alert alert-success mt-5 monText text-center smlltext loggedOut" role="alert">
+                    <p class="monText text-success mb-0">You are not logged anymore.</p>
+                    <p class="monText text-success mb-0">See you soon!</p>
+                </div>
+            </div>
+            <div class="col-1">
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <div class="row footer__navbar d-none d-md-block">
+
+    </div>
+</footer>

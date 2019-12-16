@@ -32,6 +32,12 @@ const dishSchema = new mongoose.Schema({
         type: types.String,
         enum: ["profile_1200", "profile_1400", "profile_1600", "profile_1800", "profile_2000", "profile_2200"],
         default: "profile_1400"
+    },
+    user:{
+        type:types.ObjectId,
+        require: true,
+        ref: 'User',
+        autopopulate: true
     }
 })
 

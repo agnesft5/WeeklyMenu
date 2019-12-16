@@ -19,7 +19,7 @@
                         <h6 routerLink="/home" class="float-right navText mt-3">HOME</h6>
                     </div>
                     <div *ngIf="dietist === true">
-                        <h6 routerLink="/add-dish" class="float-right navText mt-3">ADD DISH</h6>
+                        <h6 routerLink="/all-dishes" class="float-right navText mt-3">ALL DISHES</h6>
                     </div>
                 </div>
                 <div class="col-3">
@@ -40,7 +40,7 @@
                     <h5 routerLink="/home" class="navText">HOME</h5>
                 </div>
                 <div *ngIf="dietist === true">
-                    <h5 routerLink="/add-dish" class="navText">ADD DISH</h5>
+                    <h5 routerLink="/all-dishes" class="navText">ALL DISHES</h5>
                 </div>
                 <h5 routerLink="/details" class="navText">PROFILE</h5>
                 <h5 (click)="logout()" class="navText">LOG OUT</h5>
@@ -67,7 +67,10 @@
                 </div>
                 <div *ngIf="vista == 'loggedIn'" class="form__container">
                     <form #dishForm="ngForm" (ngSubmit)="sendData(dishForm); dishForm.reset()" class="dishForm">
-
+                        <div class="details__welcome">
+                            <p class="smlltext monText">Hi <span class="welcome__name">{{userName}}</span>!</p>
+                            <p class="smlltext monText mt-2 mb-4">Post your dish so we can use it:</p>
+                        </div>
                         <!--Name-->
                         <div class="form-group form__group">
                             <div class="row">
@@ -76,8 +79,8 @@
                                 </div>
                                 <div class="col-8">
                                     <input type="text" #inputName="ngModel" [(ngModel)]="name" name="inputName"
-                                        class="form-control main__input monText smlltext" required
-                                        pattern="^\w+( +\w+)*$" placeholder="goat cheese salad">
+                                        class="form-control main__input monText smlltext" required pattern="^[a-z_ ]*$"
+                                        placeholder="goat cheese salad">
                                     <p class="error" *ngIf="inputName.invalid && inputName.touched && inputName.dirty">
                                         Invalid format*</p>
                                     <p class="error" *ngIf="inputName.touched && inputName.pristine">Name is
@@ -95,12 +98,10 @@
                                 <div class="col-4 mb-2">
                                     <input type="text" #inputIngredient="ngModel" [(ngModel)]="ingredient"
                                         name="inputIngredient" class="form-control add__input monText smlltext" required
-                                        pattern="^\w+( +\w+)*$" placeholder="goat cheese">
-                                    <!-- <p class="error"
+                                        pattern="^[a-z_ ]*$" placeholder="goat cheese">
+                                    <p class="error"
                                         *ngIf="inputIngredient.invalid && inputIngredient.touched && inputIngredient.dirty">
-                                        Invalid format*</p> -->
-                                    <!-- <p class="error" *ngIf="inputIngredient.touched && inputIngredient.pristine">Ingredient is
-                                        mandatory*</p> -->
+                                        Invalid format*</p>
                                 </div>
                                 <div class="col-4 text-center">
                                     <span style="color: sandybrown;" class="smlltext monText mt-2 mb-4">Add!</span>
@@ -114,14 +115,16 @@
                                     <input type="number" #inputQuantity="ngModel" [(ngModel)]="quantity"
                                         name="inputQuantity" class="form-control add__input monText smlltext" required
                                         pattern="[0-9]+(\.[0-9][0-9]?)?" placeholder="30 g">
-                                    <!-- <p class="error"
+                                    <p class="error"
                                         *ngIf="inputQuantity.invalid && inputQuantity.touched && inputQuantity.dirty">
-                                        Invalid format. Quantity should be a number*</p> -->
+                                        Invalid format. Quantity should be a number*</p>
                                 </div>
 
                                 <!-- ADD BUTTON -->
                                 <div class="col-4 mt-1 text-center">
-                                    <button (click)="addData(ingredient, quantity)" type="button"
+                                    <!-- No funciona -->
+                                    <button [disabled]="inputIngredient.invalid"
+                                        (click)="addData(inputIngredient, inputQuantity)" type="button"
                                         class="btn btn add__button"><span class="plus__button">+</span></button>
                                 </div>
                             </div>
@@ -132,18 +135,26 @@
                             </div>
 
                             <!-- Show arrays -->
+                            <!-- No funciona -->
                             <div class="row" *ngIf="showArrays == 'show'">
-                                <div class="col-6 text-right">
+                                <div class="col-5 text-right">
                                     <div class="row my-3">
                                         <div *ngFor="let quantity of quantities" class="col-12">
                                             <small class="monText mt-1 mb-1">{{quantity}} g</small>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-6 text-left">
+                                <div class="col-5 text-left">
                                     <div class="row my-3">
-                                        <div *ngFor="let ingredient of ingredientes" class="col-12">
+                                        <div *ngFor="let ingredient of ingredients" class="col-12">
                                             <small class="monText mt-1 mb-1">{{ingredient}}</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-2 text-left">
+                                    <div class="row my-3">
+                                        <div *ngFor="let ingredient of ingredients, let i=index" class="col-12">
+                                            <i (click)="eraseIngredient(i)" class="fas fa-trash erase__icon"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -188,34 +199,48 @@
 
                         <!-- Botons -->
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-12">
                                 <div class="text-center mt-2">
-                                    <button [disabled]="detailsForm.invalid" type="submit"
+                                    <button [disabled]="inputName.invalid || inputCalories.invalid" type="submit"
                                         class="btn btn-warning m-2 monText main__buton">Send</button>
                                 </div>
                             </div>
-                            <div class="col-6">
+                            <!-- <div class="col-6">
                                 <div class="text-center mt-2">
                                     <button (click)="eraseContent()" type="reset"
                                         class="btn btn-warning m-2 monText main__buton">Reset</button>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
 
 
-                        <div *ngIf="detailsForm.touched && detailsForm.pristine"
+                        <div *ngIf="inputName.invalid && inputName.dirty && inputName.touched|| inputCalories.invalid && inputCalories.dirty && inputCalories.touched"
                             class="alert alert-danger mt-5 monText smlltext" role="alert">
-                            Invalid from! Please, check your credentials.
+                            Invalid from! Please, check the fields.
                         </div>
 
                         <!-- status -->
-                        <div *ngIf="status" class="alert alert-warning mt-5 monText smlltext" role="alert">
+                        <div *ngIf="showStatus === 'status'" class="alert alert-warning mt-3 monText smlltext"
+                            role="alert">
                             {{status}}
+                        </div>
+
+                        <div class="row" *ngIf="showStatus === 'postAnother'">
+                            <div class="col-12 text-center mt-5">
+                                <i (click)="postAgain(); dishForm.reset()" class="fas fa-sync-alt erase__icon" style="color: sandybrown; font-size: large;"><small class="monText mt-3 mb-1">  Post
+                                        another</small></i>
+                            </div>
+                        </div>
+
+                        <div class="row" *ngIf="showStatus === 'tryAgain'">
+                            <div class="col-12 text-center mt-5">
+                                <i (click)="postAgain(); dishForm.reset()" class="fas fa-sync-alt erase__icon" style="color: sandybrown; font-size: large;"><small class="monText mt-3 mb-1"> Try again</small></i>
+                            </div>
                         </div>
 
                         <!-- loading -->
                         <div class="row" *ngIf="postLoading === true">
-                            <div class="col-12 text-center mt-5 form__detailsLoad" >
+                            <div class="col-12 text-center mt-3">
                                 <div class="lds-ring">
                                     <div></div>
                                     <div></div>

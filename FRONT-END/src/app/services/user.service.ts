@@ -8,56 +8,56 @@ import { Subject } from 'rxjs';
 })
 export class UserService {
 
-  objProf:object = {
+  objProf: object = {
     profile_1200: [
-        { meal: "starter_lunch", range: [202, 207], dessert:false },
-        { meal: "main_lunch", range: [126, 130], dessert:false },
-        { meal: "dessert_lunch", range: [90, 94] , dessert:true},
-        { meal: "starter_dinner", range: [114, 119], dessert:false },
-        { meal: "main_dinner", range: [71, 75], dessert:false },
-        { meal: "dessert_dinner", range: [44, 50], dessert:true }
+      { meal: "starter_lunch", range: [202, 207], dessert: false },
+      { meal: "main_lunch", range: [126, 130], dessert: false },
+      { meal: "dessert_lunch", range: [90, 94], dessert: true },
+      { meal: "starter_dinner", range: [114, 119], dessert: false },
+      { meal: "main_dinner", range: [71, 75], dessert: false },
+      { meal: "dessert_dinner", range: [44, 50], dessert: true }
     ],
     profile_1400: [
-        { meal: "starter_lunch", range: [240, 261], dessert:false },
-        { meal: "main_lunch", range: [143, 147], dessert:false },
-        { meal: "dessert_lunch", range: [101, 106], dessert:true},
-        { meal: "starter_dinner", range: [137, 142], dessert:false },
-        { meal: "main_dinner", range: [83, 89], dessert:false },
-        { meal: "dessert_dinner", range: [51, 55], dessert:true }
+      { meal: "starter_lunch", range: [240, 261], dessert: false },
+      { meal: "main_lunch", range: [143, 147], dessert: false },
+      { meal: "dessert_lunch", range: [101, 106], dessert: true },
+      { meal: "starter_dinner", range: [137, 142], dessert: false },
+      { meal: "main_dinner", range: [83, 89], dessert: false },
+      { meal: "dessert_dinner", range: [51, 55], dessert: true }
     ],
     profile_1600: [
-        { meal: "starter_lunch", range: [262, 285], dessert:false },
-        { meal: "main_lunch", range: [163, 173], dessert:false },
-        { meal: "dessert_lunch", range: [107, 113], dessert:true },
-        { meal: "starter_dinner", range: [155, 162], dessert:false },
-        { meal: "main_dinner", range: [95, 100], dessert:false },
-        { meal: "dessert_dinner", range: [61, 65], dessert:true }
+      { meal: "starter_lunch", range: [262, 285], dessert: false },
+      { meal: "main_lunch", range: [163, 173], dessert: false },
+      { meal: "dessert_lunch", range: [107, 113], dessert: true },
+      { meal: "starter_dinner", range: [155, 162], dessert: false },
+      { meal: "main_dinner", range: [95, 100], dessert: false },
+      { meal: "dessert_dinner", range: [61, 65], dessert: true }
     ],
     profile_1800: [
-        { meal: "starter_lunch", range: [286, 320], dessert:false },
-        { meal: "main_lunch", range: [190, 194], dessert:false },
-        { meal: "dessert_lunch", range: [131, 136], dessert:true },
-        { meal: "starter_dinner", range: [226, 230], dessert:false },
-        { meal: "main_dinner", range: [56, 60], dessert:false },
-        { meal: "dessert_dinner", range: [66, 70], dessert:true }
+      { meal: "starter_lunch", range: [286, 320], dessert: false },
+      { meal: "main_lunch", range: [190, 194], dessert: false },
+      { meal: "dessert_lunch", range: [131, 136], dessert: true },
+      { meal: "starter_dinner", range: [226, 230], dessert: false },
+      { meal: "main_dinner", range: [56, 60], dessert: false },
+      { meal: "dessert_dinner", range: [66, 70], dessert: true }
     ],
     profile_2000: [
-        { meal: "starter_lunch", range: [321, 355], dessert:false },
-        { meal: "main_lunch", range: [208, 215], dessert:false },
-        { meal: "dessert_lunch", range: [148, 154], dessert:true },
-        { meal: "starter_dinner", range: [195, 201], dessert:false },
-        { meal: "main_dinner", range: [120, 125], dessert:false },
-        { meal: "dessert_dinner", range: [76, 82], dessert:true }
+      { meal: "starter_lunch", range: [321, 355], dessert: false },
+      { meal: "main_lunch", range: [208, 215], dessert: false },
+      { meal: "dessert_lunch", range: [148, 154], dessert: true },
+      { meal: "starter_dinner", range: [195, 201], dessert: false },
+      { meal: "main_dinner", range: [120, 125], dessert: false },
+      { meal: "dessert_dinner", range: [76, 82], dessert: true }
     ], profile_2200: [
-        { meal: "starter_lunch", range: [356, 390], dessert:false },
-        { meal: "main_lunch", range: [231, 239], dessert:false },
-        { meal: "dessert_lunch", range: [174, 184], dessert:true },
-        { meal: "starter_dinner", range: [216, 225], dessert:false },
-        { meal: "main_dinner", range: [185, 189] , dessert:false},
-        { meal: "dessert_dinner", range: [15, 43], dessert:true }
+      { meal: "starter_lunch", range: [356, 390], dessert: false },
+      { meal: "main_lunch", range: [231, 239], dessert: false },
+      { meal: "dessert_lunch", range: [174, 184], dessert: true },
+      { meal: "starter_dinner", range: [216, 225], dessert: false },
+      { meal: "main_dinner", range: [185, 189], dessert: false },
+      { meal: "dessert_dinner", range: [15, 43], dessert: true }
     ]
 
-}
+  }
 
   //////////////// REGISTER /////////////
   registerData: Subject<object> = new Subject<object>();
@@ -77,10 +77,16 @@ export class UserService {
   //// POST ////
   postMenuData: Subject<object> = new Subject<object>();
 
+  //////////// MENU /////////////
+  //// POST ////
+  postDietData: Subject<object> = new Subject<object>();
+  dietData:Subject<object> = new Subject<object>();
+  diet:object;
+
   //////////// DISH /////////////
   //// POST ////
   postDishData: Subject<object> = new Subject<object>();
-  postedDish:object;
+  postedDish: object;
 
 
   constructor(
@@ -205,6 +211,18 @@ export class UserService {
 
   }
 
+  /////////////// GET DIET ///////////////
+  getDiet(id): void {
+    this._http.get(`http://localhost:3000/get-diet/${id}`,
+      { headers: new HttpHeaders({ "x-requested-witdh": "XMLHResponse" }) })
+      .subscribe(
+        (result) => {
+          this.dietData.next(result);
+          this.diet = result;
+        }
+      )
+  }
+
   /////////////// GENERATE MENU ///////////////
 
   createMenu(): any {
@@ -231,47 +249,47 @@ export class UserService {
   }
 
   /////////////// CALCULATE DISH PROFILE AND TYPE ///////////////
-  calculateDish(name: string, ingredients: string[], quantity: number[], kcal: number, isDessert:boolean):any{
+  calculateDish(name: string, ingredients: string[], quantity: number[], kcal: number, isDessert: boolean): any {
     //CALCULAR PERFIL I TIPO
 
-    let type:string;
-    let profile:string;
-    let profileFound:boolean = false;
+    let type: string;
+    let profile: string;
+    let profileFound: boolean = false;
 
     for (let i = 0; i < Object.keys(this.objProf).length; i++) {
-        let profileKey = Object.keys(this.objProf)[i]
-        let arrProf = this.objProf[profileKey]
+      let profileKey = Object.keys(this.objProf)[i]
+      let arrProf = this.objProf[profileKey]
 
 
-        for (let j = 0; j < arrProf.length; j++) {
-            let meal = arrProf[j].meal;
-            let dessert = arrProf[j].dessert
-            let arrRange = arrProf[j].range;
-            let inferior = arrRange[0];
-            let superior = arrRange[1];
+      for (let j = 0; j < arrProf.length; j++) {
+        let meal = arrProf[j].meal;
+        let dessert = arrProf[j].dessert
+        let arrRange = arrProf[j].range;
+        let inferior = arrRange[0];
+        let superior = arrRange[1];
 
-            console.log(isDessert)
-            
+        console.log(isDessert)
 
-            if (kcal >= inferior && kcal <= superior && dessert === isDessert) {
-                profile = profileKey;
-                type = meal;
-                profileFound = true;
-                
-            } else if (kcal >= 391 && isDessert === false) {
 
-                profile = "profile_2200";
-                type = "starter_lunch";
-                profileFound = true;
-                
-            } else if (kcal <= 14 && isDessert === true) {
-                profile = "profile_1200";
-                type = "dessert_dinner";
-                profileFound = true;
-                
-            }
+        if (kcal >= inferior && kcal <= superior && dessert === isDessert) {
+          profile = profileKey;
+          type = meal;
+          profileFound = true;
+
+        } else if (kcal >= 391 && isDessert === false) {
+
+          profile = "profile_2200";
+          type = "starter_lunch";
+          profileFound = true;
+
+        } else if (kcal <= 14 && isDessert === true) {
+          profile = "profile_1200";
+          type = "dessert_dinner";
+          profileFound = true;
 
         }
+
+      }
 
     }
 
@@ -279,11 +297,23 @@ export class UserService {
     console.log(profile)
 
     if (!profileFound) {
-        profile = "profile_undefined";
-        type = "meal_undefined";
+      profile = "profile_undefined";
+      type = "meal_undefined";
     }
 
     this.postDish(name, ingredients, quantity, kcal, type, profile)
+  }
+
+
+  /////////////// GENERATE DIET ///////////////
+
+  createDiet(): any {
+    this._http.post("http://localhost:3000/generate-diet",
+      { headers: new HttpHeaders({ "x-requested-witdh": "XMLHResponse" }) })
+      .subscribe(
+        (result) => {
+          this.postDietData.next(result);
+        })
   }
 
   logout() {

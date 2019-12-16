@@ -8,6 +8,16 @@ const dietSchema = new mongoose.Schema({
         type: types.ObjectId,
         require: true
     },
+    user: {
+        type: types.ObjectId,
+        require: true,
+        ref: 'User',
+        autopopulate: true
+    }, date: {
+        type: types.Date,
+        require: true,
+        default: new Date()
+    },
     menus: {
         type: [types.ObjectId],
         require: true,

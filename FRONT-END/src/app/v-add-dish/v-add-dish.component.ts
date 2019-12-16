@@ -26,29 +26,55 @@ export class VAddDishComponent {
   showArrays: string = 'dontShow';
   dietist: boolean = false;
   vista: string = "loggedIn";
-  postLoading: boolean = true;
+  postLoading: boolean = false;
+  showStatus: string = 'noStatus';
 
   //ingredientes: string[] = ['patata', 'ceba', 'all']
 
-  /////// SUBSCRIPTION //////
+  /////// SUBSCRIPTION DISH //////
   postedDishSubscription: Subscription;
   postedData: object;
   status: string;
 
 
+  /////// SUBSCRIPTION USER //////
+  detailsSubscription: Subscription;
+  userDetails: object;
+  userName: string;
 
   constructor(public _user: UserService) {
     this.postedDishSubscription = this._user.postDishData.subscribe(
       (newValue) => {
         this.postedData = newValue
         this.postLoading = true;
+        this.status = this.postedData['status']
+        if (this.status !== undefined) {
+          setTimeout(() => {
+            this.postLoading = false;
+            this.showStatus = 'status';
+            setTimeout(() => {
+              if(this.status === "Dish saved!"){
+                this.showStatus = 'postAnother'
+              }else{
+                this.showStatus = 'tryAgain'
+              }
+            }, 3000);
+          }, 5000);
+        }
         setTimeout(() => {
           this.status = this.postedData['status']
           console.log(this.status)
           this.postLoading = false;
         }, 5000);
-        
+
         console.log(this.postedData)
+      }
+    )
+
+    this.detailsSubscription = this._user.userDetails.subscribe(
+      (newValue) => {
+        this.userDetails = newValue;
+        this.userName = this.userDetails['data']['name'];
       }
     )
   }
@@ -68,18 +94,18 @@ export class VAddDishComponent {
 
   //// ADD INGREDIENTS & QUANTITIES ////
 
-  addData(ingredient, quantity) {
-    if (ingredient == "" || ingredient == undefined || ingredient == null && quantity == "" || quantity == undefined || quantity == null) {
+  addData(inputIngredient, inputQuantity) {
+    if (inputIngredient.value == "" || inputIngredient.value == undefined || inputIngredient.value == null && inputQuantity == "" || inputQuantity.value == undefined || inputQuantity.value == null) {
       this.inputError = true;
       console.log(this.inputError)
     } else {
-      this.ingredients.push(ingredient);
-      this.quantities.push(quantity);
+      this.ingredients.push(inputIngredient.value);
+      this.quantities.push(inputQuantity.value);
       console.log(this.ingredients);
       console.log(this.quantities);
       this.inputError = false;
-      this.ingredient = undefined;
-      this.quantity = undefined;
+      inputIngredient.reset()
+      inputQuantity.reset();
       this.printData();
     }
   }
@@ -99,12 +125,29 @@ export class VAddDishComponent {
       if (this.dessertTrue == undefined || this.dessertTrue == null) {
         this.dessertTrue = false
         this._user.calculateDish(this.name, this.ingredients, this.quantities, this.kcal, this.dessertTrue)
+        this.ingredients = [];
+        this.quantities = [];
+        this.showArrays = 'dontShow'
       } else {
         this._user.calculateDish(this.name, this.ingredients, this.quantities, this.kcal, this.dessertTrue)
+        this.ingredients = [];
+        this.quantities = [];
+        this.showArrays = 'dontShow'
       }
     } else {
       return false
     }
+  }
+
+  /////// ERASE INGREDIENT /////
+  eraseIngredient(index) {
+    this.ingredients.splice(index, 1)
+    this.quantities.splice(index, 1)
+  }
+
+  /////// POST AGAIN /////
+  postAgain() {
+    this.showStatus = 'noStatus'
   }
 
   //// LOGOUT /////
@@ -115,6 +158,7 @@ export class VAddDishComponent {
   }
 
   ngOnInit() {
+    this._user.getDetails();
     if (localStorage.getItem("dietist") == "true") {
       this.dietist = true;
     } else {

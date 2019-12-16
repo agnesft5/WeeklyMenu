@@ -311,7 +311,8 @@ mongoose.connect(`mongodb://localhost/WeeklyMenu`, { useNewUrlParser: true, useU
                                                     quantity: body.quantity,
                                                     kcal: body.kcal,
                                                     type: body.type,
-                                                    profile: body.profile
+                                                    profile: body.profile,
+                                                    user: decoded['id']
 
                                                 })
 
@@ -546,6 +547,7 @@ mongoose.connect(`mongodb://localhost/WeeklyMenu`, { useNewUrlParser: true, useU
 
                                                 const newMenu = new Menu({
                                                     _id: mongoose.Types.ObjectId(),
+                                                    user: decoded['id'],
                                                     date: new Date(),
                                                     starterLunch: starter_lunch,
                                                     mainLunch: main_lunch,
@@ -596,6 +598,7 @@ mongoose.connect(`mongodb://localhost/WeeklyMenu`, { useNewUrlParser: true, useU
                                     res.send({ "status": "Couldn't find this user." })
                                 } else {
                                     console.log({ "status": "User found." })
+                                    const newMenus = []
                                     for (let menuDiet = 0; menuDiet < 7; menuDiet++) {
                                         /////// ALGORITME DIETA
                                         Dish.find({ profile: user.userProfile },
@@ -735,6 +738,7 @@ mongoose.connect(`mongodb://localhost/WeeklyMenu`, { useNewUrlParser: true, useU
 
                                                     menuDiet = new Menu({
                                                         _id: mongoose.Types.ObjectId(),
+                                                        user: decoded['id'],
                                                         date: new Date(),
                                                         starterLunch: starter_lunch,
                                                         mainLunch: main_lunch,
@@ -743,31 +747,90 @@ mongoose.connect(`mongodb://localhost/WeeklyMenu`, { useNewUrlParser: true, useU
                                                         mainDinner: main_dinner,
                                                         dessertDinner: dessert_dinner
                                                     })
-                                                    console.log("___________________________________________".green)
-                                                    console.log("Menu ->")
-                                                    console.log(menuDiet)
-                                                    console.log(`////////////////${menuDiet.starterLunch._id}/////////////////`.red)
-                                                    console.log(`////////////////${menuDiet.starterDinner._id}/////////////////`.green)
-                                                    console.log("___________________________________________".red)
+                                                    // console.log(menuDiet)
+                                                    // console.log(menuDiet['_id'])
 
 
 
-                                                    // menuDiet.save((error) => {
-                                                    //     if (error) {
-                                                    //         res.send({
-                                                    //             "status": "Couldn't generate your menu",
-                                                    //             "error": error
-                                                    //         })
-                                                    //     } else {
-                                                    //         res.send({
-                                                    //             "status": "Menu generated successfully!",
-                                                    //             "data": newMenu
-                                                    //         })
-                                                    //     }
-                                                    // })
+                                                    menuDiet.save((error) => {
+                                                        if (error) {
+                                                            res.send({
+                                                                "status": "Couldn't generate your menu",
+                                                                "error": error
+                                                            })
+                                                        } else {
+                                                            newMenus.push(menuDiet['_id'])
+                                                            // console.log(newMenus)
+                                                        }
+                                                        if (newMenus.length === 7) {
+                                                            const newDiet = new Diet({
+                                                                _id: mongoose.Types.ObjectId(),
+                                                                user: decoded['id'],
+                                                                date: new Date(),
+                                                                menus: newMenus
+                                                            })
+                                                            console.log(newDiet)
+                                                            newDiet.save((error) => {
+                                                                if (error) {
+                                                                    res.send({
+                                                                        "status": "Couldn't generate your diet",
+                                                                        "error": error
+                                                                    })
+                                                                } else {
+                                                                    res.send({
+                                                                        "status": "Diet generated successfully!",
+                                                                        "data": newDiet
+                                                                    })
+                                                                }
+                                                            })
+                                                        } else {
+                                                            console.log("Not yet")
+                                                        }
+                                                    })
+
                                                 }
+
                                             })
+
                                     }
+
+                                }
+
+                            })
+                        }
+                    })
+            })
+
+
+            //////////////// - GET DIET - /////////////////
+
+            server.get('/get-diet/:id', (req, res) => {
+                let id = decodeURI(req.params.id);
+                let token = req.cookies["jwt"]
+                jwt.verify(token, secrets["jwt_key"],
+                    (error, decoded) => {
+                        if (error) {
+                            res.send({
+                                "status": "Authentication failed.",
+                                "error": error
+                            })
+                        } else if (decoded) {
+                            User.findById(decoded['id'], (error, data) => {
+                                if (error) {
+                                    res.send({ "status": "Couldn't find this user." })
+                                } else {
+                                    console.log({ "status": "User found." })
+                                    Diet.findById(id, (error, data) => {
+                                        if (error) {
+                                            res.send({ "status": "Couldn't find your diet" })
+                                        } else {
+                                            res.send({
+                                                "status": "Diet found!",
+                                                "data": data
+                                            })
+                                        }
+                                    })
+
                                 }
                             })
                         }
