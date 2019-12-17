@@ -62,10 +62,10 @@ export class VDetailsComponent {
 
           if (this.status === "Details updated!") {
             this.detailsLoading = true;
-            console.log(this.status)
+            this.getDetails();
             setTimeout(() => {
               this.vista = "showDetails"
-            }, 3000);
+            }, 5000);
           } else {
             console.log(this.status)
             return false;
@@ -157,8 +157,8 @@ export class VDetailsComponent {
 
   ngOnInit(): void {
     if (localStorage.getItem("detailed") == "true") {
-      this.vista = "showDetails"
       this.getDetails();
+        this.vista = "showDetails"
     } else {
       this.vista = "loggedIn"
     }

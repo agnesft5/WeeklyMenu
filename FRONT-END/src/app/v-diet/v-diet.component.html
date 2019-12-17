@@ -74,13 +74,13 @@
                         <table class="table table-borderless">
                             <thead>
                                 <tr>
-                                    <th class="monText text-center" scope="col">MONDAY</th>
-                                    <th class="monText text-center" scope="col">TUESDAY</th>
-                                    <th class="monText text-center" scope="col">WEDNESDAY</th>
-                                    <th class="monText text-center" scope="col">THURSDAY</th>
-                                    <th class="monText text-center" scope="col">FRIDAY</th>
-                                    <th class="monText text-center" scope="col">SATURDAY</th>
-                                    <th class="monText text-center" scope="col">SUNDAY</th>
+                                    <th [routerLink]="['/selected-menu', menu1._id]" class="monText text-center dishes_text" scope="col">MONDAY</th>
+                                    <th [routerLink]="['/selected-menu', menu2._id]"class="monText text-center dishes_text" scope="col">TUESDAY</th>
+                                    <th [routerLink]="['/selected-menu', menu3._id]"class="monText text-center dishes_text" scope="col">WEDNESDAY</th>
+                                    <th [routerLink]="['/selected-menu', menu4._id]"class="monText text-center dishes_text" scope="col">THURSDAY</th>
+                                    <th [routerLink]="['/selected-menu', menu5._id]"class="monText text-center dishes_text" scope="col">FRIDAY</th>
+                                    <th [routerLink]="['/selected-menu', menu6._id]"class="monText text-center dishes_text" scope="col">SATURDAY</th>
+                                    <th [routerLink]="['/selected-menu', menu7._id]"class="monText text-center dishes_text" scope="col">SUNDAY</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -183,7 +183,7 @@
                         </div>
                         <div *ngFor="let menu of dietMenus, let i = index" class="menu__container">
                             <div class="menu__details">
-                                <p class="monText text-center" style="font-weight: 700;">{{days[i]}}</p>
+                                <p [routerLink]="['/selected-menu', menu._id]" class="monText text-center dishes_text" style="font-weight: 700;">{{days[i]}}</p>
                                 <p class="smlltext monText text-center welcome__name">LUNCH</p>
                                 <p 
                                     class="smlltext monText mt-2 mb-4 text-center capitalize__text ">

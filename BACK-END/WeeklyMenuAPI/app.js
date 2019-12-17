@@ -416,7 +416,7 @@ mongoose.connect(`mongodb://localhost/WeeklyMenu`, { useNewUrlParser: true, useU
                                                     if (data.length > 0) {
                                                         res.send(data)
                                                     } else {
-                                                        res.send({ "status":"You haven't uploaded any dishes yet." })
+                                                        res.send({ "status": "You haven't uploaded any dishes yet." })
                                                     }
                                                 }
                                             })
@@ -430,9 +430,9 @@ mongoose.connect(`mongodb://localhost/WeeklyMenu`, { useNewUrlParser: true, useU
                     })
             })
 
-            //////////////// - GET DIETIST DISHES - /////////////////
+            //////////////// - DELETE DIETIST DISHES - /////////////////
 
-            server.get('/delete-dish/:id', (req, res) => {
+            server.delete('/delete-dish/:id', (req, res) => {
                 let id = req.params.id
                 let token = req.cookies["jwt"]
                 jwt.verify(token, secrets["jwt_key"],
@@ -453,7 +453,11 @@ mongoose.connect(`mongodb://localhost/WeeklyMenu`, { useNewUrlParser: true, useU
                                         Dish.findByIdAndDelete(id,
                                             (error, data) => {
                                                 if (error) {
-                                                    res.send({ "status": "Couln't delete your dish." })
+                                                    res.send({
+                                                        "status": "Couln't delete your dish.",
+                                                        "error": error
+                                                    })
+                                                    console.log(error)
                                                 } else {
                                                     res.send({ "status": "Dish deleted successfully!" })
                                                 }
@@ -906,6 +910,42 @@ mongoose.connect(`mongodb://localhost/WeeklyMenu`, { useNewUrlParser: true, useU
                                         } else {
                                             res.send({
                                                 "status": "Diet found!",
+                                                "data": data
+                                            })
+                                        }
+                                    })
+
+                                }
+                            })
+                        }
+                    })
+            })
+
+
+             //////////////// - GET MENU - /////////////////
+
+             server.get('/get-menu/:id', (req, res) => {
+                let id = decodeURI(req.params.id);
+                let token = req.cookies["jwt"]
+                jwt.verify(token, secrets["jwt_key"],
+                    (error, decoded) => {
+                        if (error) {
+                            res.send({
+                                "status": "Authentication failed.",
+                                "error": error
+                            })
+                        } else if (decoded) {
+                            User.findById(decoded['id'], (error, data) => {
+                                if (error) {
+                                    res.send({ "status": "Couldn't find this user." })
+                                } else {
+                                    console.log({ "status": "User found." })
+                                    Menu.findById(id, (error, data) => {
+                                        if (error) {
+                                            res.send({ "status": "Couldn't find your menu" })
+                                        } else {
+                                            res.send({
+                                                "status": "Menu found!",
                                                 "data": data
                                             })
                                         }

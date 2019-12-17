@@ -76,17 +76,25 @@ export class UserService {
   //////////// MENU /////////////
   //// POST ////
   postMenuData: Subject<object> = new Subject<object>();
+  ///// GET ///
+  getMenuData: Subject<object> = new Subject<object>();
 
-  //////////// MENU /////////////
+  //////////// DIET /////////////
   //// POST ////
   postDietData: Subject<object> = new Subject<object>();
-  dietData:Subject<object> = new Subject<object>();
-  diet:object;
+  dietData: Subject<object> = new Subject<object>();
+  diet: object;
 
   //////////// DISH /////////////
   //// POST ////
   postDishData: Subject<object> = new Subject<object>();
   postedDish: object;
+  //// GET ////
+  dietistData: Subject<object> = new Subject<object>();
+  dietistDishes: object;
+  //// DELETE ////
+  deleteDishData: Subject<object> = new Subject<object>();
+  deletedDish: object;
 
 
   constructor(
@@ -95,7 +103,6 @@ export class UserService {
   ) { }
 
   ////////////////// POST REGISTER //////////////////
-
   register(name: string, lastName: string, username: string, email: string, password: string, dietistTrue: string): any {
     this._http.post(
       "http://localhost:3000/register",
@@ -120,7 +127,6 @@ export class UserService {
   }
 
   ////////////////// POST LOGIN //////////////////
-
   login(username: string, password: string): any {
     this._http.post("http://localhost:3000/login",
       { "username": username, "password": password },
@@ -161,7 +167,6 @@ export class UserService {
   }
 
   /////////////// POST USERDETAILS ///////////////
-
   putData(weight: number, height: number, age: number, gender: string, IMC: number, reqBasal: number, profile: string): any {
     this._http.put("http://localhost:3000/update-details",
       { "weight": weight, "height": height, "age": age, "gender": gender, "IMC": IMC, "basal": reqBasal, "userProfile": profile },
@@ -175,7 +180,6 @@ export class UserService {
 
 
   //////////// CALCULATE USER DETAILS ////////////
-
   calculate(weight: number, height: number, age: number, gender: string): any {
 
     let IMC: number = Math.round(weight / (height * height));
@@ -218,7 +222,7 @@ export class UserService {
       .subscribe(
         (result) => {
           this.dietData.next(result);
-          this.diet = result;
+          this.diet = result['data'];
         }
       )
   }
@@ -233,7 +237,7 @@ export class UserService {
           this.postMenuData.next(result);
         })
   }
-
+  ///////////////////////DIETIST//////////////////////////
   /////////////// POST DISH ///////////////
   postDish(name: string, ingredients: string[], quantity: number[], kcal: number, type: string, profile: string): any {
     this._http.post("http://localhost:3000/add-dish",
@@ -304,9 +308,30 @@ export class UserService {
     this.postDish(name, ingredients, quantity, kcal, type, profile)
   }
 
+  /////////////// GET DIETIST DISHES ///////////////
+  getDietistDishes() {
+    this._http.get("http://localhost:3000/posted-dishes",
+      { headers: new HttpHeaders({ "x-requested-witdh": "XMLHResponse" }) })
+      .subscribe(
+        (result) => {
+          this.dietistData.next(result);
+          this.dietistDishes = result;
+        })
+  }
+
+  /////////////// DELETE DIETIST DISH ///////////////
+  deleteDietistDish(id) {
+    this._http.delete(`http://localhost:3000/delete-dish/${id}`,
+      { headers: new HttpHeaders({ "x-requested-witdh": "XMLHResponse" }) })
+      .subscribe(
+        (result) => {
+          this.deleteDishData.next(result);
+          this.deletedDish = result
+        })
+  }
+
 
   /////////////// GENERATE DIET ///////////////
-
   createDiet(): any {
     this._http.post("http://localhost:3000/generate-diet",
       { headers: new HttpHeaders({ "x-requested-witdh": "XMLHResponse" }) })
@@ -316,6 +341,17 @@ export class UserService {
         })
   }
 
+  /////////////// GET MENU FROM DIET ///////////////
+  getSelectedMenu(id) {
+    this._http.get(`http://localhost:3000/get-menu/${id}`,
+      { headers: new HttpHeaders({ "x-requested-witdh": "XMLHResponse" }) })
+      .subscribe(
+        (result) => {
+          this.getMenuData.next(result);
+        })
+  }
+
+  /////////////// LOG OUT ///////////////
   logout() {
     localStorage.removeItem("logged");
     localStorage.removeItem("dietist");

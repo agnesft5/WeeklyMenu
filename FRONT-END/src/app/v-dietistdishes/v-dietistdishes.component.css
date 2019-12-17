@@ -88,7 +88,7 @@
 .main__background{
     background-image: url('../../assets/dietist-background5.jpg');
     background-size:cover;
-    height: 150vh;
+    min-height: 150vh;
 }
 .pc__display{
     height: 5vh;
@@ -102,6 +102,7 @@
     position: relative;
     z-index: 0;
     margin: 0 auto;
+    margin-bottom: 10%;
 }
 .smlltext{
     font-size: small;
@@ -187,71 +188,70 @@
 
 @media only screen and (min-width: 315px) and (max-width: 415px){
     .data__container{
-        margin-top: 10%;
+        margin-top: 5%;
         width: 100%;
+        height: auto;
     }
     
 }
-@media only screen and (min-width: 416px) and (max-width: 767px){
+@media only screen and (min-width: 416px) and (max-width: 769px){
     .data__container{
-        margin-top: 10%;
+        margin-top: 13%;
         width: 100%;
+        height: auto;
     }
     
 }
-@media only screen and (min-width: 768px) and (max-width: 1208px){
+@media only screen and (min-width: 770px) and (max-width: 979px){
     .data__container{
-        margin-top: 20%;
+        margin-top: 15%;
         width: 100%;
+        height: auto;
     }
     
 }
-@media only screen and (min-width: 1209px){
+@media only screen and (min-width: 980px) and (max-width: 1209px){
     .data__container{
+        margin-top: 12%;
+        width: 100%;
+        height: 70vh;
+    }
+    .overflow__container{
+        margin-top: 3%;
+        height: 40vh;
+        overflow-y: scroll;
+    }
+    
+}
+.status__alert{
+    margin-top:12%;
+    margin-bottom: 5%;
+}
+@media only screen and (min-width: 1210px){
+    .data__container{
+        margin-top: 8%;
+        width: 100%;
+        height: 70vh;
+    }
+    .overflow__container{
+        margin-top: 3%;
+        height: 42vh;
+        overflow-y: scroll;
+    }
+    .status__alert{
         margin-top: 10%;
-        width: 85%;
+        margin-bottom: 7%;
+    }
+    
+}
+@media only screen and (min-width: 1290px){
+        .status__alert{
+        margin-top: 9%;
+        margin-bottom: 7%;
     }
     
 }
 
-.loading__container{
-    width: 50%;
-    padding: 5%;
-    background-color: white;
-    border-radius: .25rem;
-    opacity: .8;
-    position: relative;
-    z-index: 0;
-    margin: 0 auto;
-    height: 64.2vh;
-}
-@media only screen and (min-width: 315px) and (max-width: 415px){
-    .loading__container{
-        margin-top: 10%;
-        width: 100%;
-    }
-    
-}
-@media only screen and (min-width: 416px) and (max-width: 767px){
-    .loading__container{
-        margin-top: 10%;
-        width: 100%;
-    }
-    
-}
-@media only screen and (min-width: 768px) and (max-width: 1208px){
-    .loading__container{
-        margin-top: 20%;
-        width: 100%;
-    }
-    
-}
-@media only screen and (min-width: 1209px){
-    .loading__container{
-        margin-top: 10%;
-        width: 85%;
-    }
-}
 .menu__img{
     width: 50%;
     position: relative;
@@ -333,8 +333,71 @@ input.ng-touched.ng-pristine{
     padding: 5%;
     border-radius: .25rem;
     margin: 2%;
-    display: inline-grid;
 }
 .capitalize__text{
     text-transform: capitalize;
+}
+.hr__separator{
+    border-bottom: 1px solid sandybrown;
+    width: 75%;
+    margin: 0 auto;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+.loaded__data{
+    height: 45vh;
+
+}
+@media only screen and (max-width: 979px){
+    .loaded__data{
+        height: auto;
+    }
+}
+
+@media only screen and (max-width: 499px){
+    .menu__img{
+        margin-top: 35%;
+    }
+
+}
+
+@media only screen and (min-width: 500px) and (max-width: 669px){
+    .menu__img{
+        margin-top: 25%;
+    }
+
+}
+
+@media only screen and (min-width: 670px) and (max-width: 769px){
+    .menu__img{
+        margin-top: 15%;
+    }
+
+}
+@media only screen and (min-width: 770px) and (max-width: 869px){
+    .menu__img{
+        margin-top: 25%;
+    }
+
+}
+
+@media only screen and (min-width: 870px) and (max-width: 1139px){
+    .menu__img{
+        margin-top: 15%;
+    }
+
+    
+}
+@media only screen and (min-width: 1140px) and (max-width: 1220px){
+    .menu__img{
+        margin-top: 10%;
+    }
+
+    
+}
+@media only screen and (min-width: 1210px){
+    .menu__img{
+        margin-top: 5%;
+    }
+    
 }

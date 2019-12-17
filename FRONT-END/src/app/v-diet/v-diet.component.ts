@@ -33,6 +33,7 @@ export class VDietComponent implements OnInit {
   getDietData: object;
   gotDiet: object;
   dietMenus: object[];
+  diet:any
 
   //MENUS//
   menu1: object;
@@ -100,6 +101,8 @@ export class VDietComponent implements OnInit {
         this.userName = this.userDetails['data']['name'];
       }
     )
+
+    this.diet = this._user.diet;
   }
 
 
@@ -128,10 +131,16 @@ export class VDietComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    this._user.createDiet();
+    
     this._user.getDetails();
-    this.changeView();
+    this._user.createDiet();
+    if(this.diet == undefined){
+      this.changeView();
+    }else{
+      this.dietMenus = this.diet['menus'];
+      this.vista = "loggedIn"
+    }
+    
     if (localStorage.getItem("dietist") == "true") {
       this.dietist = true;
     } else {
