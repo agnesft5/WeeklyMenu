@@ -388,6 +388,86 @@ mongoose.connect(`mongodb://localhost/WeeklyMenu`, { useNewUrlParser: true, useU
                     })
             })
 
+            //////////////// - GET DIETIST DISHES - /////////////////
+
+            server.get('/posted-dishes', (req, res) => {
+
+                let token = req.cookies["jwt"]
+                jwt.verify(token, secrets["jwt_key"],
+                    (error, decoded) => {
+                        if (error) {
+                            res.send({
+                                "status": "Authentication failed.",
+                                "error": error
+                            })
+                        } else if (decoded) {
+                            User.findById(decoded['id'], (error, data) => {
+                                if (error) {
+                                    res.send({ "status": "Couldn't find this user." })
+                                } else {
+                                    console.log({ "status": "User found." })
+                                    console.log(data)
+                                    if (data['dietist'] == true) {
+                                        Dish.find({ "user": decoded['id'] },
+                                            (error, data) => {
+                                                if (error) {
+                                                    res.send("Couln't find your dishes.")
+                                                } else {
+                                                    if (data.length > 0) {
+                                                        res.send(data)
+                                                    } else {
+                                                        res.send({ "status":"You haven't uploaded any dishes yet." })
+                                                    }
+                                                }
+                                            })
+                                    } else {
+                                        res.send({ "status": "You should be a dietist to get here." })
+                                    }
+
+                                }
+                            })
+                        }
+                    })
+            })
+
+            //////////////// - GET DIETIST DISHES - /////////////////
+
+            server.get('/delete-dish/:id', (req, res) => {
+                let id = req.params.id
+                let token = req.cookies["jwt"]
+                jwt.verify(token, secrets["jwt_key"],
+                    (error, decoded) => {
+                        if (error) {
+                            res.send({
+                                "status": "Authentication failed.",
+                                "error": error
+                            })
+                        } else if (decoded) {
+                            User.findById(decoded['id'], (error, data) => {
+                                if (error) {
+                                    res.send({ "status": "Couldn't find this user." })
+                                } else {
+                                    console.log({ "status": "User found." })
+                                    console.log(data)
+                                    if (data['dietist'] == true) {
+                                        Dish.findByIdAndDelete(id,
+                                            (error, data) => {
+                                                if (error) {
+                                                    res.send({ "status": "Couln't delete your dish." })
+                                                } else {
+                                                    res.send({ "status": "Dish deleted successfully!" })
+                                                }
+                                            })
+                                    } else {
+                                        res.send({ "status": "You should be a dietist to get here." })
+                                    }
+
+                                }
+                            })
+                        }
+                    })
+            })
+
             /////////////////////////////////// MENU /////////////////////////////////
 
             //////////////// - GENERATE MENU - /////////////////

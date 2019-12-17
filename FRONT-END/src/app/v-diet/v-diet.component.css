@@ -209,8 +209,12 @@
     }
     
 }
+.capitalize__text{
+    text-transform: capitalize;
+}
 .dishes_text{
     text-transform: capitalize;
+    font-weight: 700;
     cursor: pointer;
     transition: .5s;
 }

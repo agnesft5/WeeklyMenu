@@ -1,0 +1,156 @@
+<header class="d-none d-md-block">
+    <div class="row header_navbar">
+        <div class="col-5">
+
+        </div>
+        <div class="col-2">
+            <div class="header_title">
+                <div class="row">
+                    <div class="col-12">
+                        <h4 class="titleText">Weekly Menu <i class="fas fa-seedling"></i></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-5">
+            <div class="row text-center">
+                <div class="col-4">
+                    <div *ngIf="dietist === false">
+                        <h6 routerLink="/home" class="float-right navText mt-3">HOME</h6>
+                    </div>
+                    <div *ngIf="dietist === true">
+                        <h6 routerLink="/all-dishes" class="float-right navText mt-3">ALL DISHES</h6>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <h6 routerLink="/details" class="text-center navText mt-3">PROFILE</h6>
+                </div>
+                <div class="col-5">
+                    <h6 (click)="logout()" class="float-left navText mt-3">LOG OUT</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<header class="d-block d-md-none">
+    <div class="pos-f-t d-block d-md-none">
+        <div class="collapse" id="navbarToggleExternalContent">
+            <div class="bg-light pt-3 pb-1 px-4">
+                <div *ngIf="dietist === false">
+                    <h5 routerLink="/home" class="navText">HOME</h5>
+                </div>
+                <div *ngIf="dietist === true">
+                    <h5 routerLink="/all-dishes" class="navText">ALL DISHES</h5>
+                </div>
+                <h5 routerLink="/details" class="navText">PROFILE</h5>
+                <h5 (click)="logout()" class="navText">LOG OUT</h5>
+            </div>
+        </div>
+        <nav class="navbar navbar-light bg-light">
+            <button class="navbar-toggler menu__button" type="button" data-toggle="collapse"
+                data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <div class="banner main__background">
+        <div class="row w-100" style="margin: 0 auto;">
+            <div class="col-1 col-md-2">
+            </div>
+            <div class="col-10 col-md-8">
+                <div class="pc__display d-none d-md-block">
+
+                </div>
+                <div *ngIf="vista == 'loggedIn'" class="data__container">
+                    <div class="details__welcome">
+                        <p class="smlltext monText">Hi <span class="welcome__name">{{userName}}</span>!</p>
+                        <p class="smlltext monText mt-2 mb-4">These are the dishes you've posted:</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-6">
+                            <div class="dish__container">
+                                <small class="smalltext monText m-1 capitalize__text">Nom</small>
+                                <div class="row array__container">
+                                    <div class="col-6">
+                                        <div class="row">
+                                            <div class="col-12 text-right">
+                                                <small class="smalltext monText m-1 capitalize__text">Quantitat</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="row">
+                                            <div class="col-12 text-left">
+                                                <small class="smalltext monText m-1 capitalize__text">Ingredients</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <small class="smalltext monText m-1 capitalize__text">kcal</small>
+                                <small class="smalltext monText text-right m-1"><i (click)="eraseIngredient(i)"
+                                        class="fas fa-trash erase__icon"></i></small>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!-- loading -->
+                    <div class="row" *ngIf="postLoading === true">
+                        <div class="col-12 text-center mt-3">
+                            <div class="lds-ring">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div *ngIf="vista == 'loading'" class="loading__container">
+                    <div class="details__welcome">
+                        <p class="smlltext monText">Hi <span class="welcome__name">{{userName}}</span>!</p>
+                        <p class="smlltext monText mt-2 mb-4">Uploading dishes</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 img__container">
+                            <img class="menu__img" src="../../assets/menu-loading.png" alt="Fork img">
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 menu__loading">
+                            <div class="lds-ring">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngIf="vista == 'loggedOut'"
+                    class="p-3 alert alert-success mt-5 monText text-center smlltext loggedOut" role="alert">
+                    <p class="monText text-success mb-0">You are not logged anymore.</p>
+                    <p class="monText text-success mb-0">See you soon!</p>
+                </div>
+            </div>
+            <div class="col-1 col-md-2">
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <div class="row footer__navbar d-none d-md-block">
+
+    </div>
+</footer>

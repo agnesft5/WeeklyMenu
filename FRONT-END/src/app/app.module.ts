@@ -17,6 +17,7 @@ import { VSingleMenuComponent } from './v-single-menu/v-single-menu.component';
 import { VAddDishComponent } from './v-add-dish/v-add-dish.component';
 import { DietistGuard } from './services/dietist.guard';
 import { VDietComponent } from './v-diet/v-diet.component';
+import { VDietistdishesComponent } from './v-dietistdishes/v-dietistdishes.component';
 
 const config: Routes = [
   { "path": "", "component": VHomeComponent },
@@ -25,8 +26,9 @@ const config: Routes = [
   { "path": "register", "component": VRegisterComponent },
   { "path": "details", "component": VDetailsComponent, "canActivate": [AuthGuard] },
   { "path": "single-menu", "component": VSingleMenuComponent, "canActivate": [AuthGuard] },
-  { "path": "add-dish", "component": VAddDishComponent ,"canActivate":[AuthGuard, DietistGuard]},
+  { "path": "add-dish", "component": VAddDishComponent, "canActivate": [AuthGuard, DietistGuard] },
   { "path": "diet", "component": VDietComponent, "canActivate": [AuthGuard] },
+  { "path": "posted-dishes", "component": VDietistdishesComponent, "canActivate": [AuthGuard, DietistGuard] },
   { "path": "**", "component": VHomeComponent }
 ]
 
@@ -39,7 +41,8 @@ const config: Routes = [
     VDetailsComponent,
     VSingleMenuComponent,
     VAddDishComponent,
-    VDietComponent
+    VDietComponent,
+    VDietistdishesComponent
   ],
   imports: [
     BrowserModule,

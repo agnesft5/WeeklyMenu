@@ -60,6 +60,9 @@ export class VDietComponent implements OnInit {
 
   userName: string;
 
+
+  showMenu:string = 'lunch'
+
   //////////// DIETIST ///////////////
   dietist: boolean = false;
 
@@ -100,6 +103,9 @@ export class VDietComponent implements OnInit {
   }
 
 
+  showMeal(meal){
+    this.showMenu = meal
+  }
 
   changeView() {
     setTimeout(() => {

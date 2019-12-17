@@ -19,7 +19,7 @@
                         <h6 routerLink="/home" class="float-right navText mt-3">HOME</h6>
                     </div>
                     <div *ngIf="dietist === true">
-                        <h6 routerLink="/all-dishes" class="float-right navText mt-3">ALL DISHES</h6>
+                        <h6 routerLink="/posted-dishes" class="float-right navText mt-3">ALL DISHES</h6>
                     </div>
                 </div>
                 <div class="col-3">
@@ -40,7 +40,7 @@
                     <h5 routerLink="/home" class="navText">HOME</h5>
                 </div>
                 <div *ngIf="dietist === true">
-                    <h5 routerLink="/all-dishes" class="navText">ALL DISHES</h5>
+                    <h5 routerLink="/posted-dishes" class="navText">ALL DISHES</h5>
                 </div>
                 <h5 routerLink="/details" class="navText">PROFILE</h5>
                 <h5 (click)="logout()" class="navText">LOG OUT</h5>
@@ -251,30 +251,6 @@
                         </div>
                     </form>
 
-                </div>
-
-
-                <div *ngIf="vista == 'loading'" class="loading__container">
-                    <div class="details__welcome">
-                        <p class="smlltext monText">Hi <span class="welcome__name">{{userName}}</span>!</p>
-                        <p class="smlltext monText mt-2 mb-4">We are generating your menu!</p>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 img__container">
-                            <img class="menu__img" src="../../assets/menu-loading.png" alt="Fork img">
-
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 menu__loading">
-                            <div class="lds-ring">
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
                 <div *ngIf="vista == 'loggedOut'"

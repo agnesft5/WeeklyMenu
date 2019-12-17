@@ -93,8 +93,8 @@
 .pc__display{
     height: 5vh;
 }
-.form__container{
-    width: 70%;
+.data__container{
+    width: 100%;
     padding: 5%;
     background-color: white;
     border-radius: .25rem;
@@ -186,28 +186,28 @@
 }
 
 @media only screen and (min-width: 315px) and (max-width: 415px){
-    .form__container{
+    .data__container{
         margin-top: 10%;
         width: 100%;
     }
     
 }
 @media only screen and (min-width: 416px) and (max-width: 767px){
-    .form__container{
+    .data__container{
         margin-top: 10%;
         width: 100%;
     }
     
 }
 @media only screen and (min-width: 768px) and (max-width: 1208px){
-    .form__container{
+    .data__container{
         margin-top: 20%;
         width: 100%;
     }
     
 }
 @media only screen and (min-width: 1209px){
-    .form__container{
+    .data__container{
         margin-top: 10%;
         width: 85%;
     }
@@ -327,4 +327,14 @@ input.ng-touched.ng-pristine{
     outline: none;
     box-shadow: none !important;
     color: tomato !important;
+}
+.dish__container{
+    border: 1px solid sandybrown;
+    padding: 5%;
+    border-radius: .25rem;
+    margin: 2%;
+    display: inline-grid;
+}
+.capitalize__text{
+    text-transform: capitalize;
 }
