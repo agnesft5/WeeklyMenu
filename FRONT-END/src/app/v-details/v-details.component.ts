@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription, Subscribable } from 'rxjs';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
-import { FormsModule, FormControl } from '@angular/forms';
+import { FormsModule, FormControl, NgForm } from '@angular/forms';
 
 
 @Component({
@@ -115,7 +115,7 @@ export class VDetailsComponent {
 
   //// DETAILS POST /////
 
-  sendData(form: FormControl): any {
+  sendData(form: NgForm): any {
 
     //Si la form és vàlida envio les dades
     if (form.valid) {

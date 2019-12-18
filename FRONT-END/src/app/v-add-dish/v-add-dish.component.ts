@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
-import { FormsModule, FormControl } from '@angular/forms';
+import { FormsModule, FormControl, NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -121,7 +121,7 @@ export class VAddDishComponent {
   }
 
   /////// SEND DATA //////
-  sendData(form: FormControl): any {
+  sendData(form: NgForm): any {
     if (this.name !== undefined && this.ingredients.length > 0 && this.quantities.length > 0 && this.kcal !== undefined) {
       if (this.dessertTrue == undefined || this.dessertTrue == null) {
         this.dessertTrue = false

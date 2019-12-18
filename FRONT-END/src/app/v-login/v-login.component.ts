@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule, FormControl } from '@angular/forms';
+import { FormsModule, FormControl, NgForm } from '@angular/forms';
 import { UserService } from '../services/user.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
@@ -49,7 +49,7 @@ export class VLoginComponent {
 
   }
 
-  sendData(form: FormControl): any {
+  sendData(form: NgForm): any {
 
     //Si la form és vàlida envio les dades
     if (form.valid) {

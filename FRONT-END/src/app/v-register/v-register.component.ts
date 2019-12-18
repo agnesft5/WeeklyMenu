@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormsModule, Form, FormControl } from '@angular/forms';
+import { FormsModule, Form, FormControl, NgForm } from '@angular/forms';
 import { UserService } from '../services/user.service';
 import { registerLocaleData } from '@angular/common';
 import { Subscription } from 'rxjs';
@@ -88,7 +88,7 @@ export class VRegisterComponent {
 
   }
 
-  sendData(form: FormControl): any {
+  sendData(form: NgForm): any {
 
     //Si la form és vàlida envio les dades
     if (form.valid) {
