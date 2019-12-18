@@ -87,6 +87,7 @@ export class VDetailsComponent {
           this.userIMC = this.userDetails["data"]["IMC"];
           this.userMB = this.userDetails["data"]["basal"];
           this.userName = this.userDetails["data"]["name"];
+          localStorage.setItem("detailed", "true");
 
           //IMC
           if (this.userIMC <= 18.5) {
@@ -172,6 +173,7 @@ export class VDetailsComponent {
     } else {
       this.vista = "loggedIn"
     }
+    console.log(localStorage.getItem("detailed"))
     if (localStorage.getItem("dietist") == "true") {
       this.dietist = true;
     } else {

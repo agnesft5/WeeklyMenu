@@ -212,6 +212,7 @@ export class UserService {
     }
 
     this.putData(weight, height, age, gender, IMC, reqBasal, userProfile)
+    
 
   }
 
