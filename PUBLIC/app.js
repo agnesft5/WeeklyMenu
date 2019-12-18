@@ -1,18 +1,16 @@
-'use strict';
+const express = require('express');
+const https = require('https');
 
 const fs = require('fs');
-const http = require('http');
-const https = require('https');
-const express = require('express');
-const app = express();
+const server = express();
 
 
 
-app.use(express.static('views'));
+server.use(express.static('views'));
 
 https.createServer({
-    key: fs.readFileSync('/route/to/key.pem'),
-    cert: fs.readFileSync('/route/to/cert.pem')
-}, app).listen(443, ()=>{
-    console.log('server listen at port 443');
+    key: fs.readFileSync('/etc/letsencrypt/live/weeklydiet.es/privkey.pem'),
+    cert: fs.readFileSync('/etc/letsencrypt/live/weeklydiet.es/fullchain.pem')
+}, server).listen(443, ()=>{
+    console.log('Servidor escuchando en el puerto 443');
 })

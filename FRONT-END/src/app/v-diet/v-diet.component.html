@@ -74,19 +74,19 @@
                         <table class="table table-borderless">
                             <thead>
                                 <tr>
-                                    <th [routerLink]="['/selected-menu', menu1._id]"
+                                    <th [routerLink]="['/selected-menu', menu1['_id']]"
                                         class="monText text-center dishes_text" scope="col">MONDAY</th>
-                                    <th [routerLink]="['/selected-menu', menu2._id]"
+                                    <th [routerLink]="['/selected-menu', menu2['_id']]"
                                         class="monText text-center dishes_text" scope="col">TUESDAY</th>
-                                    <th [routerLink]="['/selected-menu', menu3._id]"
+                                    <th [routerLink]="['/selected-menu', menu3['_id']]"
                                         class="monText text-center dishes_text" scope="col">WEDNESDAY</th>
-                                    <th [routerLink]="['/selected-menu', menu4._id]"
+                                    <th [routerLink]="['/selected-menu', menu4['_id']]"
                                         class="monText text-center dishes_text" scope="col">THURSDAY</th>
-                                    <th [routerLink]="['/selected-menu', menu5._id]"
+                                    <th [routerLink]="['/selected-menu', menu5['_id']]"
                                         class="monText text-center dishes_text" scope="col">FRIDAY</th>
-                                    <th [routerLink]="['/selected-menu', menu6._id]"
+                                    <th [routerLink]="['/selected-menu', menu6['_id']]"
                                         class="monText text-center dishes_text" scope="col">SATURDAY</th>
-                                    <th [routerLink]="['/selected-menu', menu7._id]"
+                                    <th [routerLink]="['/selected-menu', menu7['_id']]"
                                         class="monText text-center dishes_text" scope="col">SUNDAY</th>
                                 </tr>
                             </thead>
@@ -96,64 +96,64 @@
                                 </tr>
                                 <tr>
                                     <td class="monText text-center capitalize__text smlltext">
-                                        {{menu1.starterLunch.name}}
+                                        {{menu1['starterLunch']['name']}}
                                     </td>
                                     <td class="monText text-center capitalize__text smlltext">
-                                        {{menu2.starterLunch.name}}
+                                        {{menu2['starterLunch']['name']}}
                                     </td>
                                     <td class="monText text-center capitalize__text smlltext">
-                                        {{menu3.starterLunch.name}}
+                                        {{menu3['starterLunch']['name']}}
                                     </td>
                                     <td class="monText text-center capitalize__text smlltext">
-                                        {{menu4.starterLunch.name}}
+                                        {{menu4['starterLunch']['name']}}
                                     </td>
                                     <td class="monText text-center capitalize__text smlltext">
-                                        {{menu5.starterLunch.name}}
+                                        {{menu5['starterLunch']['name']}}
                                     </td>
                                     <td class="monText text-center capitalize__text smlltext">
-                                        {{menu6.starterLunch.name}}
+                                        {{menu6['starterLunch']['name']}}
                                     </td>
                                     <td class="monText text-center capitalize__text smlltext">
-                                        {{menu7.starterLunch.name}}
+                                        {{menu7['starterLunch']['name']}}
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="monText text-center capitalize__text smlltext">{{menu1.mainLunch.name}}
+                                    <td class="monText text-center capitalize__text smlltext">{{menu1['mainLunch']['name']}}
                                     </td>
-                                    <td class="monText text-center capitalize__text smlltext">{{menu2.mainLunch.name}}
+                                    <td class="monText text-center capitalize__text smlltext">{{menu2['mainLunch']['name']}}
                                     </td>
-                                    <td class="monText text-center capitalize__text smlltext">{{menu3.mainLunch.name}}
+                                    <td class="monText text-center capitalize__text smlltext">{{menu3['mainLunch']['name']}}
                                     </td>
-                                    <td class="monText text-center capitalize__text smlltext">{{menu4.mainLunch.name}}
+                                    <td class="monText text-center capitalize__text smlltext">{{menu4['mainLunch']['name']}}
                                     </td>
-                                    <td class="monText text-center capitalize__text smlltext">{{menu5.mainLunch.name}}
+                                    <td class="monText text-center capitalize__text smlltext">{{menu5['mainLunch']['name']}}
                                     </td>
-                                    <td class="monText text-center capitalize__text smlltext">{{menu6.mainLunch.name}}
+                                    <td class="monText text-center capitalize__text smlltext">{{menu6['mainLunch']['name']}}
                                     </td>
-                                    <td class="monText text-center capitalize__text smlltext">{{menu7.mainLunch.name}}
+                                    <td class="monText text-center capitalize__text smlltext">{{menu7['mainLunch']['name']}}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="monText text-center capitalize__text smlltext ">
-                                        {{menu1.dessertLunch.name}}
+                                        {{menu1['dessertLunch']['name']}}
                                     </td>
                                     <td class="monText text-center capitalize__text smlltext">
-                                        {{menu2.dessertLunch.name}}
+                                        {{menu2['dessertLunch']['name']}}
                                     </td>
                                     <td class="monText text-center capitalize__text smlltext">
-                                        {{menu3.dessertLunch.name}}
+                                        {{menu3['dessertLunch']['name']}}
                                     </td>
                                     <td class="monText text-center capitalize__text smlltext">
-                                        {{menu4.dessertLunch.name}}
+                                        {{menu4['dessertLunch']['name']}}
                                     </td>
                                     <td class="monText text-center capitalize__text smlltext">
-                                        {{menu5.dessertLunch.name}}
+                                        {{menu5['dessertLunch']['name']}}
                                     </td>
                                     <td class="monText text-center capitalize__text smlltext">
-                                        {{menu6.dessertLunch.name}}
+                                        {{menu6['dessertLunch']['name']}}
                                     </td>
                                     <td class="monText text-center capitalize__text smlltext">
-                                        {{menu7.dessertLunch.name}}
+                                        {{menu7['dessertLunch']['name']}}
                                     </td>
                                 </tr>
                                 <tr>
@@ -161,64 +161,64 @@
                                 </tr>
                                 <tr>
                                     <td class="monText text-center capitalize__text smlltext">
-                                        {{menu1.starterDinner.name}}
+                                        {{menu1['starterDinner']['name']}}
                                     </td>
                                     <td class="monText text-center capitalize__text smlltext">
-                                        {{menu2.starterDinner.name}}
+                                        {{menu2['starterDinner']['name']}}
                                     </td>
                                     <td class="monText text-center capitalize__text smlltext">
-                                        {{menu3.starterDinner.name}}
+                                        {{menu3['starterDinner']['name']}}
                                     </td>
                                     <td class="monText text-center capitalize__text smlltext">
-                                        {{menu4.starterDinner.name}}
+                                        {{menu4['starterDinner']['name']}}
                                     </td>
                                     <td class="monText text-center capitalize__text smlltext">
-                                        {{menu5.starterDinner.name}}
+                                        {{menu5['starterDinner']['name']}}
                                     </td>
                                     <td class="monText text-center capitalize__text smlltext">
-                                        {{menu6.starterDinner.name}}
+                                        {{menu6['starterDinner']['name']}}
                                     </td>
                                     <td class="monText text-center capitalize__text smlltext">
-                                        {{menu7.starterDinner.name}}
+                                        {{menu7['starterDinner']['name']}}
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="monText text-center capitalize__text smlltext">{{menu1.mainDinner.name}}
+                                    <td class="monText text-center capitalize__text smlltext">{{menu1['mainDinner']['name']}}
                                     </td>
-                                    <td class="monText text-center capitalize__text smlltext">{{menu2.mainDinner.name}}
+                                    <td class="monText text-center capitalize__text smlltext">{{menu2['mainDinner']['name']}}
                                     </td>
-                                    <td class="monText text-center capitalize__text smlltext">{{menu3.mainDinner.name}}
+                                    <td class="monText text-center capitalize__text smlltext">{{menu3['mainDinner']['name']}}
                                     </td>
-                                    <td class="monText text-center capitalize__text smlltext">{{menu4.mainDinner.name}}
+                                    <td class="monText text-center capitalize__text smlltext">{{menu4['mainDinner']['name']}}
                                     </td>
-                                    <td class="monText text-center capitalize__text smlltext">{{menu5.mainDinner.name}}
+                                    <td class="monText text-center capitalize__text smlltext">{{menu5['mainDinner']['name']}}
                                     </td>
-                                    <td class="monText text-center capitalize__text smlltext">{{menu6.mainDinner.name}}
+                                    <td class="monText text-center capitalize__text smlltext">{{menu6['mainDinner']['name']}}
                                     </td>
-                                    <td class="monText text-center capitalize__text smlltext">{{menu7.mainDinner.name}}
+                                    <td class="monText text-center capitalize__text smlltext">{{menu7['mainDinner']['name']}}
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="monText text-center capitalize__text smlltext">
-                                        {{menu1.dessertDinner.name}}
+                                        {{menu1['dessertDinner']['name']}}
                                     </td>
                                     <td class="monText text-center capitalize__text smlltext">
-                                        {{menu2.dessertDinner.name}}
+                                        {{menu2['dessertDinner']['name']}}
                                     </td>
                                     <td class="monText text-center capitalize__text smlltext">
-                                        {{menu3.dessertDinner.name}}
+                                        {{menu3['dessertDinner']['name']}}
                                     </td>
                                     <td class="monText text-center capitalize__text smlltext">
-                                        {{menu4.dessertDinner.name}}
+                                        {{menu4['dessertDinner']['name']}}
                                     </td>
                                     <td class="monText text-center capitalize__text smlltext">
-                                        {{menu5.dessertDinner.name}}
+                                        {{menu5['dessertDinner']['name']}}
                                     </td>
                                     <td class="monText text-center capitalize__text smlltext">
-                                        {{menu6.dessertDinner.name}}
+                                        {{menu6['dessertDinner']['name']}}
                                     </td>
                                     <td class="monText text-center capitalize__text smlltext">
-                                        {{menu7.dessertDinner.name}}
+                                        {{menu7['dessertDinner']['name']}}
                                     </td>
                                 </tr>
                             </tbody>
@@ -254,23 +254,23 @@
                                     style="font-weight: 700;">{{days[i]}}</p>
                                 <p class="smlltext monText text-center welcome__name">LUNCH</p>
                                 <p class="smlltext monText mt-2 mb-4 text-center capitalize__text ">
-                                    {{menu.starterLunch.name}}</p>
+                                    {{menu['starterLunch']['name']}}</p>
                                 <p class="smlltext monText mt-2 mb-4 capitalize__text text-center">
-                                    {{menu.mainLunch.name}}
+                                    {{menu['mainLunch']['name']}}
                                 </p>
                                 <p class="smlltext monText mt-2 mb-4 capitalize__text text-center">
-                                    {{menu.dessertLunch.name}}</p>
+                                    {{menu['dessertLunch']['name']}}</p>
                             </div>
                             <hr style="width: 50%; margin: 3 auto; margin-bottom: 0;">
                             <div class="menu__details mt-4">
                                 <p class="smlltext monText text-center welcome__name">DINNER</p>
                                 <p class="smlltext monText mt-2 mb-4 text-center capitalize__text ">
-                                    {{menu.starterDinner.name}}</p>
+                                    {{menu['starterDinner']['name']}}</p>
                                 <p class="smlltext monText mt-2 mb-4 text-center capitalize__text ">
-                                    {{menu.mainDinner.name}}
+                                    {{menu['mainDinner']['name']}}
                                 </p>
                                 <p class="smlltext monText mt-2 mb-4 text-center capitalize__text ">
-                                    {{menu.dessertDinner.name}}</p>
+                                    {{menu['dessertDinner']['name']}}</p>
                             </div>
 
 
