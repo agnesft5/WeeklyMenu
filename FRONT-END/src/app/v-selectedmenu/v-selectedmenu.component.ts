@@ -94,7 +94,9 @@ export class VSelectedmenuComponent implements OnInit {
   //// LOGOUT /////
   logout() {
     this._user.logout();
-    this.vista = "loggedOut";
+    this.vista = "loggedOut";setTimeout(() => {
+      this._router.navigateByUrl("/home")
+    }, 3000);
   }
 
   ngOnInit() {

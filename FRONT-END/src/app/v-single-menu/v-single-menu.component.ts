@@ -89,6 +89,9 @@ export class VSingleMenuComponent implements OnInit {
   logout() {
     this._user.logout();
     this.vista = "loggedOut";
+    setTimeout(() => {
+      this._router.navigateByUrl("/home")
+    }, 3000);
   }
 
   ngOnInit() {

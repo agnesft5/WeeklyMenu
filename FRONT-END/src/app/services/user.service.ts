@@ -356,6 +356,7 @@ export class UserService {
   logout() {
     localStorage.removeItem("logged");
     localStorage.removeItem("dietist");
+    localStorage.removeItem("detailed")
     this.diet = undefined;
   }
 
