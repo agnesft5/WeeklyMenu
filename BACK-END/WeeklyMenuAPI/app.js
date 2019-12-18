@@ -50,7 +50,7 @@ server.use(jwtChecker({
 
 /////////////////////// CONNEXIÓN ///////////////////////
 
-mongoose.connect(`mongodb://localhost/WeeklyMenu`, { useNewUrlParser: true, useUnifiedTopology: true },
+mongoose.connect(`mongodb+srv://agnesft5:${secrets['password']}@weeklydiet-amptd.mongodb.net/test?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true },
     (error) => {
         if (error) {
             res.send(error)

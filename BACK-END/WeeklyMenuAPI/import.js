@@ -63,11 +63,14 @@ const objProf = {
 
 }
 
+////////////////////// SECRETS.JSON ///////////////////////
 
+const secretsDoc = fs.readFileSync('secrets.json');
+const secrets = JSON.parse(secretsDoc);
 
 /////////////////////// CONNEXIÓN ///////////////////////
 
-mongoose.connect(`mongodb://localhost/WeeklyMenu`, { useNewUrlParser: true, useUnifiedTopology: true },
+mongoose.connect(`mongodb+srv://agnesft5:${secrets['password']}@weeklydiet-amptd.mongodb.net/test?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true },
     (error) => {
         if (error) {
             console.log(error)
