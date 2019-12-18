@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { FormsModule, FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-v-add-dish',
@@ -42,7 +43,7 @@ export class VAddDishComponent {
   userDetails: object;
   userName: string;
 
-  constructor(public _user: UserService) {
+  constructor(public _user: UserService, public _router:Router) {
     this.postedDishSubscription = this._user.postDishData.subscribe(
       (newValue) => {
         this.postedData = newValue
@@ -155,6 +156,9 @@ export class VAddDishComponent {
   logout() {
     this._user.logout();
     this.vista = "loggedOut";
+    setTimeout(() => {
+      this._router.navigateByUrl("/home")
+    }, 3000);
   }
 
   ngOnInit() {

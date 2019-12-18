@@ -17,33 +17,22 @@
                 <div class="col-4">
                 </div>
                 <div class="col-3">
-                    <h6 routerLink="/about" class="text-center navText mt-3">ABOUT US</h6>
+                    <h6 routerLink="/home" class="text-center navText mt-3">HOME</h6>
                 </div>
                 <div class="col-5">
-                    <h6 routerLink="/home" class="float-left navText mt-3">HOME</h6>
+                    <h6 routerLink="/login" class="float-left navText mt-3">LOGIN</h6>
                 </div>
             </div>
         </div>
     </div>
 </header>
 <header class="d-block d-md-none">
-    <!-- <div class="dropdown header__menu">
-        <button class="btn dropdown-toggle menu__button" type="button" id="dropdownMenu2" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-ellipsis-h button__icon"></i>
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-            <button routerLink="/about" class="dropdown-item navText" type="button">ABOUT US</button>
-            <button routerLink="/home" class="dropdown-item navText" type="button">HOME</button>
-        </div>
-    </div> -->
-
 
     <div class="pos-f-t d-block d-md-none">
         <div class="collapse" id="navbarToggleExternalContent">
             <div class="bg-light pt-3 pb-1 px-4">
-                <h5 routerLink="/about" class="navText">ABOUT US</h5>
                 <h5 routerLink="/home" class="navText">HOME</h5>
+                <h5 routerLink="/login" class="navText">LOGIN</h5>
             </div>
         </div>
         <nav class="navbar navbar-light bg-light">
@@ -97,7 +86,7 @@
                                 </div>
                                 <div class="col-8">
                                     <input id="lastName" type="text" #inputLastName="ngModel" [(ngModel)]="lastName"
-                                        name="inputLastName" class="form-control main__input smlltext" required
+                                        name="inputLastName" class="form-control main__input smlltext"
                                         pattern="[A-zÀ-ú]*" placeholder="Last Name">
 
                                     <p class="error"
@@ -195,7 +184,7 @@
                                 class="btn btn-success m-2 main__buton">Sign In</button>
                         </div>
 
-                        <div *ngIf="registerForm.invalid && registerForm.touched"
+                        <div *ngIf="inputName.dirty && inputLastName.dirty && inputUsername.dirty && inputEmail.dirty && inputPassword.dirty && registerForm.invalid && registerForm.invalid"
                             class="alert alert-danger mt-5 monText smlltext" role="alert">
                             Invalid from! Please, check your credentials.
                         </div>
@@ -205,12 +194,12 @@
                             <button routerLink="/login" class="btn btn-link login__button">Log In</button>
                         </div>
 
-                        <div *ngIf="status" class="alert alert-warning mt-5 monText smlltext" role="alert">
+                        <div *ngIf="status" class="alert alert-warning mt-3 mb-2 monText smlltext" role="alert">
                             {{status}}
                         </div>
 
                         <div class="row">
-                            <div class="col-12 form__registerLoad">
+                            <div class="col-12 form__registerLoad ml-3">
                                 <div class="lds-ring" *ngIf="registerLoad === true">
                                     <div></div>
                                     <div></div>

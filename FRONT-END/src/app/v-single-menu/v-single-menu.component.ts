@@ -13,6 +13,7 @@ export class VSingleMenuComponent implements OnInit {
   //loading
   vista: string = "loading"
   details:string = 'none'
+  clicked:boolean = false;
 
   ////////////MENU////////////
 
@@ -75,8 +76,9 @@ export class VSingleMenuComponent implements OnInit {
   }
 
   showDetails(view, event){
-    this.details = view
-    if(event.detail == 2){
+    if(this.details == "none"){
+      this.details = view
+    }else if (this.details == view){
       this.details = "none"
     }
   }
@@ -90,8 +92,8 @@ export class VSingleMenuComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._user.createMenu();
     this._user.getDetails();
+    this._user.createMenu();
     this.changeView();
     if (localStorage.getItem("dietist") == "true"){
       this.dietist = true;

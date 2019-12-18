@@ -27,9 +27,6 @@
     position: fixed;
     top: 0;
     background-color: white;
-    /* -webkit-box-shadow: 1px 20px 20px -8px rgba(0,0,0,0.5);
-    -moz-box-shadow: 1px 20px 20px -8px rgba(0,0,0,0.5);
-    box-shadow: 1px 20px 20px -8px rgba(0,0,0,0.5); */
     z-index: 1;
 }
 .header_title{
@@ -91,6 +88,7 @@
     height: 150vh;
 }
 .form__container{
+    margin-top: 0%;
     font-family: 'Montserrat', sans-serif;
     padding: 0;
 }
@@ -156,8 +154,8 @@ input.ng-touched.ng-pristine{
     box-sizing: border-box;
     display: block;
     position: absolute;
-    width: 64px;
-    height: 64px;
+    width: 40px;
+    height: 40px;
     margin: 8px;
     border: 8px solid #444;
     border-radius: 50%;
@@ -185,6 +183,7 @@ input.ng-touched.ng-pristine{
     margin: 0 auto;
     width: 50%;
     text-align: center;
+    height: 7vh;
 }
 .register__button{
     color: green;

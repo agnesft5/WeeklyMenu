@@ -33,7 +33,7 @@ export class VDietComponent implements OnInit {
   getDietData: object;
   gotDiet: object;
   dietMenus: object[];
-  diet:any
+  diet: any
 
   //MENUS//
   menu1: object;
@@ -62,7 +62,7 @@ export class VDietComponent implements OnInit {
   userName: string;
 
 
-  showMenu:string = 'lunch'
+  showMenu: string = 'lunch'
 
   //////////// DIETIST ///////////////
   dietist: boolean = false;
@@ -102,11 +102,11 @@ export class VDietComponent implements OnInit {
       }
     )
 
-    this.diet = this._user.diet;
+
   }
 
 
-  showMeal(meal){
+  showMeal(meal) {
     this.showMenu = meal
   }
 
@@ -123,24 +123,47 @@ export class VDietComponent implements OnInit {
     }
   }
 
+  generateNew(){
+    this._user.getDetails();
+    this.vista = 'loading';
+    this._user.createDiet();
+    window.scrollTo(0,0);
+    this.changeView();  
+  }
+
   //// LOGOUT /////
 
   logout() {
     this._user.logout();
     this.vista = "loggedOut";
+    this.diet = undefined;
+    setTimeout(() => {
+      this._router.navigateByUrl("/home")
+    }, 3000);
   }
 
   ngOnInit() {
-    
+
     this._user.getDetails();
-    this._user.createDiet();
-    if(this.diet == undefined){
+    this.diet = this._user.diet;
+    console.log(this.diet)
+    if (this.diet == undefined) {
+      this._user.createDiet();
       this.changeView();
-    }else{
+    } else {
+      this._user.getDetails();
       this.dietMenus = this.diet['menus'];
+      console.log(this.dietMenus)
+      this.menu1 = this.dietMenus[0];
+      this.menu2 = this.dietMenus[1];
+      this.menu3 = this.dietMenus[2];
+      this.menu4 = this.dietMenus[3];
+      this.menu5 = this.dietMenus[4];
+      this.menu6 = this.dietMenus[5];
+      this.menu7 = this.dietMenus[6];
       this.vista = "loggedIn"
     }
-    
+
     if (localStorage.getItem("dietist") == "true") {
       this.dietist = true;
     } else {

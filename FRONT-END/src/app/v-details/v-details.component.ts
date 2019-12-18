@@ -45,7 +45,7 @@ export class VDetailsComponent {
   vista: string = "loggedIn";
 
   //// DIETIST ////
-  dietist:boolean = false;
+  dietist: boolean = false;
 
   constructor(
     public _user: UserService,
@@ -63,16 +63,14 @@ export class VDetailsComponent {
           if (this.status === "Details updated!") {
             this.detailsLoading = true;
             this.getDetails();
-            setTimeout(() => {
-              this.vista = "showDetails"
-            }, 5000);
+            this.vista = 'showDetails'
           } else {
             console.log(this.status)
             return false;
 
           }
 
-        }, 1000);
+        }, 3000);
 
       }
     )
@@ -101,7 +99,7 @@ export class VDetailsComponent {
           } else {
             this.imcCorres = "Undefined correspondence"
           }
-          
+
         } else {
           this.detailsNotFound = "Something went wrong. Please try again."
           this.vista = "loggedIn";
@@ -138,6 +136,14 @@ export class VDetailsComponent {
 
   getDetails() {
     this._user.getDetails();
+    setTimeout(() => {
+      this.weight = undefined;
+      this.height = undefined;
+      this.age = undefined;
+      this.gender = undefined;
+      this.status = undefined
+    }, 5000);
+
   }
 
   ///// SELECT VIEW ////
@@ -151,6 +157,9 @@ export class VDetailsComponent {
   logout() {
     this._user.logout();
     this.vista = "loggedOut";
+    setTimeout(() => {
+      this._router.navigateByUrl("/home")
+    }, 3000);
   }
 
   ///// SELECT VIEW ////
@@ -158,13 +167,13 @@ export class VDetailsComponent {
   ngOnInit(): void {
     if (localStorage.getItem("detailed") == "true") {
       this.getDetails();
-        this.vista = "showDetails"
+      this.vista = "showDetails"
     } else {
       this.vista = "loggedIn"
     }
-    if (localStorage.getItem("dietist") == "true"){
+    if (localStorage.getItem("dietist") == "true") {
       this.dietist = true;
-    }else{
+    } else {
       this.dietist = false;
     }
   }

@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 export class VSelectedmenuComponent implements OnInit {
 
   //loading
-  vista: string = "loggedIn"
+  vista: string = "loading"
   details: string = 'none'
 
   ////////////MENU////////////
@@ -77,15 +77,16 @@ export class VSelectedmenuComponent implements OnInit {
 
   }
 
-  // changeView() {
-  //   setTimeout(() => {
-  //     this.vista = "loggedIn"
-  //   }, 5000);
-  // }
+  changeView() {
+    setTimeout(() => {
+      this.vista = "loggedIn"
+    }, 2000);
+  }
 
-  showDetails(view, event) {
-    this.details = view
-    if (event.detail == 2) {
+  showDetails(view, event){
+    if(this.details == "none"){
+      this.details = view
+    }else if (this.details == view){
       this.details = "none"
     }
   }
@@ -98,7 +99,7 @@ export class VSelectedmenuComponent implements OnInit {
 
   ngOnInit() {
     this._user.getDetails();;
-    //this.changeView();
+    this.changeView();
     if (localStorage.getItem("dietist") == "true") {
       this.dietist = true;
     } else {

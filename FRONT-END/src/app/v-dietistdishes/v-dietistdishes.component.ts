@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-v-dietistdishes',
@@ -11,7 +12,7 @@ export class VDietistdishesComponent implements OnInit {
 
 
   //////////// VIEWS ////////////
-  vista: string = 'loggedIn'
+  vista: string = 'loading'
   dietist: boolean;
   postLoading: boolean = false;
   showStatus: string = 'noStatus';
@@ -32,7 +33,7 @@ export class VDietistdishesComponent implements OnInit {
   deletedDish: object;
   status: string;
 
-  constructor(public _user: UserService) {
+  constructor(public _user: UserService, public _router:Router) {
 
     this.detailsSubscription = this._user.userDetails.subscribe(
       (newValue) => {
@@ -83,6 +84,7 @@ export class VDietistdishesComponent implements OnInit {
   }
 
   deleteDish(id) {
+    window.scrollTo(0,0)
     this._user.deleteDietistDish(id);
     setTimeout(() => {
       this._user.getDietistDishes();
@@ -93,6 +95,9 @@ export class VDietistdishesComponent implements OnInit {
   logout() {
     this._user.logout();
     this.vista = "loggedOut";
+    setTimeout(() => {
+      this._router.navigateByUrl("/home")
+    }, 3000);
   }
 
   ngOnInit() {

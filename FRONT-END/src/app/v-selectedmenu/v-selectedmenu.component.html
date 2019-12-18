@@ -16,7 +16,7 @@
             <div class="row text-center">
                 <div class="col-4">
                     <div *ngIf="dietist === false">
-                        <h6 routerLink="/home" class="float-right navText mt-3">HOME</h6>
+                        <h6 routerLink="/diet" class="float-right navText mt-3">DIET</h6>
                     </div>
                     <div *ngIf="dietist === true">
                         <h6 routerLink="/add-dish" class="float-right navText mt-3">ADD DISH</h6>
@@ -226,7 +226,7 @@
                 <div *ngIf="vista == 'loading'" class="loading__container">
                     <div class="details__welcome">
                         <p class="smlltext monText">Hi <span class="welcome__name">{{userName}}</span>!</p>
-                        <p class="smlltext monText mt-2 mb-4">We are generating your menu!</p>
+                        <p class="smlltext monText mt-2 mb-4">We are loading your menu!</p>
                     </div>
                     <div class="row">
                         <div class="col-12 img__container">
@@ -235,7 +235,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-12 menu__loading">
+                        <div class="col-12 menu__loading ml-3">
                             <div class="lds-ring">
                                 <div></div>
                                 <div></div>

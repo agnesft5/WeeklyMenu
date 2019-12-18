@@ -148,7 +148,7 @@
                         </div>
                         <!-- loading -->
                         <div class="row" *ngIf="postLoading === true">
-                            <div class="col-12 text-center mt-5">
+                            <div class="col-12 text-center mt-5 ml-3">
                                 <div class="lds-ring">
                                     <div></div>
                                     <div></div>
@@ -162,18 +162,21 @@
 
 
                 <div *ngIf="vista == 'loading'" class="loading__container">
+                    <div class="pc__display d-none d-md-block">
+
+                    </div>
                     <div class="details__welcome">
                         <p class="smlltext monText">Hi <span class="welcome__name">{{userName}}</span>!</p>
                         <p class="smlltext monText mt-2 mb-4">We are uploading your dishes</p>
                     </div>
                     <div class="row">
-                        <div class="col-12 img__container">
-                            <img class="menu__img" src="../../assets/menu-loading.png" alt="Fork img">
+                        <div class="col-12 imgLoading__container text-center">
+                            <img class="loading__img" src="../../assets/menu-loading.png" alt="Fork img">
 
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-12 menu__loading">
+                        <div class="col-12 menu__loading ml-3">
                             <div class="lds-ring">
                                 <div></div>
                                 <div></div>

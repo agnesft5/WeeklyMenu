@@ -355,9 +355,7 @@ export class UserService {
   logout() {
     localStorage.removeItem("logged");
     localStorage.removeItem("dietist");
-    setTimeout(() => {
-      this._router.navigateByUrl("/home")
-    }, 3000);
+    this.diet = undefined;
   }
 
 

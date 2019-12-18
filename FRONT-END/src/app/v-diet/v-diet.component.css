@@ -27,9 +27,6 @@
     position: fixed;
     top: 0;
     background-color: white;
-    /* -webkit-box-shadow: 1px 20px 20px -8px rgba(0,0,0,0.5);
-    -moz-box-shadow: 1px 20px 20px -8px rgba(0,0,0,0.5);
-    box-shadow: 1px 20px 20px -8px rgba(0,0,0,0.5); */
     z-index: 1;
 }
 .header_title{
@@ -138,8 +135,8 @@
     box-sizing: border-box;
     display: block;
     position: absolute;
-    width: 64px;
-    height: 64px;
+    width: 40px;
+    height: 40px;
     margin: 8px;
     border: 8px solid #444;
     border-radius: 50%;
@@ -221,6 +218,14 @@
 .dishes_text:hover{
     color: rgb(18, 135, 53);
 }
+.dishes_text:focus{
+    outline: none;
+    box-sizing: none;
+}
+.dishes_text:active{
+    outline: none;
+    box-sizing: none;
+}
 
 .loading__container{
     width: 70%;
@@ -232,6 +237,18 @@
     z-index: 0;
     margin: 0 auto;
     height: 64.2vh;
+}
+.menu__img{
+    width: 80%;
+    position: relative;
+}
+.img__container{
+    text-align: center;
+    margin-top: 10%;
+}
+.menu__loading{
+    text-align: center;
+    margin-top: 5%;
 }
 @media only screen and (min-width: 315px) and (max-width: 415px){
     .loading__container{
@@ -246,16 +263,29 @@
         width: 100%;
     }
 }
+@media only screen and (min-width: 570px) and (max-width: 767px){
+    .loading__container{
+        margin-top: 5%;
+        width: 100%;
+    }
+    .menu__img{
+        width: 60%;
+        position: relative;
+    }
+}
 @media only screen and (min-width: 768px) and (max-width: 1208px){
     .loading__container{
         margin-top: 15%;
         width: 100%;
     }
     .img__container{
-        margin-top: -3% !important;
+        margin-top: 3% !important;
+    }
+    .menu__img{
+        width: 40%;
     }
     .menu__loading{
-        margin-top: -0% !important;
+        margin-top: 4% !important;
     }
     
 }
@@ -265,24 +295,16 @@
         width: 85%;
     }
     .img__container{
-        margin-top: -3% !important;
+        margin-top: 0% !important;
     }
     .menu__loading{
-        margin-top: 0% !important;  
+        margin-top: 2% !important;  
+    }
+    .menu__img{
+        width: 35%;
     }
 }
-.menu__img{
-    width: 50%;
-    position: relative;
-}
-.img__container{
-    text-align: center;
-    margin-top: 10%;
-}
-.menu__loading{
-    text-align: center;
-    margin-top: 5%;
-}
+
 @media only screen and (min-width: 315px) and (max-width: 415px){
     .table__container{
         margin-top: 5%;
@@ -334,4 +356,17 @@
     border: 1px solid rgb(18, 135, 53);
     padding: 2%;
     padding-top: 4%;
+}
+@media only screen and (min-width: 320px) and (max-width: 420px){
+    .lds-ring div {
+        width: 36px;
+        height: 36px;
+      }
+    .menu__loading{
+        margin-left: 3% !important;
+    }
+    
+}
+.main__buton{
+    border-radius: 0px !important;
 }

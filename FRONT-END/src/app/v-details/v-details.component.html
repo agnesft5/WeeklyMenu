@@ -15,11 +15,16 @@
         <div class="col-5">
             <div class="row text-center">
                 <div class="col-4">
-                    <h6 routerLink="/about" class="float-right navText mt-3">ABOUT US</h6>
+                    <div *ngIf="dietist === false">
+                        <h6 routerLink="/single-menu" class="float-right navText mt-3">MENU</h6>
+                    </div>
+                    <div *ngIf="dietist === true">
+                        <h6 routerLink="/posted-dishes" class="float-right navText mt-3">ALL DISHES</h6>
+                    </div> 
                 </div>
                 <div class="col-3">
                     <div *ngIf="dietist === false">
-                        <h6 routerLink="/home" class="text-center navText mt-3">HOME</h6>
+                        <h6 routerLink="/diet" class="text-center navText mt-3">DIET</h6>
                     </div>
                     <div *ngIf="dietist === true">
                         <h6 routerLink="/add-dish" class="text-center navText mt-3">ADD DISH</h6>
@@ -33,25 +38,17 @@
     </div>
 </header>
 <header class="d-block d-md-none">
-
-
-    <!-- <div class="dropdown header__menu">
-            <button class="btn dropdown-toggle menu__button" type="button" id="dropdownMenu2" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-ellipsis-h button__icon"></i>
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                <button routerLink="/about" class="dropdown-item navText" type="button">ABOUT US</button>
-                <button routerLink="/home" class="dropdown-item navText" type="button">HOME</button>
-            </div>
-        </div> -->
-
     <div class="pos-f-t d-block d-md-none">
         <div class="collapse" id="navbarToggleExternalContent">
             <div class="bg-light pt-3 pb-1 px-4">
-                <h5 routerLink="/about" class="navText">ABOUT US</h5>
+                <div *ngIf="dietist === true">
+                    <h5 routerLink="/posted-dishes" class="navText">ALL DISHES</h5>
+                </div>
                 <div *ngIf="dietist === false">
-                    <h5 routerLink="/home" class="navText">HOME</h5>
+                    <h5 routerLink="/single-menu" class="navText">MENU</h5>
+                </div>
+                <div *ngIf="dietist === false">
+                    <h5 routerLink="/diet" class="navText">DIET</h5>
                 </div>
                 <div *ngIf="dietist === true">
                     <h5 routerLink="/add-dish" class="navText">ADD DISH</h5>
@@ -203,7 +200,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-12 form__detailsLoad">
+                            <div class="col-12 form__detailsLoad ml-3">
                                 <div class="lds-ring" *ngIf="detailsLoading === true">
                                     <div></div>
                                     <div></div>
