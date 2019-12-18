@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import * as jspdf from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-v-diet',
@@ -106,6 +108,20 @@ export class VDietComponent implements OnInit {
   }
 
 
+  ////////// EXPORT PDF //////////
+  exportAsPDF() {
+    let data = document.getElementById('dieta');
+    html2canvas(data).then(canvas => {
+      const contentDataURL = canvas.toDataURL('image/png')
+      let pdf = new jspdf('l', 'cm', 'a4'); //LANDSCAPE
+      var width = pdf.internal.pageSize.getWidth();
+      var height = pdf.internal.pageSize.getHeight();
+      // let pdf = new jspdf('p', 'cm', 'a4'); //PORTRAIT
+      pdf.addImage(contentDataURL, 'PNG', 0, -5, width, height);
+      pdf.save('diet.pdf');
+    });
+  }
+
   showMeal(meal) {
     this.showMenu = meal
   }
@@ -123,12 +139,12 @@ export class VDietComponent implements OnInit {
     }
   }
 
-  generateNew(){
+  generateNew() {
     this._user.getDetails();
     this.vista = 'loading';
     this._user.createDiet();
-    window.scrollTo(0,0);
-    this.changeView();  
+    window.scrollTo(0, 0);
+    this.changeView();
   }
 
   //// LOGOUT /////

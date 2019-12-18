@@ -370,3 +370,21 @@
 .main__buton{
     border-radius: 0px !important;
 }
+.erase__icon{
+    cursor: pointer;
+    color: sandybrown;
+}
+.erase__icon:hover{
+    color: sandybrown;
+    opacity: .8;
+}
+.erase__icon:focus{
+    outline: none;
+    box-shadow: none !important;
+    color: tomato !important;
+}
+.erase__icon:active{
+    outline: none;
+    box-shadow: none !important;
+    color: tomato !important;
+}

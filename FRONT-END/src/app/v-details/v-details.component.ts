@@ -4,6 +4,7 @@ import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 import { FormsModule, FormControl } from '@angular/forms';
 
+
 @Component({
   selector: 'app-v-details',
   templateUrl: './v-details.component.html',
