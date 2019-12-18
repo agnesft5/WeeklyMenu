@@ -6,7 +6,7 @@ const server = express();
 
 
 
-server.use(express.static('views'));
+server.use(express.static('PUBLIC'));
 
 https.createServer({
     key: fs.readFileSync('/etc/letsencrypt/live/weeklydiet.es/privkey.pem'),
