@@ -231,7 +231,7 @@ export class UserService {
   /////////////// GENERATE MENU ///////////////
 
   createMenu(): any {
-    this._http.post("https://weeklydiet.es:3000/generate-menu",
+    this._http.post("https://weeklydiet.es:3000/generate-menu", {},
       { headers: new HttpHeaders({ "x-requested-witdh": "XMLHResponse" }), withCredentials: true })
       .subscribe(
         (result) => {
@@ -334,7 +334,7 @@ export class UserService {
 
   /////////////// GENERATE DIET ///////////////
   createDiet(): any {
-    this._http.post("https://weeklydiet.es:3000/generate-diet",
+    this._http.post("https://weeklydiet.es:3000/generate-diet",{},
       { headers: new HttpHeaders({ "x-requested-witdh": "XMLHResponse" }), withCredentials: true })
       .subscribe(
         (result) => {
