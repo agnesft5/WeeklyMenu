@@ -41,6 +41,7 @@ const corsOptions = {
     credentials: true,
     optionsSuccessStatus: 200
   }
+server.use(cors(corsOptions));
 server.use(cookieParser());
 
 server.use(jwtChecker({
