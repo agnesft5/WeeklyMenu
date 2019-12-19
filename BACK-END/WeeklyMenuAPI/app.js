@@ -12,6 +12,7 @@ const colors = require('colors');
 const fs = require('fs');
 const { check, validationResult } = require('express-validator');
 const helmet = require('helmet');
+const https = require('https');
 
 ////////////////////// MODEL IMPORTS //////////////////////
 
@@ -922,9 +923,9 @@ mongoose.connect(`mongodb+srv://agnesft5:${secrets['password']}@weeklydiet-amptd
             })
 
 
-             //////////////// - GET MENU - /////////////////
+            //////////////// - GET MENU - /////////////////
 
-             server.get('/get-menu/:id', (req, res) => {
+            server.get('/get-menu/:id', (req, res) => {
                 let id = decodeURI(req.params.id);
                 let token = req.cookies["jwt"]
                 jwt.verify(token, secrets["jwt_key"],
@@ -957,8 +958,11 @@ mongoose.connect(`mongodb+srv://agnesft5:${secrets['password']}@weeklydiet-amptd
                     })
             })
 
-            server.listen(3000, () => {
-                console.log("Weekly Menu API Server listening on port 3000".green)
+            https.createServer({
+                key: fs.readFileSync('/etc/letsencrypt/live/weeklydiet.es/privkey.pem'),
+                cert: fs.readFileSync('/etc/letsencrypt/live/weeklydiet.es/fullchain.pem')
+            }, server).listen(3000, () => {
+                console.log('Servidor escuchando en el puerto 3000');
             })
         }
     })

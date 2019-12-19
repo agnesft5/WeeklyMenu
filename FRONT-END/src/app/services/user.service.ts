@@ -130,7 +130,7 @@ export class UserService {
   login(username: string, password: string): any {
     this._http.post("https://weeklydiet.es:3000/login",
       { "username": username, "password": password },
-      { headers: new HttpHeaders({ "x-requested-witdh": "XMLHResponse" }) })
+      { headers: new HttpHeaders({ "x-requested-witdh": "XMLHResponse", "withCredentials":"true" }) })
       .subscribe(
         (result) => {
           this.loginData.next(result);
