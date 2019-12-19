@@ -107,7 +107,7 @@ export class UserService {
     this._http.post(
       "https://weeklydiet.es:3000/register",
       { "name": name, "lastName": lastName, "username": username, "email": email, "password": password, "dietist": dietistTrue },
-      { headers: new HttpHeaders({ "x-requested-witdh": "XMLHResponse" }) })
+      { headers: new HttpHeaders({ "x-requested-witdh": "XMLHResponse" }), withCredentials: true  })
       .subscribe(
         (result) => {
           this.registerData.next(result)
@@ -117,7 +117,7 @@ export class UserService {
   /////////////// GET USERDETAILS ///////////////
   getDetails(): void {
     this._http.get("https://weeklydiet.es:3000/user-details",
-      { headers: new HttpHeaders({ "x-requested-witdh": "XMLHResponse" }) })
+      { headers: new HttpHeaders({ "x-requested-witdh": "XMLHResponse" }), withCredentials: true })
       .subscribe(
         (result) => {
           this.userDetails.next(result);
@@ -130,7 +130,7 @@ export class UserService {
   login(username: string, password: string): any {
     this._http.post("https://weeklydiet.es:3000/login",
       { "username": username, "password": password },
-      { headers: new HttpHeaders({ "x-requested-witdh": "XMLHResponse", "withCredentials":"true" }) })
+      { headers: new HttpHeaders({ "x-requested-witdh": "XMLHResponse" }), withCredentials: true })
       .subscribe(
         (result) => {
           this.loginData.next(result);
@@ -170,7 +170,7 @@ export class UserService {
   putData(weight: number, height: number, age: number, gender: string, IMC: number, reqBasal: number, profile: string): any {
     this._http.put("https://weeklydiet.es:3000/update-details",
       { "weight": weight, "height": height, "age": age, "gender": gender, "IMC": IMC, "basal": reqBasal, "userProfile": profile },
-      { headers: new HttpHeaders({ "x-requested-witdh": "XMLHResponse" }) })
+      { headers: new HttpHeaders({ "x-requested-witdh": "XMLHResponse" }), withCredentials: true })
       .subscribe(
         (result) => {
           this.detailsData.next(result);
@@ -212,14 +212,14 @@ export class UserService {
     }
 
     this.putData(weight, height, age, gender, IMC, reqBasal, userProfile)
-    
+
 
   }
 
   /////////////// GET DIET ///////////////
   getDiet(id): void {
     this._http.get(`https://weeklydiet.es:3000/get-diet/${id}`,
-      { headers: new HttpHeaders({ "x-requested-witdh": "XMLHResponse" }) })
+      { headers: new HttpHeaders({ "x-requested-witdh": "XMLHResponse" }), withCredentials: true })
       .subscribe(
         (result) => {
           this.dietData.next(result);
@@ -232,7 +232,7 @@ export class UserService {
 
   createMenu(): any {
     this._http.post("https://weeklydiet.es:3000/generate-menu",
-      { headers: new HttpHeaders({ "x-requested-witdh": "XMLHResponse" }) })
+      { headers: new HttpHeaders({ "x-requested-witdh": "XMLHResponse" }), withCredentials: true })
       .subscribe(
         (result) => {
           this.postMenuData.next(result);
@@ -243,7 +243,7 @@ export class UserService {
   postDish(name: string, ingredients: string[], quantity: number[], kcal: number, type: string, profile: string): any {
     this._http.post("https://weeklydiet.es:3000/add-dish",
       { "name": name, "ingredients": ingredients, "quantity": quantity, "kcal": kcal, "type": type, "profile": profile },
-      { headers: new HttpHeaders({ "x-requested-witdh": "XMLHResponse" }) })
+      { headers: new HttpHeaders({ "x-requested-witdh": "XMLHResponse" }), withCredentials: true })
       .subscribe(
         (result) => {
           this.postDishData.next(result);
@@ -312,7 +312,7 @@ export class UserService {
   /////////////// GET DIETIST DISHES ///////////////
   getDietistDishes() {
     this._http.get("https://weeklydiet.es:3000/posted-dishes",
-      { headers: new HttpHeaders({ "x-requested-witdh": "XMLHResponse" }) })
+      { headers: new HttpHeaders({ "x-requested-witdh": "XMLHResponse" }), withCredentials: true })
       .subscribe(
         (result) => {
           this.dietistData.next(result);
@@ -323,7 +323,7 @@ export class UserService {
   /////////////// DELETE DIETIST DISH ///////////////
   deleteDietistDish(id) {
     this._http.delete(`https://weeklydiet.es:3000/delete-dish/${id}`,
-      { headers: new HttpHeaders({ "x-requested-witdh": "XMLHResponse" }) })
+      { headers: new HttpHeaders({ "x-requested-witdh": "XMLHResponse" }), withCredentials: true })
       .subscribe(
         (result) => {
           this.deleteDishData.next(result);
@@ -335,7 +335,7 @@ export class UserService {
   /////////////// GENERATE DIET ///////////////
   createDiet(): any {
     this._http.post("https://weeklydiet.es:3000/generate-diet",
-      { headers: new HttpHeaders({ "x-requested-witdh": "XMLHResponse" }) })
+      { headers: new HttpHeaders({ "x-requested-witdh": "XMLHResponse" }), withCredentials: true })
       .subscribe(
         (result) => {
           this.postDietData.next(result);
@@ -345,7 +345,7 @@ export class UserService {
   /////////////// GET MENU FROM DIET ///////////////
   getSelectedMenu(id) {
     this._http.get(`https://weeklydiet.es:3000/get-menu/${id}`,
-      { headers: new HttpHeaders({ "x-requested-witdh": "XMLHResponse" }) })
+      { headers: new HttpHeaders({ "x-requested-witdh": "XMLHResponse" }), withCredentials: true })
       .subscribe(
         (result) => {
           this.getMenuData.next(result);

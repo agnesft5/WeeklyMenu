@@ -36,7 +36,11 @@ const secrets = JSON.parse(secretsDoc);
 
 server.use(bodyParser.json());
 server.use(helmet());
-server.use(cors());
+const corsOptions = {
+    origin: 'https://weeklydiet.es',
+    credentials: true,
+    optionsSuccessStatus: 200
+  }
 server.use(cookieParser());
 
 server.use(jwtChecker({
