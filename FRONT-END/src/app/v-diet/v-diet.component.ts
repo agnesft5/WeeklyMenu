@@ -117,7 +117,7 @@ export class VDietComponent implements OnInit {
       var width = pdf.internal.pageSize.getWidth();
       var height = pdf.internal.pageSize.getHeight();
       // let pdf = new jspdf('p', 'cm', 'a4'); //PORTRAIT
-      pdf.addImage(contentDataURL, 'PNG', 0, -5, width, height);
+      pdf.addImage(contentDataURL, 'PNG', 0, 0, width, height);
       pdf.save('diet.pdf');
     });
   }
